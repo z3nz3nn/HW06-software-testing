@@ -1,0 +1,491 @@
+Trò chuyện với Gemini
+Bạn đã nói
+
+You are assisting with an individual university API-testing assignment. Work only from the authoritative requirements below. This is Phase 1: requirements analysis for exactly one target API. Do NOT generate test cases yet.
+
+
+
+
+TARGET
+
+POST /api/apply-coupon
+
+JSON body:
+
+{
+
+"code": "SAVE10",
+
+"total_amount": 500000,
+
+"user_id": 1
+
+}
+
+Successful response is documented only as JSON containing discount_amount and final_amount.
+
+
+
+
+FR-09 BUSINESS RULES
+
+A coupon applies only when all five conditions are true:
+
+C1 code exists and is_active = 1.
+
+C2 current date is before expired_at.
+
+C3 total_amount >= min_order_amount.
+
+C4 user is authenticated with a valid JWT.
+
+C5 this user's usage count for this coupon is < max_uses_per_user.
+
+
+
+
+FORMULAS
+
+percent: discount_amount = total_amount * discount_value / 100.
+
+fixed: discount_amount = discount_value.
+
+final_amount = total_amount - discount_amount.
+
+
+
+
+SEEDED COUPONS
+
+SAVE10: percent 10, minimum 300000, expires 2099-12-31, maximum uses 1.
+
+BIGBUY: fixed 50000, minimum 500000, expires 2099-12-31, maximum uses 1.
+
+VIP100: fixed 100000, minimum 300000, expires 2099-12-31, maximum uses 2.
+
+EXPIRED: percent 20, minimum 100000, expires 2020-01-01, maximum uses 1.
+
+
+
+
+SECURITY
+
+SEC-02 protected APIs require a valid JWT.
+
+SEC-05 database queries must be parameterized.
+
+The body includes user_id, but FR-09 says authentication is by JWT. Treat the authenticated JWT identity as authoritative and flag the body user_id as an IDOR/trust-boundary ambiguity.
+
+The specification does not define exact error status codes or the error schema.
+
+
+
+
+ASSIGNMENT EXPECTATIONS
+
+Later work must cover every parameter domain, decision combinations, security, exact documented success schema, and robustness. Ambiguities must not be converted into invented requirements.
+
+
+
+
+Produce:
+
+1. Requirement traceability.
+
+2. Equivalence/boundary partitions for code, total_amount, user_id, and Authorization.
+
+3. A decision table that isolates each C1-C5 condition plus important interactions.
+
+4. Formula oracles including boundary total == minimum.
+
+5. Explicit ambiguities and what should be normative versus observational.
+
+Do not inspect implementation behavior and do not generate individual test cases yet.
+
+Gemini đã nói
+
+Here is the Phase 1 Requirements Analysis for the POST /api/apply-coupon API. This analysis strictly bounds the scope to the provided specifications without generating explicit test cases.
+
+1. Requirement Traceability Matrix
+ID	Source	Description
+REQ-01	Target	Endpoint is POST /api/apply-coupon accepting JSON (code, total_amount, user_id).
+REQ-02	Target	Successful response must contain exactly discount_amount and final_amount.
+REQ-03	FR-09 (C1)	Coupon must exist and have is_active = 1.
+REQ-04	FR-09 (C2)	Current date must be strictly before expired_at.
+REQ-05	FR-09 (C3)	Request total_amount must be >= min_order_amount.
+REQ-06	FR-09 (C4)	Request requires a valid JWT for user authentication.
+REQ-07	FR-09 (C5)	User's usage count for the requested coupon must be < max_uses_per_user.
+REQ-08	Formulas	discount_amount is calculated by percentage or fixed value; final_amount = total_amount - discount_amount.
+REQ-09	SEC-02	The API is protected and requires a valid JWT.
+REQ-10	SEC-05	Database queries must be parameterized to prevent SQL Injection.
+REQ-11	Security	IDOR conflict: Authenticated JWT identity is authoritative over the body user_id.
+2. Equivalence & Boundary Partitions
+code (String)
+
+Valid: Existing, active, unexpired coupons (e.g., SAVE10, BIGBUY, VIP100).
+
+Invalid (Business Logic): Expired coupons (EXPIRED), non-existent codes (FAKE50).
+
+Invalid (Robustness/Security): Empty string "", null, extremely long strings, strings with SQL injection payloads (to test REQ-10).
+
+total_amount (Numeric)
+
+Valid (Nominal): Values strictly greater than min_order_amount (e.g., 500000 for SAVE10).
+
+Valid (Boundary): Values exactly equal to min_order_amount (e.g., 300000 for SAVE10).
+
+Invalid (Boundary): Values exactly one unit below min_order_amount (e.g., 299999 for SAVE10).
+
+Invalid (Domain/Robustness): Negative numbers, 0, missing key, null, non-numeric strings, float values (if integer is strictly expected).
+
+user_id (Numeric)
+
+Valid: Matches the user ID extracted from the provided JWT.
+
+Invalid (Security/IDOR): Does not match the user ID extracted from the JWT.
+
+Invalid (Robustness): Missing key, null, non-numeric values, negative IDs.
+
+Authorization Header (JWT)
+
+Valid: Well-formed Bearer <token> with valid signature and unexpired claims.
+
+Invalid: Missing header, expired JWT, invalid signature, malformed token structure.
+
+3. Decision Table (FR-09 Conditions)
+
+This table isolates C1 through C5 to ensure every business rule boundary is handled.
+(T = True, F = False, - = Don't Care)
+
+Rule	C1 (Active/Exists)	C2 (Not Expired)	C3 (Amount >= Min)	C4 (Valid JWT)	C5 (Under Max Uses)	Expected Outcome
+1 (Happy Path)	T	T	T	T	T	Success: Calculate & return amounts
+2 (Invalid Code)	F	-	-	-	-	Error: Coupon invalid or not found
+3 (Expired)	T	F	-	-	-	Error: Coupon expired
+4 (Amount Too Low)	T	T	F	-	-	Error: Minimum order amount not met
+5 (Unauthorized)	T	T	T	F	-	Error: Authentication failed
+6 (Max Uses Hit)	T	T	T	T	F	Error: Usage limit exceeded
+4. Formula Oracles
+
+These oracles define expected mathematical outcomes, specifically hitting the total == minimum boundaries required by the business rules.
+
+Coupon	Type	Total Amount Input	Discount Calculation	Expected discount_amount	Expected final_amount
+SAVE10	Percent	300000 (Boundary)	300000 * 10 / 100	30000	270000
+SAVE10	Percent	500000 (Nominal)	500000 * 10 / 100	50000	450000
+BIGBUY	Fixed	500000 (Boundary)	Fixed 50000	50000	450000
+VIP100	Fixed	300000 (Boundary)	Fixed 100000	100000	200000
+5. Explicit Ambiguities & Testing Strategy
+
+To proceed to Phase 2 (Test Generation), the following undocumented behaviors must be categorized as either Normative (strictly asserted based on standards) or Observational (discovered through exploratory testing and logged as actual behavior).
+
+Error Status Codes & Schema (Observational)
+
+Ambiguity: The specification only defines the success JSON schema. It does not state whether errors return 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, or 422 Unprocessable Entity.
+
+Strategy: Tests will assert that the API fails gracefully (does not apply the coupon) but will only observe the HTTP status code and error schema for reporting purposes.
+
+The user_id Trust Boundary (Normative)
+
+Ambiguity: The payload requires user_id, but FR-09 mandates JWT authentication.
+
+Strategy: A request where JWT_Identity != Body_user_id represents a direct IDOR vulnerability attempt. Tests will treat the JWT as authoritative. The expected normative behavior is that the API strictly rejects the request (or forcefully overrides the payload with the JWT identity) rather than processing the transaction for a different user.
+
+Floating-Point Math / Rounding (Observational)
+
+Ambiguity: If total_amount is 300005 with a 10% discount, discount_amount is mathematically 30000.5.
+
+Strategy: The specification does not define integer rounding rules (e.g., floor, ceiling, or nearest). Tests using non-roundable numbers will record the rounding implementation chosen by the developer.
+
+Order of Evaluation / Precedence (Observational)
+
+Ambiguity: If a request features an expired token (C4 fails) AND an invalid code (C1 fails), which error does the API return first?
+
+Strategy: Observe and document the API's validation short-circuiting sequence.
+
+Bạn đã nói
+
+Critically revise your coupon analysis before test generation.
+
+
+
+
+Correct these issues:
+
+1. The success schema says the JSON contains discount_amount and final_amount; it does not say those are the only fields. The normative oracle is “both required numeric fields are present and correct,” while additional fields are observational unless they leak sensitive data.
+
+2. No integer-only rule is supplied for total_amount. Floats and rounding are observational, not requirements-based invalid classes.
+
+3. FR-09 C4 and SEC-02 mean authentication is mandatory for the API itself. In the decision table, do not use C4 as “don't care” when another condition fails; an unauthenticated caller must not be allowed to probe coupon existence, expiry, thresholds, or usage.
+
+4. The body user_id conflicts with JWT identity. Separate two defensible behaviors for a mismatch: reject it or ignore it and use JWT identity. Either is safe; using the body identity for C5 is a failure.
+
+5. Distinguish failure to apply the coupon from specific undocumented status/error payloads.
+
+6. Add interactions for exact threshold, usage count max-1 versus max, percent/fixed formulas, expired JWT, user A JWT plus user B body ID, and missing user_id with valid JWT.
+
+
+
+
+Return:
+
+A. Revised normative oracles.
+
+B. Revised decision table with authentication gating.
+
+C. A trust-boundary table for JWT identity versus body user_id.
+
+D. Formula/schema invariants.
+
+Still do not generate individual test cases.
+
+Gemini đã nói
+
+Here is the critically revised Phase 1 Requirements Analysis, incorporating the corrected bounds for schema validation, data types, authentication gating, and trust-boundary conflicts.
+
+A. Revised Normative Oracles
+
+These oracles separate strict, required behaviors (Normative) from undocumented behaviors that will merely be recorded (Observational).
+
+Success Oracle (Normative): When conditions C1–C5 are met, the API MUST apply the coupon and return a JSON response containing at least two numeric fields: discount_amount and final_amount, which must be mathematically correct according to the specified formulas.
+
+Success Schema (Observational): The presence of additional fields in the success JSON is observational (acceptable unless they leak sensitive PII or internal system state).
+
+Failure Oracle (Normative): When any condition C1–C5 fails, the API MUST NOT apply the coupon (no database state changes to usage limits, no discounted calculation returned).
+
+Failure Schema & Status (Observational): The specific HTTP status code (e.g., 400, 401, 403, 422) and the exact JSON error schema returned on failure are purely observational.
+
+Data Type Oracle (Observational): Because no strict integer-only rule is defined for total_amount, the API's acceptance of floats and its specific rounding behavior (floor, ceiling, nearest) for fractional discounts are observational properties, not normative failures.
+
+B. Revised Decision Table (Authentication Gated)
+
+Authentication (C4) is a strict gate. An unauthenticated caller must be rejected immediately to prevent probing for valid codes, thresholds, or expiration dates.
+
+(T = True, F = False, - = Must Not Be Evaluated/Revealed)
+
+Scenario	C4 (Auth)	C1 (Active)	C2 (Not Exp)	C3 (Total >= Min)	C5 (Uses < Max)	Normative Outcome
+1. Unauthenticated	F	-	-	-	-	Reject. (Must not leak C1/C2/C3/C5 state)
+2. Invalid/Inactive	T	F	-	-	-	Reject. Coupon invalid/not found
+3. Expired Coupon	T	T	F	-	-	Reject. Coupon expired
+4. Below Threshold	T	T	T	F	-	Reject. Minimum order amount not met
+5. Max Uses Hit	T	T	T	T	F	Reject. Usage limit reached
+6. Exact Threshold	T	T	T	Boundary	T	Success. Calculate & apply discount
+7. Max - 1 Uses	T	T	T	T	T (Max-1)	Success. Calculate & apply discount
+C. Trust-Boundary Table: JWT vs. Body user_id
+
+The API requires a valid JWT for authentication (SEC-02, C4), but the request body accepts a user_id. The JWT identity is the authoritative source of truth.
+
+JWT State	Body user_id	System Assessment	Defensible (Normative) API Behaviors	Critical Failure (Vulnerability)
+Valid (User A)	User A	Match	Proceed with C5 check for User A.	N/A
+Valid (User A)	User B	Mismatch (IDOR attempt)	
+
+Behavior 1: Reject request (e.g., 400/403).
+
+
+
+
+Behavior 2: Ignore body ID, apply C5 for User A.
+
+	API evaluates C5 for User B (IDOR vulnerability).
+Valid (User A)	Missing	Missing Field	
+
+Behavior 1: Ignore missing field, apply C5 for User A.
+
+
+
+
+Behavior 2: Reject for strict schema failure.
+
+	N/A
+Expired/Missing	User A	Unauthenticated	Reject request immediately (Auth Failure).	API bypasses JWT, trusts body ID.
+D. Formula and Schema Invariants
+
+When conditions C1–C5 evaluate to True, the following invariants MUST hold true in the system and response:
+
+Schema Invariants:
+
+Response.HasKey("discount_amount") == True
+
+Response.HasKey("final_amount") == True
+
+Type(discount_amount) == Numeric (Float or Integer)
+
+Type(final_amount) == Numeric (Float or Integer)
+
+Mathematical Invariants:
+
+Core Rule: final_amount == total_amount - discount_amount
+
+Fixed Logic: For fixed coupons (e.g., BIGBUY, VIP100), discount_amount == discount_value.
+
+(Note: Because seeded fixed coupons have a min_order_amount greater than their discount_value, final_amount will always safely evaluate to > 0).
+
+Percent Logic: For percentage coupons (e.g., SAVE10), discount_amount == total_amount * (discount_value / 100).
+
+Threshold Boundary Logic: If total_amount == min_order_amount, the mathematical invariants above must still execute identically without off-by-one errors.
+
+Bạn đã nói
+
+Generate the AI candidate test suite for POST /api/apply-coupon from the revised model. Produce exactly 45 distinct cases.
+
+
+
+
+Use a compact Markdown table with:
+
+AI_ID, Title, Preconditions, Request/header variation, Expected business outcome (APPLY/REJECT/OBSERVE), Automated oracle, Requirement IDs/conditions, Technique, Priority.
+
+
+
+
+Coverage rules:
+
+- Individually cover code, total_amount, user_id, and Authorization: nominal, boundaries, missing, null, empty where relevant, and wrong JSON types.
+
+- Isolate C1-C5 and cover exact minimum, one below, one above; usage count max-1 and max; active/inactive, expired, nonexistent.
+
+- Cover SAVE10 percent and BIGBUY/VIP100 fixed formula values, including documented thresholds and a fractional observational input.
+
+- Cover JWT: valid, missing, blank Bearer, malformed, invalid signature, expired, user A token with user B body ID, missing body user_id with valid JWT.
+
+- Detect user_id usage-limit bypass: the safe outcome is reject mismatch or use JWT identity; using the supplied body identity is failure.
+
+- Include replay/usage-record interactions and concurrent use-limit checks where relevant.
+
+- Include SQL injection strings, oversized code, extra JSON properties, malformed JSON, duplicate JSON keys, and no leakage of stack/database errors.
+
+- Do not invent exact error HTTP codes or error fields.
+
+- On success assert required numeric fields and exact formula invariants; additional fields are allowed unless sensitive.
+
+- Mark concurrency, data seeding, time control, and out-of-band inspection requirements.
+
+- All 45 are AI-generated candidates, not student-authored.
+
+Afterward provide a coverage map and identify any cases that may be incomplete due to specification ambiguity.
+
+Gemini đã nói
+
+Here is the AI candidate test suite for POST /api/apply-coupon, generated strictly from the revised normative model.
+
+AI Candidate Test Suite
+AI_ID	Title	Preconditions	Request/header variation	Expected Outcome	Automated Oracle	Req/Cond	Technique	Priority
+AI_01	Nominal Valid Request	User 1 logged in, 0 uses of SAVE10	Valid JWT, body: {"code":"SAVE10", "total_amount":500000, "user_id":1}	APPLY	Assert discount_amount: 50000, final_amount: 450000. Usage=1.	C1-C5, Req-01	Base Nominal	High
+AI_02	Missing Auth Header	User 1	Omit Authorization header	REJECT	No state change. Assert no DB error leak.	C4, SEC-02	Boundary	High
+AI_03	Blank Bearer Token	User 1	Authorization: Bearer (empty)	REJECT	No state change.	C4, SEC-02	Boundary	High
+AI_04	Malformed JWT	User 1	Authorization: Bearer <invalid_chars>	REJECT	No state change.	C4, SEC-02	Equivalence	High
+AI_05	Invalid Signature JWT	User 1	JWT with tampered signature	REJECT	No state change.	C4, SEC-02	Security	High
+AI_06	Expired JWT	User 1	JWT with exp in the past	REJECT	No state change.	C4, SEC-02	Boundary	High
+AI_07	Missing body user_id	User 1 logged in	Omit user_id from JSON body	OBSERVE	OBSERVE if API applies via JWT identity or rejects for schema.	Trust Bndry	Equivalence	Med
+AI_08	IDOR: Body User B	User 1 logged in	Body user_id: 2	REJECT/APPLY	System MUST NOT apply to User 2. Reject or apply to User 1.	Trust Bndry	Security	High
+AI_09	IDOR: Token maxed, Body 0	User 1 (max uses), User 2 (0 uses)	JWT User 1, Body user_id: 2	REJECT	Assert coupon not applied. (Verifies JWT identity drives C5).	C5, Trust	Security	High
+AI_10	BIGBUY Nominal	User 1, 0 uses BIGBUY	{"code":"BIGBUY", "total_amount":600000, "user_id":1}	APPLY	Assert discount_amount: 50000, final_amount: 550000.	Formula	Base Nominal	High
+AI_11	Non-existent Code	User 1	code: "FAKE50"	REJECT	No state change.	C1	Equivalence	High
+AI_12	Expired Code	User 1	code: "EXPIRED" (expires 2020)	REJECT	No state change.	C2	Boundary	High
+AI_13	Inactive Code	Seed code INACTIVE10, active=0	code: "INACTIVE10"	REJECT	No state change. (Requires Seeding)	C1	Equivalence	High
+AI_14	Code Case Sensitivity	User 1	code: "save10"	OBSERVE	OBSERVE if normalized to SAVE10 or rejected.	C1	Equivalence	Low
+AI_15	Code Empty String	User 1	code: ""	REJECT	No state change.	C1	Boundary	Med
+AI_16	Code Null	User 1	code: null	REJECT	No state change.	Schema	Data Type	Med
+AI_17	Code Missing	User 1	Omit code from body	REJECT	No state change.	Schema	Boundary	Med
+AI_18	Total Amount: Exact Min	User 1, 0 uses SAVE10	total_amount: 300000	APPLY	Assert discount_amount: 30000, final_amount: 270000.	C3, Formula	Boundary	High
+AI_19	Total Amount: Min + 1	User 1, 0 uses SAVE10	total_amount: 300001	APPLY	Assert discount_amount: 30000.1 (or rounded), final: 269999.9.	C3	Boundary	High
+AI_20	Total Amount: Min - 1	User 1	total_amount: 299999	REJECT	No state change.	C3	Boundary	High
+AI_21	Total Exact Min (BIGBUY)	User 1, 0 uses BIGBUY	total_amount: 500000	APPLY	Assert discount_amount: 50000, final_amount: 450000.	C3, Formula	Boundary	High
+AI_22	Total Exact Min (VIP100)	User 1, 0 uses VIP100	total_amount: 300000	APPLY	Assert discount_amount: 100000, final_amount: 200000.	C3, Formula	Boundary	High
+AI_23	Total Amount: Float	User 1	total_amount: 500000.55	OBSERVE	OBSERVE rounding strategy or type rejection.	Formula	Data Type	Med
+AI_24	Total Amount: Zero	User 1	total_amount: 0	REJECT	No state change.	C3	Boundary	High
+AI_25	Total Amount: Negative	User 1	total_amount: -50000	REJECT	No state change.	C3	Equivalence	High
+AI_26	Total Missing	User 1	Omit total_amount key	REJECT	No state change.	Schema	Boundary	Med
+AI_27	Total as String	User 1	total_amount: "500000"	OBSERVE	OBSERVE type coercion or reject.	Schema	Data Type	Low
+AI_28	Total Null	User 1	total_amount: null	REJECT	No state change.	Schema	Data Type	Med
+AI_29	Usage: 0 Prior (VIP100)	User 1, 0 uses VIP100	VIP100	APPLY	Applies, sets DB usage to 1.	C5	Nominal	High
+AI_30	Usage: Max-1 (VIP100)	User 1, 1 use VIP100	VIP100	APPLY	Applies, sets DB usage to 2. (Requires Seeding)	C5	Boundary	High
+AI_31	Usage: Max Hit (VIP100)	User 1, 2 uses VIP100	VIP100	REJECT	No state change. (Requires Seeding)	C5	Boundary	High
+AI_32	Usage: Max Hit (SAVE10)	User 1, 1 use SAVE10	SAVE10	REJECT	No state change. (Requires Seeding)	C5	Boundary	High
+AI_33	Concurrent Usage Limit	User 1, 0 uses SAVE10	Fire 2 parallel threads with SAVE10	APPLY/REJECT	One MUST APPLY, one MUST REJECT. Final usage MUST be 1. (Concurrency)	C5	Concurrency	High
+AI_34	SAVE10 Formula Nominal	User 1	total_amount: 800000	APPLY	Assert discount_amount: 80000, final_amount: 720000.	Formula	Equivalence	High
+AI_35	VIP100 Formula Nominal	User 1	total_amount: 450000	APPLY	Assert discount_amount: 100000, final_amount: 350000.	Formula	Equivalence	High
+AI_36	SQLi in Code	User 1	code: SAVE10' OR '1'='1	REJECT	No state change, NO SQL error leaked.	SEC-05	Security	High
+AI_37	SQLi in User ID	User 1	user_id: 1 OR 1=1	REJECT	No state change, NO SQL error leaked.	SEC-05	Security	High
+AI_38	Oversized Code Payload	User 1	code: A x 5000 chars	REJECT	No state change.	Robustness	Boundary	Med
+AI_39	Extra JSON Properties	User 1	{"code":"SAVE10", ..., "admin":true}	OBSERVE	OBSERVE if extra props are safely ignored.	Schema	Robustness	Low
+AI_40	Malformed JSON	User 1	{"code":"SAVE10", (EOF)	REJECT	HTTP Error, no state change.	Schema	Robustness	High
+AI_41	Duplicate JSON Keys	User 1	"code":"SAVE10", "code":"BIGBUY"	OBSERVE	OBSERVE which code system parses (or rejects).	Schema	Robustness	Low
+AI_42	User ID String	User 1	user_id: "1"	OBSERVE	OBSERVE type coercion or rejection.	Schema	Data Type	Low
+AI_43	Code as Array	User 1	code: ["SAVE10"]	REJECT	No state change.	Schema	Data Type	Med
+AI_44	Time Travel (Expiry C2)	System time set: 2100-01-01	code: SAVE10	REJECT	No state change. (Requires Time Control)	C2	Boundary	High
+AI_45	Missing all params	User 1	{} (empty JSON object)	REJECT	No state change.	Schema	Equivalence	High
+Coverage Map
+
+Authentication (C4): AI_02 - AI_06.
+
+Trust Boundary / IDOR: AI_07 - AI_09, AI_42.
+
+Coupon Code (C1, C2): AI_11 - AI_17, AI_36 (SQLi), AI_38, AI_44 (Expiry Clock).
+
+Total Amount (C3): AI_18 - AI_28.
+
+Usage Limits (C5): AI_29 - AI_33 (Concurrency).
+
+Formulas/Math: AI_01, AI_10, AI_18, AI_21, AI_22, AI_34, AI_35, AI_23 (float).
+
+Robustness/Schema: AI_16, AI_17, AI_26-28, AI_38 - AI_41, AI_43, AI_45.
+
+Ambiguities & Incomplete Cases (Observational Limits)
+
+The following behaviors remain incomplete strictly from a specification standpoint and must be treated as observational during execution:
+
+Error Status Codes: We assert REJECT, but the exact HTTP status codes (400, 401, 403, 404, 422) for failures cannot be predicted.
+
+Fractional Math Handling: (AI_23) Standard currency rules usually dictate rounding to the nearest integer/cent. Because the spec provides no integer constraint, the rounding strategy is observational.
+
+Strict Schema vs. Loose Parsing: (AI_14, AI_27, AI_39, AI_41, AI_42) Whether the API uses strict JSON type mapping (rejecting "1" for an int) or permissive coercion depends on the underlying web framework, which is currently undocumented.
+
+IDOR Fallback Logic: (AI_07, AI_08) It is unknown whether the developer safely overrode the user_id with the JWT identity (APPLY) or threw a schema validation error due to the mismatch (REJECT). Both are valid security postures.
+
+Bạn đã nói
+
+Targeted post-generation correction: several candidates assume POST /api/apply-coupon increments coupon usage (for example AI_01, AI_29, AI_30, AI_33). That state mutation is not specified. The endpoint description says it calculates the discounted total, while C5 only says the user's existing usage count must be below max. Consuming a coupon may occur only after successful checkout, and no such behavior is defined for this target endpoint.
+
+
+
+
+Do not regenerate the whole suite. Produce a correction ledger for every affected test ID with:
+
+Original ID, original problematic assertion, audit label (INVALID or INCOMPLETE), corrected precondition, corrected oracle, and rationale.
+
+
+
+
+Rules:
+
+- Pre-seed usage counts externally for max-1 and max conditions.
+
+- Do not assert that apply-coupon increments usage unless an authoritative requirement is later provided.
+
+- A repeat call at unchanged pre-seeded usage should produce the same eligibility result; treat this as idempotent calculation unless documentation says otherwise.
+
+- Move concurrency around “consume the final use” to an integration test involving the actual usage-recording/checkout operation and mark it outside this endpoint's strict scope.
+
+- Preserve C5 eligibility checks and JWT identity trust-boundary coverage.
+
+Finally state the corrected total number of usable AI candidates after removing or replacing invalid duplicates.
+
+Gemini đã nói
+Correction Ledger
+ID	Original Problematic Assertion	Audit Label	Corrected Precondition	Corrected Oracle	Rationale
+AI_01	Assert discount_amount: 50000, final_amount: 450000. Usage=1.	INCOMPLETE	User 1 logged in, usage externally pre-seeded to 0 uses of SAVE10.	APPLY. Assert discount_amount: 50000, final_amount: 450000. Assert usage remains 0.	Endpoint calculates the discount but must be idempotent; it does not consume the coupon.
+AI_29	Applies, sets DB usage to 1.	INVALID	User 1 logged in, externally pre-seeded with 0 uses of VIP100. Execute API call twice consecutively.	APPLY. Both calls succeed returning identical discounts. Assert usage remains 0.	Validates idempotent eligibility evaluation for C5 without mutating state.
+AI_30	Applies, sets DB usage to 2. *(Requires Seeding)*	INVALID	User 1 logged in, externally pre-seeded with 1 prior use of VIP100 (Max - 1). Execute API call twice consecutively.	APPLY. Both calls succeed returning identical discounts. Assert usage remains 1.	Proves that evaluating at the exact boundary (max-1) does not accidentally increment usage, which would wrongly block the second idempotent calculation.
+AI_33	One MUST APPLY, one MUST REJECT. Final usage MUST be 1. *(Concurrency)*	INVALID	(Moved to Integration) User 1 logged in, usage pre-seeded to 0. 2 parallel threads attempt the actual checkout/consume endpoint.	(Moved to Integration) One MUST SUCCEED, one MUST FAIL. Final usage = 1.	Concurrency checks around "consuming the final use" belong in the checkout/transaction boundary, entirely outside the strict scope of this read-only calculation endpoint.
+
+(Note: AI_31 and AI_32 correctly asserted "REJECT / No state change" for the Max Hit condition, meaning their original oracles remain valid under this read-only paradigm, provided their preconditions are externally seeded).
+
+Final Usable AI Candidates
+
+After correcting the overreaching state-mutation assumptions and migrating the concurrency race-condition test (AI_33) to the checkout integration suite, there are exactly 44 usable AI candidate tests remaining within the strict scope of the POST /api/apply-coupon requirements.
+
+
+
+
+Pro
+
+Gemini là AI và có thể mắc sai sót.

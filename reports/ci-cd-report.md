@@ -10,9 +10,9 @@ The **diagnostic** lane preserves genuine SUT assertion failures and always uplo
 
 | Run | Commit/link | Expected result | Screenshot |
 | --- | --- | --- | --- |
-| All-pass demonstration | HUMAN_REVIEW_REQUIRED_AFTER_PUSH | All mutation-demo cases pass | HUMAN_REVIEW_REQUIRED_AFTER_ACTIONS_RUN |
-| One-fail mutation | HUMAN_REVIEW_REQUIRED_AFTER_PUSH | Exactly one deliberate sentinel failure | HUMAN_REVIEW_REQUIRED_AFTER_ACTIONS_RUN |
+| All-pass demonstration | [run 32405131238](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) / commit beecfaa | All mutation-demo cases pass | evidence/screenshots/04-ci-all-pass.jpg |
+| One-fail mutation | [run 32405318145](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145) / commit a40164b | Exactly one deliberate data case fails (two linked assertions) | evidence/screenshots/05-ci-one-fail.jpg and 06-ci-one-fail-log.jpg |
 
 ## Human review
 
-The repository is currently private and empty on GitHub. Changing visibility, pushing, and creating representational evidence must be approved/performed before links can be finalized. Do not claim the mutation lane proves the unmodified SUT passes; the diagnostic Newman reports are the authoritative product-quality result.
+Both runs were produced by GitHub Actions after separate pushes and include downloadable HTML/JUnit artifacts. The repository remains private pending explicit approval to change visibility. Do not claim the mutation lane proves the unmodified SUT passes; the diagnostic Newman reports are the authoritative product-quality result.

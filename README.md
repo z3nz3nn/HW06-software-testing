@@ -8,6 +8,10 @@ This repository contains the complete, auditable testing pipeline for three ESho
 | B | FR-09 Apply coupon | `POST /api/apply-coupon` |
 | C | FR-16 Import products | `POST /api/admin/import-products` |
 
+Key artifacts: [main report](reports/main-report.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [CI/CD report](reports/ci-cd-report.md), and [video script](reports/video-script.md).
+
+CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) and [one-failing-case mutation](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145).
+
 ## Student declaration
 
 - Student: **Hưng Nguyễn**

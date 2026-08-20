@@ -1,0 +1,24 @@
+{
+  "name": "hw06-software-testing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Evidence-backed API testing assignment for the EShop SUT",
+  "type": "module",
+  "scripts": {
+    "generate:postman": "node scripts/generate-postman.mjs",
+    "test:api": "node scripts/run-newman.mjs",
+    "test:api:reset": "node scripts/run-newman.mjs reset-password",
+    "test:api:coupon": "node scripts/run-newman.mjs apply-coupon",
+    "test:api:import": "node scripts/run-newman.mjs import-products",
+    "test:ci-demo": "node scripts/run-newman.mjs reset-password --data-file postman/data/reset-password-ci-demo.json --report-mode compact",
+    "test:ci-diagnostic": "node scripts/run-newman.mjs all --report-mode compact --suppress-exit-code",
+    "summarize:newman": "node scripts/summarize-newman.mjs",
+    "generate:reports": "node scripts/generate-reports.mjs",
+    "verify:artifacts": "node scripts/verify-artifacts.mjs"
+  },
+  "devDependencies": {
+    "jsonwebtoken": "^9.0.3",
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}

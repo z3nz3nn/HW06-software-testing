@@ -1,0 +1,13 @@
+node_modules/
+**/node_modules/
+*.log
+.env
+tmp/
+sut/eshop-sut-main.zip
+sut/eshop-sut/backend/database.sqlite
+evidence/newman/*.tmp.*
+evidence/newman/*.json
+!evidence/newman/*summary.json
+evidence/newman/*.html
+evidence/newman/*.xml
+outputs/hw06/*.inspect.ndjson

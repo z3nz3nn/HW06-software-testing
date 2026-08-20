@@ -1,0 +1,69 @@
+name: HW06 API Tests
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    name: Diagnostic suite (preserve SUT defects)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install runner dependencies
+        run: npm ci
+      - name: Install SUT dependencies
+        run: npm --prefix sut/eshop-sut/backend ci
+      - name: Regenerate collection and data
+        run: npm run generate:postman
+      - name: Run all diagnostic API tests
+        run: npm run test:ci-diagnostic -- --student-id "${{ vars.STUDENT_ID || 'CI-DEMO-NOT-SUBMISSION' }}"
+      - name: Upload diagnostic reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostic-newman-reports
+          path: |
+            evidence/newman/*.html
+            evidence/newman/*.xml
+            evidence/console/*.log
+          if-no-files-found: error
+          retention-days: 14
+
+  mutation-demo:
+    name: Controlled all-pass / one-fail demonstration
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install runner dependencies
+        run: npm ci
+      - name: Install SUT dependencies
+        run: npm --prefix sut/eshop-sut/backend ci
+      - name: Regenerate collection and data
+        run: npm run generate:postman
+      - name: Run one controlled Newman case
+        run: npm run test:ci-demo -- --student-id "${{ vars.STUDENT_ID || 'CI-DEMO-NOT-SUBMISSION' }}"
+      - name: Upload mutation-demo report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mutation-demo-newman-report
+          path: |
+            evidence/newman/*.html
+            evidence/newman/*.xml
+          if-no-files-found: error
+          retention-days: 14

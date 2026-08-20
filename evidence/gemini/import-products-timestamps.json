@@ -1,0 +1,26 @@
+{
+  "tool": "Google Gemini Pro",
+  "account": "Hưng Nguyễn (email redacted in report)",
+  "prompts": [
+    {
+      "id": "IMPORT-P1",
+      "sentAtUtc": "2026-08-20T18:01:51.998Z",
+      "responseCompletedAtUtc": "2026-08-20T18:03:04.779Z"
+    },
+    {
+      "id": "IMPORT-P2",
+      "sentAtUtc": "2026-08-20T18:03:24.673Z",
+      "responseCompletedAtUtc": "2026-08-20T18:04:09.712Z"
+    },
+    {
+      "id": "IMPORT-P3",
+      "sentAtUtc": "2026-08-20T18:04:25.153Z",
+      "responseCompletedAtUtc": "2026-08-20T18:05:35.085Z"
+    },
+    {
+      "id": "IMPORT-P4",
+      "sentAtUtc": "2026-08-20T18:05:57.495Z",
+      "responseCompletedAtUtc": "2026-08-20T18:06:37.703Z"
+    }
+  ]
+}

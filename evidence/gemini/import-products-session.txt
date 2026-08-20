@@ -1,0 +1,574 @@
+Trò chuyện với Gemini
+Bạn đã nói
+
+You are assisting with an individual university API-testing assignment. Work only from the authoritative requirements below. This is Phase 1: requirements analysis for exactly one target API. Do NOT generate test cases yet.
+
+
+
+
+TARGET API
+
+POST /api/admin/import-products
+
+Authorization: Bearer <JWT>, admin role required.
+
+JSON body accepted by the API specification:
+
+{
+
+"products": [
+
+{
+
+"name": "SP 1",
+
+"price": 10000,
+
+"description": "Mô tả 1",
+
+"imageUrl": "",
+
+"category_id": 1
+
+}
+
+]
+
+}
+
+
+
+
+FR-16 BUSINESS REQUIREMENTS
+
+Admin uploads a CSV whose extension is .csv.
+
+Header must be: name,price,description,imageUrl,category_id.
+
+Comma-containing fields are supported when double-quoted according to RFC 4180.
+
+Before import, each row is validated: name must not be empty; price must be positive.
+
+If any row has an error, the entire import must roll back (atomic all-or-nothing).
+
+The system reports clearly how many rows succeeded, how many failed, and failure reasons.
+
+
+
+
+RELATED PRODUCT RULES
+
+FR-15 says product name is required and <=255 characters, price is required and >0, and category is required and chosen from an existing category.
+
+
+
+
+SECURITY
+
+FR-12 and SEC-02/SEC-03: every /api/admin/* API requires a valid JWT and role=admin. A normal user token must be rejected.
+
+SEC-05: parameterized database queries.
+
+The specification does not define exact HTTP status codes or exact success/error property names.
+
+
+
+
+IMPORTANT SPECIFICATION MISMATCH
+
+FR-16 describes CSV upload/parsing, but this target API receives an already parsed JSON products array. Distinguish API-level validation/atomicity tests from frontend CSV parser tests; do not attribute file-extension or RFC-4180 parsing directly to this JSON endpoint.
+
+
+
+
+ASSIGNMENT EXPECTATIONS
+
+Later tests must cover every nested parameter, arrays, cross-row interactions, state/atomicity, role escalation, injection, response schema, and robustness.
+
+
+
+
+Produce:
+
+1. Traceability split into API-level versus frontend/CSV-parser responsibilities.
+
+2. Partitions and boundaries for products array and every product field.
+
+3. Transaction/state model for validate -> commit or rollback.
+
+4. Authorization decision table.
+
+5. Response/count invariants without inventing property names.
+
+6. Ambiguities requiring human review.
+
+Do not inspect implementation behavior and do not generate individual cases yet.
+
+Gemini đã nói
+
+Here is the Phase 1 requirements analysis for the POST /api/admin/import-products endpoint. This analysis maps the business rules to the system boundaries, establishes the state models, and highlights ambiguities without generating executable test cases.
+
+1. Traceability Split: API vs. Frontend Responsibilities
+
+Because the business requirement (FR-16) describes a CSV upload but the target API accepts a pre-parsed JSON array, the testing responsibilities must be strictly bifurcated.
+
+Feature / Requirement	Frontend (CSV Parser) Responsibility	API (Backend JSON) Responsibility
+File Handling	Validate .csv extension and file size limits.	None (receives JSON payload).
+CSV Formatting	Enforce exact header (name,price...); apply RFC 4180 parsing for double-quoted commas.	None.
+Payload Structure	Convert parsed CSV rows into the JSON products array.	Reject malformed JSON; validate the products array schema.
+Field Validation	Surface UI errors before API call if possible (optional).	Enforce FR-15 and FR-16 constraints (name length, positive price, valid category).
+Database State	Display final status to the user.	Guarantee atomic all-or-nothing rollback; execute parameterized queries (SEC-05).
+Authentication	Pass the Bearer token in headers.	Enforce JWT validity and admin role (FR-12, SEC-02/03).
+2. Partitions and Boundaries
+
+To validate the products array and its nested fields, the data must be partitioned into equivalence classes and boundary values.
+
+Array-Level Partitions (products)
+
+Empty state: Null array, empty array [].
+
+Valid counts: 1 item (minimum), typical batch (e.g., 50 items).
+
+Stress counts: Very large array (e.g., 10,000 items) to test timeout and payload limits.
+
+Duplicate states: Array containing duplicate product names or identical payloads across multiple indexes.
+
+Field-Level Partitions (per item in products)
+Field	Valid Partitions	Invalid / Boundary Partitions
+name	Standard string, string with spaces, max length (255 chars).	Null, empty "" (FR-16), 256 chars (FR-15 boundary), SQL injection payloads (SEC-05).
+price	Positive integer/float (e.g., 1, 10000), large valid amount.	Null, negative number (-1), absolute zero (0), non-numeric string ("10k").
+category_id	Existing valid integer ID.	Null, non-existent ID, negative ID, string/malformed type.
+description	Standard string, empty string (if optional).	Null, excessively long string, HTML/script injection payloads.
+imageUrl	Valid URL, empty string "".	Null, malformed URL, extremely long URL.
+3. Transaction and State Model
+
+FR-16 mandates an atomic, all-or-nothing import. The database state must never reflect a partial import.
+
+Pre-Import State: Database holds baseline product count (X).
+
+Validation Phase: The API iterates through the products array.
+
+Condition A: All items pass schema, constraint, and referential (category) checks.
+
+Condition B: One or more items fail validation.
+
+Final State (A - Commit): The transaction commits. Database product count becomes X+N (where N is the number of items in the array).
+
+Final State (B - Rollback): The transaction aborts. Database product count remains strictly X.
+
+4. Authorization Decision Table
+
+Based on FR-12, SEC-02, and SEC-03, the endpoint must be strictly protected.
+
+Token State	Decoded Role	Action Expected	Database State Change
+Valid, active JWT	admin	Allow (process payload)	Yes (if payload is valid)
+Valid, active JWT	user	Reject (Forbidden)	None
+Expired JWT	admin	Reject (Unauthorized)	None
+Malformed/Tampered JWT	Any / Unknown	Reject (Unauthorized)	None
+No Token (Missing Auth)	N/A	Reject (Unauthorized)	None
+5. Response and Count Invariants
+
+The API specification does not define specific property names for the response. However, we can establish mathematical invariants based on the requirement that the system reports successes, failures, and reasons.
+
+Let T = Total number of products in the parsed JSON array.
+
+Let S = Reported count of successful rows.
+
+Let F = Reported count of failed rows.
+
+Let D = Actual number of rows inserted into the database.
+
+Invariants that must hold true for every response:
+
+Total Count Check: T=S+F
+
+Atomic Rollback Rule:
+
+If F==0, then D=T (Complete Success).
+
+If F>0, then D=0 (All-or-Nothing Rollback).
+
+Error Tracing: The response must contain exactly F distinct error reasons mapped to the specific failing rows/indexes.
+
+6. Ambiguities Requiring Human Review
+
+Before proceeding to test case generation, the following ambiguities in the business requirements and API specification must be clarified:
+
+"Success" Count during Rollback: If a batch of 10 items has 9 valid rows and 1 invalid row, the transaction rolls back (0 items saved). Should the API report S=9,F=1 (indicating rows that passed validation), or S=0,F=10 (indicating the final aborted state)?
+
+Optionality of Fields: Are description and imageUrl strictly required, or can they be omitted/null? FR-15 explicitly requires name, price, and category, but is silent on the others.
+
+Missing HTTP Status Codes: Because the spec lacks exact status codes, does a validation failure resulting in a rollback return a 400 Bad Request, 422 Unprocessable Entity, or a 200 OK with an error payload?
+
+Duplicate Handling: How should the API handle a batch containing two products with the exact same name? Should it update the existing product, or throw a uniqueness constraint violation and roll back the whole batch?
+
+Bạn đã nói
+
+Critically revise the import analysis before test generation.
+
+
+
+
+Corrections:
+
+1. Do not invent exact “Unauthorized/Forbidden” status categories. The normative result is reject before processing and no database change; record actual status/body.
+
+2. “Exactly F distinct error reasons” is not supported: one row can have multiple validation errors, and the specification does not define response property names. Require at least one actionable reason for every rejected row, while recording the response shape for review.
+
+3. Rollback creates two possible reporting interpretations: validation counts (e.g. 9 rows valid, 1 invalid, 0 committed) versus committed counts (0 succeeded). Do not force T=S+F until the semantic meaning of “success” is established. Require the unambiguous database invariant D=0 when any row is invalid.
+
+4. SQL-injection-looking strings sent as a name/description are not automatically invalid inputs. SEC-05 requires treating them as literal parameter values without altering query structure or leaking database errors. A nonempty name payload can be accepted safely if all other rules pass.
+
+5. Stored HTML/script in description concerns SEC-04 at display time. For this endpoint, assert no execution/response reflection and mark end-to-end escaping as a separate UI verification.
+
+6. Separate normative field rules (name 1..255, price >0, existing category) from observational rules for description/imageUrl, batch-size limits, duplicate names, numeric floats, and extra properties.
+
+7. Clarify atomicity verification must compare stable product identifiers/content as well as count to detect updates or partial writes hidden by a constant count.
+
+
+
+
+Return:
+
+A. Corrected API-level normative oracles.
+
+B. Observational partitions.
+
+C. Atomicity verification protocol.
+
+D. Conservative response-reporting oracle.
+
+E. Corrected authorization gate.
+
+Still do not generate individual test cases.
+
+Gemini đã nói
+
+Here is the revised Phase 1 requirements analysis, incorporating the corrections to ensure strict alignment with the specification boundaries, security handling, and database invariants.
+
+A. Corrected API-Level Normative Oracles
+
+These are the strict, testable business rules (FR-15, FR-16) that dictate whether a product row is valid or invalid.
+
+name: Must be provided, non-empty, and between 1 and 255 characters.
+
+Security Note (SEC-05): Strings containing SQL injection payloads (e.g., ' OR 1=1; --) are normatively valid inputs. They must be treated as literal string values and accepted safely without altering database queries or leaking SQL errors.
+
+price: Must be provided and strictly greater than 0.
+
+category_id: Must be provided and correspond to an existing, valid category in the system.
+
+Database Invariant (All Valid): If every row in the products array passes the normative rules, the transaction must commit all rows.
+
+Database Invariant (Any Invalid): If one or more rows fail any normative rule, the transaction must roll back entirely (D=0 changes to the database).
+
+B. Observational Partitions
+
+Because the specification does not exhaustively define all system behaviors, the following partitions require observational testing to document the API's actual implementation and handle edge cases safely.
+
+Unspecified Field Rules (description, imageUrl): Observe how the system handles missing, null, or empty string values, as well as extreme length limits.
+
+Security Note (SEC-04): HTML/script injection payloads in description are observational for the API regarding reflection (they must not execute in the API response or crash the endpoint). End-to-end rendering safety is deferred to UI testing.
+
+Batch Size Limits: Observe the maximum number of items (array length) and payload size the API can process before timing out or throwing a limit error.
+
+Data Types and Formatting: Observe the handling of floating-point numbers for price (e.g., 100.50) versus integers, and stringified numbers.
+
+Duplicate Handling: Observe API behavior when duplicate name values exist within the same array or conflict with existing database records (e.g., does it reject, update, or append?).
+
+Schema Strictness: Observe whether unexpected extra properties in the JSON payload (e.g., "internal_code": "XYZ") are silently ignored or rejected.
+
+C. Atomicity Verification Protocol
+
+Verifying an all-or-nothing rollback requires more than checking the total row count, as a constant count might mask partial writes (e.g., an update overwriting an existing row).
+
+Pre-State Snapshot: Record the total count of products in the database AND capture a snapshot of existing product identifiers and their core content (e.g., a hash or copy of the current state).
+
+Execution: Submit a mixed payload (valid and invalid rows) to trigger a rollback.
+
+Post-State Assertion:
+
+The total database product count must exactly match the Pre-State count.
+
+No new identifiers introduced by the payload can exist in the database.
+
+No existing product content can be modified (verifying no partial updates occurred).
+
+D. Conservative Response-Reporting Oracle
+
+The API specification does not define exact HTTP status codes, property names, or the semantic meaning of "success" during a rollback. The oracle must evaluate the response dynamically:
+
+Error Tracing: For every rejected row in the payload, the response must provide at least one actionable reason. (Note: A single row may have multiple errors, so error counts may exceed failed row counts).
+
+Reporting Semantics: Record whether the response reports "success" based on validation counts (e.g., 9 valid, 1 invalid) or commit counts (0 committed, 10 failed). Do not force a specific mathematical formula (like T=S+F) until the API's reporting behavior is established.
+
+Response Shape: Record the actual HTTP status code returned (whether 200, 400, 422, etc.) and the structure of the JSON response body for human review.
+
+E. Corrected Authorization Gate
+
+All requests to this endpoint must pass authentication (valid JWT) and authorization (admin role).
+
+Valid JWT + Admin Role: The API must allow the request and proceed to payload processing (database changes depend on payload validity).
+
+Missing, Invalid, Expired Token, or Non-Admin Role: The API must reject the request before processing.
+
+Assertion: No database changes can occur.
+
+Observation: Record the actual HTTP status code and response body returned by the API (do not invent or assume strict 401 Unauthorized or 403 Forbidden behaviors prior to testing).
+
+Bạn đã nói
+
+Generate the AI candidate suite for POST /api/admin/import-products from the corrected model. Produce exactly 48 distinct cases.
+
+
+
+
+Use a compact Markdown table with:
+
+AI_ID, Title, Preconditions, Payload/auth variation, Expected business outcome (COMMIT/ROLLBACK/REJECT_BEFORE_PROCESSING/OBSERVE), Automated oracle, Requirement IDs, Technique, Priority.
+
+
+
+
+Coverage requirements:
+
+- Authorization: admin token; normal-user token; missing, blank, malformed, invalid-signature, and expired token. Assert no data change on all rejected requests.
+
+- products container: missing, null, wrong type object/string, empty array, one row, several rows, large/stress batch observation.
+
+- name: missing, null, empty, whitespace-only observation, lengths 1/255/256, Unicode, SQL-looking literal.
+
+- price: missing, null, 0, negative, minimum positive, typical positive, float observation, numeric string observation, extreme numeric values.
+
+- category_id: missing, null, existing, nonexistent, negative, wrong type; enforce FR-15 existing category.
+
+- description and imageUrl: omitted/null/empty observations, long values, HTML/script string with separate UI escaping note, malformed URL observation.
+
+- Cross-row atomicity: invalid row first/middle/last, several invalid rows, all valid, and snapshot/count/content verification.
+
+- Response reporting: at least one actionable reason per rejected row, but do not invent status codes/property names or force success/failure count semantics.
+
+- Security/schema: SQLi-like literal handling, extra properties, prototype-style properties, malformed JSON, duplicate JSON keys, large payload, concurrent duplicate imports observation, database error/stack leakage.
+
+- Do not test .csv extension or RFC-4180 parsing as if handled by this JSON endpoint; list those only as out-of-scope companion UI/parser tests.
+
+- Mark time/data seeding/concurrency/out-of-band DB requirements.
+
+- All 48 are AI-generated candidates.
+
+After the table provide coverage mapping and identify ambiguous/incomplete candidates.
+
+Gemini đã nói
+
+Here is the AI candidate suite containing exactly 48 test cases for the POST /api/admin/import-products JSON endpoint.
+
+AI Candidate Test Suite
+AI_ID	Title	Preconditions	Payload/Auth Variation	Expected Outcome	Automated Oracle	Req IDs	Technique	Priority
+TC-01	Valid Admin Token	Admin JWT active, valid DB snapshot	1 valid product	COMMIT	DB +1 product; Response records success format	FR-12, FR-16	EP	High
+TC-02	Normal User Token	User JWT active	1 valid product	REJECT_BEFORE_PROCESSING	DB snapshot unchanged; Record response status/body	FR-12, SEC-02	EP	High
+TC-03	Missing Token	No JWT provided	1 valid product	REJECT_BEFORE_PROCESSING	DB snapshot unchanged; Record response status/body	FR-12, SEC-02	EP	High
+TC-04	Blank Token Header	Authorization: Bearer	1 valid product	REJECT_BEFORE_PROCESSING	DB snapshot unchanged	FR-12, SEC-02	BVA	Med
+TC-05	Malformed Token	Authorization: Bearer abc123invalid	1 valid product	REJECT_BEFORE_PROCESSING	DB snapshot unchanged	FR-12, SEC-02	EG	High
+TC-06	Invalid JWT Signature	JWT with tampered signature	1 valid product	REJECT_BEFORE_PROCESSING	DB snapshot unchanged	SEC-02, SEC-03	Security	High
+TC-07	Expired Admin JWT	Admin JWT past exp	1 valid product	REJECT_BEFORE_PROCESSING	DB snapshot unchanged	SEC-02, SEC-03	BVA	High
+TC-08	Missing products key	Admin JWT active	Payload: {}	REJECT_BEFORE_PROCESSING	DB snapshot unchanged; Require actionable error	FR-16	EP	High
+TC-09	products is null	Admin JWT active	{"products": null}	REJECT_BEFORE_PROCESSING	DB snapshot unchanged; Require actionable error	FR-16	BVA	Med
+TC-10	products wrong type (obj)	Admin JWT active	{"products": {"name":"A"}}	REJECT_BEFORE_PROCESSING	DB snapshot unchanged; Require actionable error	FR-16	EP	Med
+TC-11	products wrong type (str)	Admin JWT active	{"products": "[]"}	REJECT_BEFORE_PROCESSING	DB snapshot unchanged	FR-16	EP	Med
+TC-12	products empty array	Admin JWT active	{"products": []}	OBSERVE	Record if rejected or accepted gracefully; DB unchanged	FR-16	BVA	Med
+TC-13	Multiple valid rows	DB has category 1	50 valid products	COMMIT	DB +50; Snapshot verifies all inserted	FR-16	EP	High
+TC-14	Stress batch	DB has category 1	5,000 valid products	OBSERVE	Record max payload size/timeout behavior	FR-16	Stress	Low
+TC-15	name missing	DB has category 1	Valid row but omit name key	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	EP	High
+TC-16	name null	DB has category 1	name: null	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	BVA	Med
+TC-17	name empty string	DB has category 1	name: ""	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	BVA	High
+TC-18	name whitespace only	DB has category 1	name: " "	OBSERVE	Check if trimmed to empty and rejected	FR-15	BVA	Med
+TC-19	name length 1 char	DB has category 1	name: "A"	COMMIT	DB +1; Product saved exactly as "A"	FR-15	BVA	High
+TC-20	name length 255 chars	DB has category 1	name is 255 'A's	COMMIT	DB +1; Product saved correctly	FR-15	BVA	High
+TC-21	name length 256 chars	DB has category 1	name is 256 'A's	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15	BVA	High
+TC-22	price missing	DB has category 1	Valid row but omit price key	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	EP	High
+TC-23	price null	DB has category 1	price: null	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	BVA	Med
+TC-24	price exactly 0	DB has category 1	price: 0	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	BVA	High
+TC-25	price negative	DB has category 1	price: -100	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15, FR-16	BVA	High
+TC-26	price min positive	DB has category 1	price: 1	COMMIT	DB +1; Price exactly 1	FR-15, FR-16	BVA	High
+TC-27	price float observation	DB has category 1	price: 10.55	OBSERVE	Check if DB supports float or throws/rounds	FR-15	EP	Med
+TC-28	price numeric string	DB has category 1	price: "100"	OBSERVE	Record if API auto-casts to int/float or rejects	FR-15	EP	Low
+TC-29	price extreme max	DB has category 1	price: 9999999999	OBSERVE	Check for integer overflow or DB max limit	FR-15	BVA	Med
+TC-30	category_id missing	DB has category 1	Valid row, omit category_id	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15	EP	High
+TC-31	category_id null	DB has category 1	category_id: null	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15	BVA	Med
+TC-32	category_id nonexistent	DB has category 1	category_id: 999999	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15	EP	High
+TC-33	category_id negative	DB has category 1	category_id: -1	ROLLBACK	DB unchanged; ≥1 actionable error in response	FR-15	BVA	Med
+TC-34	category_id string type	DB has category 1	category_id: "1"	OBSERVE	Record if API auto-casts string to int or rejects	FR-15	EP	Low
+TC-35	description omitted	DB has category 1	Omit description	OBSERVE	Commit expected; check if DB stores null or ""	FR-16	EP	Med
+TC-36	imageUrl omitted	DB has category 1	Omit imageUrl	OBSERVE	Commit expected; check if DB stores null or ""	FR-16	EP	Med
+TC-37	description very long	DB has category 1	description is 10k chars	OBSERVE	Check DB text limits/truncation behavior	FR-16	Stress	Low
+TC-38	imageUrl malformed	DB has category 1	imageUrl: "not-a-url"	OBSERVE	Check if strictly validated as URI format	FR-16	EP	Med
+TC-39	HTML/script in desc	DB has category 1	description: "<script>..."	COMMIT	DB +1; Assert stored literally (SEC-04 UI defer)	SEC-04	Security	High
+TC-40	Atomicity: 1st row invalid	DB has cat 1; rows: Bad, Good, Good	3 rows, price:0 on idx 0	ROLLBACK	DB strictly D=0; content/snapshot unchanged	FR-16	ST	High
+TC-41	Atomicity: Mid row invalid	DB has cat 1; rows: Good, Bad, Good	3 rows, name:"" on idx 1	ROLLBACK	DB strictly D=0; content/snapshot unchanged	FR-16	ST	High
+TC-42	Atomicity: Last row invalid	DB has cat 1; rows: Good, Good, Bad	3 rows, cat_id:-1 on idx 2	ROLLBACK	DB strictly D=0; content/snapshot unchanged	FR-16	ST	High
+TC-43	SQLi Literal in name	DB has category 1	name: "' OR 1=1; --"	COMMIT	DB +1; literal string saved, queries parameterize	SEC-05	Security	High
+TC-44	Extra properties in JSON	DB has category 1	{"name":"A", "hack":true}	OBSERVE	Record if extra keys are stripped vs rejected	Schema	EP	Low
+TC-45	Malformed JSON payload	Admin JWT active	Missing closing bracket	REJECT_BEFORE_PROCESSING	Gateway/framework rejection; DB unchanged	Schema	EG	Med
+TC-46	Duplicate JSON keys	DB has category 1	{"name":"A", "name":"B"}	OBSERVE	Check if JSON parser overrides vs errors out	Schema	EG	Low
+TC-47	Duplicate internal names	DB has category 1	Array has 2 rows with same name	OBSERVE	Record if system updates, rejects, or appends	DB	EP	Med
+TC-48	Database error stack leak	DB table locked/forced error	1 valid product	OBSERVE	API rejects; check response body lacks SQL trace	Security	Security	High
+Coverage Mapping
+
+Authorization: Handled exhaustively in TC-01 through TC-07 (valid, missing, roles, token tampering, expiry).
+
+Products Container: TC-08 through TC-14 map JSON structural boundaries and sizing limits.
+
+Field Constraints (FR-15/FR-16): TC-15 to TC-34 methodically cover missing, null, type, boundary lengths, and normative validation checks (name limits, positive price, existing category).
+
+Optional Fields: TC-35 to TC-39 test behaviors not explicitly defined in the spec, such as omitted fields, lengths, and format validation on images.
+
+Atomicity (FR-16): TC-40 to TC-42 verify the "all-or-nothing" rule strictly with D=0 verifications using positional variants.
+
+Security (SEC-02..05): Covered by TC-39 (stored scripts), TC-43 (SQL injection syntax as literal input), and TC-48 (error leakage prevention).
+
+Ambiguous / Incomplete Candidates (OBSERVE)
+
+The tests marked as OBSERVE require the QA engineer to run the payload and record how the implementation behaves, as the requirements are currently silent:
+
+Empty / Missing state defaults: How are missing optional fields (TC-35, TC-36) or whitespace-only names (TC-18) treated?
+
+Type Casting: Does the API accept "100" as a price and cast it, or reject it for being a string (TC-28, TC-34)? Does it support floats or strictly integers (TC-27)?
+
+Payload Strictness: Will extra JSON keys (TC-44) or duplicated keys (TC-46) be rejected (strict schema) or ignored?
+
+Duplicate Business Logic: TC-47 tests if identical names result in a rollback, a duplicate entry, or an upsert (update).
+
+Reporting Semantics: The "Automated Oracle" deliberately observes the response shapes (counts, error properties) across all ROLLBACK instances rather than asserting a rigid {"success": X, "fail": Y} format.
+
+Out of Scope (UI/Frontend Responsibilities)
+
+CSV File Parsing: Validating .csv file extensions, MIME types, and file size limits.
+
+RFC-4180 Parsing: Validating double-quoted commas (e.g., "Mô tả, có dấu phẩy") converting properly to a string. This is tested at the frontend CSV parser layer before the JSON API request is ever generated.
+
+Bạn đã nói
+
+Post-generation audit correction. Do not regenerate the 48-row table.
+
+
+
+
+First produce a correction ledger for affected original IDs:
+
+- TC-08 through TC-12 authenticate successfully; invalid container/schema is rejected during payload validation, not “before processing.” Correct the outcome terminology and oracle.
+
+- TC-27 price 10.55 is a positive JSON number. FR-15 says price is a number >0 and does not require an integer. Explain whether this should be VALID/COMMIT normatively, while rounding/display remains observational.
+
+- TC-39 must not claim safe UI rendering merely because the API stores a literal. Keep a companion end-to-end UI escaping check.
+
+- TC-43 black-box insertion of an SQL-looking literal supports behavior evidence but does not prove all queries are parameterized; source/database review is required for SEC-05.
+
+- TC-48 requires controlled white-box fault injection and cannot be executed as an ordinary black-box case.
+
+
+
+
+For each affected ID return Original ID, audit label VALID/INVALID/INCOMPLETE, corrected expected outcome/oracle, and rationale.
+
+
+
+
+Then add exactly 8 supplemental AI-generated candidates, IDs TC-49 through TC-56, covering the omissions:
+
+1. Unicode Vietnamese product name.
+
+2. description = null and imageUrl = null in a focused case.
+
+3. Multiple invalid rows requiring reasons for each rejected row.
+
+4. All-valid three-row atomic commit with snapshot verification.
+
+5. Prototype-style __proto__/constructor extra properties.
+
+6. Concurrent identical import requests as an observational idempotency/duplication case.
+
+7. category_id boolean/array wrong JSON types.
+
+8. Normal-user token plus SQL-looking valid product to prove authorization gates validation and makes no DB change.
+
+
+
+
+End with the revised usable candidate count and updated coverage note.
+
+Gemini đã nói
+Correction Ledger for Affected Original IDs
+Original ID	Audit Label	Corrected Expected Outcome / Oracle	Rationale
+TC-08 to TC-12	INVALID (Terminology)	
+
+REJECT_AT_VALIDATION
+
+
+
+
+Oracle: DB unchanged; response returns validation error.
+
+	The requests successfully pass the authorization gate (valid admin JWT). The rejection occurs during JSON schema/payload parsing, not "before processing."
+TC-27	INVALID (Outcome)	
+
+COMMIT
+
+
+
+
+Oracle: DB +1; price recorded. Observation remains for rounding/display.
+
+	FR-15 strictly requires price >0. A positive float (10.55) satisfies this business rule normatively and must be accepted. How the DB maps/rounds the float is observational.
+TC-39	INCOMPLETE (Oracle claim)	
+
+COMMIT
+
+
+
+
+Oracle: DB +1; literal string saved. (Flag for separate E2E UI testing).
+
+	Storing the script literal in the DB proves API acceptance, but it cannot definitively prove safe UI rendering (SEC-04). End-to-end UI escaping must be verified in a separate layer.
+TC-43	INCOMPLETE (Verification method)	
+
+COMMIT
+
+
+
+
+Oracle: DB +1; verify literal string saved. Require source/DB review.
+
+	A black-box API test can verify the payload is accepted without crashing, but it cannot conclusively prove parameterization (SEC-05). It must be paired with white-box code review or DB query log inspection.
+TC-48	INVALID (Execution method)	
+
+OBSERVE (White-box execution)
+
+
+
+
+Oracle: Induce DB fault; assert API response lacks stack trace.
+
+	A standard black-box valid payload cannot reliably trigger a database error. This requires controlled fault injection (e.g., locking the table or mocking the DB connection) to verify SEC-04/SEC-05 error leakage prevention.
+Supplemental AI Candidates (TC-49 to TC-56)
+AI_ID	Title	Preconditions	Payload/Auth Variation	Expected Outcome	Automated Oracle	Req IDs	Technique	Priority
+TC-49	Unicode Vietnamese name	DB has category 1, Admin JWT	name: "Sản Phẩm Có Dấu"	COMMIT	DB +1; snapshot verifies exact Unicode text preserved.	FR-15	EP	High
+TC-50	description & imageUrl explicitly null	DB has category 1, Admin JWT	Both fields sent as null in a valid row	OBSERVE	Check if DB accepts nulls for optional fields vs requiring empty strings.	FR-16	BVA	Med
+TC-51	Multiple invalid rows & reasons	DB has category 1, Admin JWT	3 rows, all invalid (e.g., empty name, negative price, bad cat)	ROLLBACK	DB D=0; Response contains at least one reason for each rejected row.	FR-16	ST	High
+TC-52	All-valid multi-row snapshot	DB has category 1, Admin JWT	3 completely valid rows	COMMIT	DB D=3; Content snapshot perfectly matches all 3 parsed payloads.	FR-16	ST	High
+TC-53	Prototype pollution payload	DB has category 1, Admin JWT	Add __proto__: {"admin": true} to JSON row	ROLLBACK	DB D=0 or ignores property; no prototype override occurs.	Schema	Security	High
+TC-54	Concurrent identical imports	DB has category 1, Admin JWT	Send exact same valid batch concurrently on 2 threads	OBSERVE	Record race conditions, duplicates, or constraint violations.	DB	Stress	Med
+TC-55	category_id wrong JSON types	DB has category 1, Admin JWT	category_id: true or [1]	ROLLBACK	DB D=0; Schema validates types before DB execution.	FR-15	EP	High
+TC-56	Auth gate vs SQLi parsing	User JWT (non-admin) active	Valid product, but name contains SQLi literal	REJECT_BEFORE_PROCESSING	DB D=0; Proves auth rejection occurs before payload parsing/SQL risk.	FR-12, SEC-02	ST	High
+Revised Usable Candidate Count and Coverage Note
+
+Revised Usable Candidate Count: 56 distinct candidates. (The 48 original candidates remain active with the 5 ledger corrections applied to their execution/oracles, plus the 8 new supplemental candidates).
+
+Updated Coverage Note:
+The suite now explicitly covers Vietnamese localization constraints (TC-49), concurrent idempotency states (TC-54), prototype pollution schema vulnerabilities (TC-53), and explicit multi-row failure reason reporting (TC-51). Furthermore, the boundary between authentication and validation is proven (TC-56), and the distinction between black-box observable API behavior and white-box security verification (parameterization logs, fault injection) is formally documented in the oracles.
+
+
+
+
+Pro
+
+Gemini là AI và có thể mắc sai sót.

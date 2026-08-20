@@ -1,0 +1,21 @@
+5d71f4e45d59b0f8b7987362eac755a92ad2b827 | 2026-08-21T01:54:08+07:00 | Z3n | ci: restore passing baseline and document both runs
+a40164bfcf0d249ad3913da8654bd8e2ac041320 | 2026-08-21T01:49:35+07:00 | Z3n | ci: mutate sentinel to demonstrate one failing case
+beecfaafc1381ce072422aa912add7c6762627e3 | 2026-08-21T01:46:47+07:00 | Z3n | chore: ignore spreadsheet QA traces
+55f3cdbb415e640c41da1985def9de13e9803929 | 2026-08-21T01:46:29+07:00 | Z3n | ci: add all-pass Newman mutation baseline
+a980c50f286ad20e9ad0749d1caa43c4212a0d02 | 2026-08-21T01:46:22+07:00 | Z3n | feat(skill): add validated EShop API test generator
+c4df7be5a97cc14fc2e9870954aee2c04d6d456a | 2026-08-21T01:46:14+07:00 | Z3n | docs: add reports Excel PDFs and video script
+a87353eed336c73f178d544753f1c9cdff72a3d1 | 2026-08-21T01:46:02+07:00 | Z3n | test(import): record Newman execution evidence
+0adb20bc0a75e0050b61f3b30cff0335d3313d75 | 2026-08-21T01:46:01+07:00 | Z3n | test(coupon): record Newman execution evidence
+238b13b9ad027b0cffd1dbf88e26aba29d800688 | 2026-08-21T01:46:00+07:00 | Z3n | test(reset): record Newman execution evidence
+6b1353c40fafe5648247d6e0de0b61060b17eb6d | 2026-08-21T01:45:52+07:00 | Z3n | test: execute isolated Newman suites and summarize results
+893628ee45f0ba1791f0d12ba9aadf1b88e4ab19 | 2026-08-21T01:45:36+07:00 | Z3n | test(import): document five student state extensions
+05852ecf09362661de6f2c541f2f61dcedc1ce70 | 2026-08-21T01:45:35+07:00 | Z3n | test(coupon): document five student trust-boundary extensions
+451dde85e88500ba83e32c7ff2e547e66709cd95 | 2026-08-21T01:45:34+07:00 | Z3n | test(reset): document six student security extensions
+3660e3385641af4fe39828902639ce83ae9b4449 | 2026-08-21T01:45:24+07:00 | Z3n | docs(import): document candidate audit decisions
+e850f2074ae9d709f3542efcc3d62ad2ae30a190 | 2026-08-21T01:45:23+07:00 | Z3n | docs(coupon): document candidate audit decisions
+9f20926c60a4762287005c8fc0647683b47c61d2 | 2026-08-21T01:45:22+07:00 | Z3n | docs(reset): document candidate audit decisions
+3f5ce39a866b8e95925db7a0a6769f78d6ec4053 | 2026-08-21T01:45:15+07:00 | Z3n | test: add audited data-driven Postman suites
+666fca78a8cd3bbbc03e3322378eadf2550722d0 | 2026-08-21T01:45:05+07:00 | Z3n | docs(import): record stepwise Gemini generation
+9a5abf31c9032eec68023a7b905e7dd307b5c906 | 2026-08-21T01:45:04+07:00 | Z3n | docs(coupon): record stepwise Gemini generation
+d86608efa69b25b86240a18d934443c82be20b1f | 2026-08-21T01:45:03+07:00 | Z3n | docs(reset): record stepwise Gemini generation
+e916b2e4abee1590d0b3819f7880b4643cda47b0 | 2026-08-21T01:44:51+07:00 | Z3n | chore: bootstrap EShop HW06 test repository

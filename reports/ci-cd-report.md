@@ -12,6 +12,7 @@ The **diagnostic** lane preserves genuine SUT assertion failures and always uplo
 | --- | --- | --- | --- |
 | All-pass demonstration | [run 32405131238](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) / commit beecfaa | All mutation-demo cases pass | evidence/screenshots/04-ci-all-pass.jpg |
 | One-fail mutation | [run 32405318145](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145) / commit a40164b | Exactly one deliberate data case fails (two linked assertions) | evidence/screenshots/05-ci-one-fail.jpg and 06-ci-one-fail-log.jpg |
+| Restored main baseline | [run 32405737091](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405737091) / commit 5d71f4e | Workflow passes again after restoring the sentinel | evidence/screenshots/07-ci-run-history.jpg |
 
 ## Human review
 

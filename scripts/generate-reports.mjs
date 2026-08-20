@@ -76,6 +76,19 @@ const findings = [
   ["BUG-10", "Medium", "Error handling", "Malformed JSON and null rows expose Express/Node stack details.", "R-AI-40, C-AI-40, I-AI-45, I-H-01"],
 ];
 
+const findingScreenshots = {
+  "BUG-01": "evidence/screenshots/bug-01-login-secret-leak.jpg",
+  "BUG-02": "evidence/screenshots/bug-02-reset-password-complexity.jpg",
+  "BUG-03": "evidence/screenshots/bug-03-weak-reset-token.jpg",
+  "BUG-04": "evidence/screenshots/bug-04-coupon-missing-auth.jpg",
+  "BUG-05": "evidence/screenshots/bug-05-coupon-percentage-formula.jpg",
+  "BUG-06": "evidence/screenshots/bug-06-coupon-threshold-boundary.jpg",
+  "BUG-07": "evidence/screenshots/bug-07-import-missing-role-check.jpg",
+  "BUG-08": "evidence/screenshots/bug-08-import-incomplete-validation.jpg",
+  "BUG-09": "evidence/screenshots/bug-09-import-non-atomic.jpg",
+  "BUG-10": "evidence/screenshots/bug-10-stack-leak.jpg",
+};
+
 const mainReport = `
 # HW06 — AI-First API Testing Report
 
@@ -183,7 +196,8 @@ The recorded assertion fails consistently in the isolated local run. See \`evide
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [${findingScreenshots[id]}](../${findingScreenshots[id]})
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 `).join("\n");
 
 const bugReport = `
@@ -263,6 +277,7 @@ The **diagnostic** lane preserves genuine SUT assertion failures and always uplo
 ${mdTable(["Run", "Commit/link", "Expected result", "Screenshot"], [
   ["All-pass demonstration", "[run 32405131238](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) / commit beecfaa", "All mutation-demo cases pass", "evidence/screenshots/04-ci-all-pass.jpg"],
   ["One-fail mutation", "[run 32405318145](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145) / commit a40164b", "Exactly one deliberate data case fails (two linked assertions)", "evidence/screenshots/05-ci-one-fail.jpg and 06-ci-one-fail-log.jpg"],
+  ["Restored main baseline", "[run 32405737091](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405737091) / commit 5d71f4e", "Workflow passes again after restoring the sentinel", "evidence/screenshots/07-ci-run-history.jpg"],
 ])}
 
 ## Human review

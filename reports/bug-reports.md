@@ -28,7 +28,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-01-login-secret-leak.jpg](../evidence/screenshots/bug-01-login-secret-leak.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-02 — Reset accepts weak, missing, null, empty, and numeric passwords, contrary to FR-01.
@@ -56,7 +57,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-02-reset-password-complexity.jpg](../evidence/screenshots/bug-02-reset-password-complexity.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-03 — Forgot-password generates only four digits and stores no expiry timestamp; SEC-07 cannot be met.
@@ -84,7 +86,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-03-weak-reset-token.jpg](../evidence/screenshots/bug-03-weak-reset-token.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-04 — Apply-coupon has no JWT gate and trusts body user_id, enabling identity substitution and usage-limit bypass.
@@ -112,7 +115,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-04-coupon-missing-auth.jpg](../evidence/screenshots/bug-04-coupon-missing-auth.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-05 — Percent discount uses total × (1 − discount_value), yielding negative discounts and inflated final totals.
@@ -140,7 +144,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-05-coupon-percentage-formula.jpg](../evidence/screenshots/bug-05-coupon-percentage-formula.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-06 — Minimum-order check uses > instead of >=, rejecting exact threshold values.
@@ -168,7 +173,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-06-coupon-threshold-boundary.jpg](../evidence/screenshots/bug-06-coupon-threshold-boundary.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-07 — Import-products authenticates a JWT but never enforces role=admin.
@@ -196,7 +202,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-07-import-missing-role-check.jpg](../evidence/screenshots/bug-07-import-missing-role-check.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-08 — Rows validate only truthy name; invalid price/category/name-length values are inserted.
@@ -224,7 +231,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-08-import-incomplete-validation.jpg](../evidence/screenshots/bug-08-import-incomplete-validation.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-09 — Mixed-invalid batches partially commit instead of rolling back the whole batch.
@@ -252,7 +260,8 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-09-import-non-atomic.jpg](../evidence/screenshots/bug-09-import-non-atomic.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
 
 
 ## BUG-10 — Malformed JSON and null rows expose Express/Node stack details.
@@ -280,4 +289,5 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 ### GitHub evidence
 
 - Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
-- Screenshot: **HUMAN_REVIEW_REQUIRED — attach the real Newman/response screenshot to the issue**
+- Screenshot: [evidence/screenshots/bug-10-stack-leak.jpg](../evidence/screenshots/bug-10-stack-leak.jpg)
+- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.

@@ -11,3 +11,4 @@ evidence/newman/*.json
 evidence/newman/*.html
 evidence/newman/*.xml
 outputs/hw06/*.inspect.ndjson
+outputs/hw06/workbook-inspection.ndjson

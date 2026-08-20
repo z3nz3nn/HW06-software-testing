@@ -1,0 +1,5312 @@
+[
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-01",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-12,FR-16",
+    "technique": "Nominal",
+    "title": "One valid product with admin JWT"
+  },
+  {
+    "authMode": "user",
+    "expectedDelta": 0,
+    "id": "I-AI-02",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-12,SEC-03",
+    "technique": "Authorization",
+    "title": "Normal-user JWT"
+  },
+  {
+    "authMode": "missing",
+    "expectedDelta": 0,
+    "id": "I-AI-03",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-02",
+    "technique": "Authorization",
+    "title": "Missing token"
+  },
+  {
+    "authMode": "blank",
+    "expectedDelta": 0,
+    "id": "I-AI-04",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-02",
+    "technique": "Authorization",
+    "title": "Blank Bearer token"
+  },
+  {
+    "authMode": "malformed",
+    "expectedDelta": 0,
+    "id": "I-AI-05",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-02",
+    "technique": "Authorization",
+    "title": "Malformed token"
+  },
+  {
+    "authMode": "invalidSignature",
+    "expectedDelta": 0,
+    "id": "I-AI-06",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-02",
+    "technique": "Authorization",
+    "title": "JWT with invalid signature"
+  },
+  {
+    "authMode": "expired",
+    "expectedDelta": 0,
+    "id": "I-AI-07",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-02",
+    "technique": "Authorization",
+    "title": "Expired admin JWT"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-08",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "AI incorrectly called this pre-processing rejection; corrected to authenticated payload validation.",
+    "priority": "Medium",
+    "outcome": "REJECT_AT_VALIDATION",
+    "payload": {},
+    "requirements": "FR-16",
+    "technique": "Schema",
+    "title": "Missing products key"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-09",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "Corrected outcome terminology.",
+    "priority": "Medium",
+    "outcome": "REJECT_AT_VALIDATION",
+    "payload": {
+      "products": null
+    },
+    "requirements": "FR-16",
+    "technique": "Schema",
+    "title": "products is null"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-10",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "Corrected outcome terminology.",
+    "priority": "Medium",
+    "outcome": "REJECT_AT_VALIDATION",
+    "payload": {
+      "products": {
+        "name": "__CASE__ Product",
+        "price": 10000,
+        "description": "Valid product description",
+        "imageUrl": "https://example.com/product.png",
+        "category_id": 1
+      }
+    },
+    "requirements": "FR-16",
+    "technique": "Schema",
+    "title": "products is an object"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-11",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "Corrected outcome terminology.",
+    "priority": "Medium",
+    "outcome": "REJECT_AT_VALIDATION",
+    "payload": {
+      "products": "[]"
+    },
+    "requirements": "FR-16",
+    "technique": "Schema",
+    "title": "products is a string"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-12",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "Original outcome was observational; API cannot import zero rows and should reject at validation.",
+    "priority": "Medium",
+    "outcome": "REJECT_AT_VALIDATION",
+    "payload": {
+      "products": []
+    },
+    "requirements": "FR-16",
+    "technique": "BVA",
+    "title": "products is an empty array"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 50,
+    "id": "I-AI-13",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product 1",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 2",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 3",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 4",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 5",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 6",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 7",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 8",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 9",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 10",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 11",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 12",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 13",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 14",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 15",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 16",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 17",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 18",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 19",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 20",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 21",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 22",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 23",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 24",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 25",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 26",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 27",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 28",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 29",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 30",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 31",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 32",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 33",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 34",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 35",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 36",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 37",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 38",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 39",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 40",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 41",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 42",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 43",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 44",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 45",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 46",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 47",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 48",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 49",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Product 50",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "EP",
+    "title": "Fifty valid products"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-14",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Batch-size limits are unspecified; reduced to 500 for safe execution.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Stress 1",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 2",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 3",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 4",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 5",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 6",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 7",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 8",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 9",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 10",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 11",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 12",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 13",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 14",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 15",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 16",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 17",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 18",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 19",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 20",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 21",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 22",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 23",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 24",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 25",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 26",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 27",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 28",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 29",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 30",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 31",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 32",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 33",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 34",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 35",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 36",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 37",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 38",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 39",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 40",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 41",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 42",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 43",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 44",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 45",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 46",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 47",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 48",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 49",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 50",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 51",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 52",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 53",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 54",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 55",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 56",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 57",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 58",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 59",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 60",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 61",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 62",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 63",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 64",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 65",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 66",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 67",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 68",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 69",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 70",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 71",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 72",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 73",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 74",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 75",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 76",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 77",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 78",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 79",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 80",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 81",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 82",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 83",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 84",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 85",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 86",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 87",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 88",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 89",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 90",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 91",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 92",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 93",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 94",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 95",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 96",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 97",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 98",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 99",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 100",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 101",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 102",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 103",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 104",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 105",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 106",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 107",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 108",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 109",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 110",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 111",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 112",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 113",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 114",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 115",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 116",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 117",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 118",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 119",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 120",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 121",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 122",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 123",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 124",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 125",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 126",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 127",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 128",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 129",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 130",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 131",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 132",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 133",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 134",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 135",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 136",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 137",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 138",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 139",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 140",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 141",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 142",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 143",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 144",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 145",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 146",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 147",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 148",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 149",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 150",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 151",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 152",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 153",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 154",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 155",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 156",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 157",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 158",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 159",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 160",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 161",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 162",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 163",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 164",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 165",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 166",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 167",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 168",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 169",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 170",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 171",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 172",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 173",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 174",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 175",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 176",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 177",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 178",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 179",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 180",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 181",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 182",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 183",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 184",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 185",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 186",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 187",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 188",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 189",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 190",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 191",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 192",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 193",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 194",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 195",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 196",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 197",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 198",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 199",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 200",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 201",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 202",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 203",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 204",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 205",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 206",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 207",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 208",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 209",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 210",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 211",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 212",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 213",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 214",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 215",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 216",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 217",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 218",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 219",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 220",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 221",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 222",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 223",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 224",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 225",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 226",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 227",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 228",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 229",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 230",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 231",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 232",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 233",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 234",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 235",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 236",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 237",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 238",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 239",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 240",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 241",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 242",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 243",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 244",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 245",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 246",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 247",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 248",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 249",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 250",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 251",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 252",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 253",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 254",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 255",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 256",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 257",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 258",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 259",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 260",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 261",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 262",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 263",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 264",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 265",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 266",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 267",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 268",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 269",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 270",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 271",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 272",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 273",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 274",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 275",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 276",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 277",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 278",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 279",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 280",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 281",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 282",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 283",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 284",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 285",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 286",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 287",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 288",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 289",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 290",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 291",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 292",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 293",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 294",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 295",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 296",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 297",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 298",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 299",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 300",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 301",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 302",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 303",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 304",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 305",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 306",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 307",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 308",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 309",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 310",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 311",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 312",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 313",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 314",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 315",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 316",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 317",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 318",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 319",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 320",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 321",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 322",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 323",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 324",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 325",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 326",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 327",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 328",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 329",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 330",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 331",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 332",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 333",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 334",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 335",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 336",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 337",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 338",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 339",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 340",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 341",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 342",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 343",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 344",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 345",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 346",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 347",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 348",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 349",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 350",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 351",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 352",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 353",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 354",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 355",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 356",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 357",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 358",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 359",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 360",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 361",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 362",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 363",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 364",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 365",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 366",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 367",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 368",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 369",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 370",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 371",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 372",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 373",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 374",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 375",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 376",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 377",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 378",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 379",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 380",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 381",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 382",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 383",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 384",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 385",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 386",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 387",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 388",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 389",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 390",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 391",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 392",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 393",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 394",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 395",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 396",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 397",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 398",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 399",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 400",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 401",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 402",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 403",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 404",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 405",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 406",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 407",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 408",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 409",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 410",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 411",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 412",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 413",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 414",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 415",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 416",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 417",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 418",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 419",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 420",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 421",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 422",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 423",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 424",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 425",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 426",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 427",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 428",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 429",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 430",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 431",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 432",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 433",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 434",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 435",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 436",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 437",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 438",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 439",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 440",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 441",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 442",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 443",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 444",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 445",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 446",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 447",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 448",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 449",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 450",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 451",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 452",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 453",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 454",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 455",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 456",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 457",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 458",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 459",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 460",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 461",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 462",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 463",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 464",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 465",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 466",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 467",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 468",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 469",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 470",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 471",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 472",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 473",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 474",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 475",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 476",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 477",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 478",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 479",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 480",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 481",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 482",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 483",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 484",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 485",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 486",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 487",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 488",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 489",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 490",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 491",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 492",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 493",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 494",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 495",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 496",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 497",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 498",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 499",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Stress 500",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "Robustness",
+    "technique": "Stress",
+    "title": "Large valid batch"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-15",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "EP",
+    "title": "Missing product name"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-16",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": null,
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "BVA",
+    "title": "Null product name"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-17",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "BVA",
+    "title": "Empty product name"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-18",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Trimming is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": " ",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "Robustness",
+    "title": "Whitespace-only name"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-19",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "A",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Name length one"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-20",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Name length 255"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-21",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Name length 256"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-22",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "EP",
+    "title": "Missing price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-23",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": null,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "BVA",
+    "title": "Null price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-24",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 0,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "BVA",
+    "title": "Price zero"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-25",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": -100,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "BVA",
+    "title": "Negative price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-26",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 1,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "BVA",
+    "title": "Minimum positive price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-27",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "AI marked this observational despite the stated numeric >0 rule; corrected to commit.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10.55,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "EP",
+    "title": "Positive floating price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-28",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "JSON coercion is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": "100",
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "Robustness",
+    "title": "Numeric-string price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-29",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "No maximum is specified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 9999999999,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "Robustness",
+    "title": "Extreme positive price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-30",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png"
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "EP",
+    "title": "Missing category_id"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-31",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": null
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Null category_id"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-32",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 999999
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "EP",
+    "title": "Nonexistent category_id"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-33",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": -1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Negative category_id"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-34",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "JSON coercion is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": "1"
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "Robustness",
+    "title": "String category_id"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-35",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Optional-field behavior is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "EP",
+    "title": "Omitted description"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-36",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Optional-field behavior is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "EP",
+    "title": "Omitted imageUrl"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-37",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "No description maximum is specified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "Robustness",
+    "technique": "Stress",
+    "title": "Very long description"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-38",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "URL validation is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "not-a-url",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "Robustness",
+    "title": "Malformed imageUrl"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-39",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "API storage can be checked; safe UI rendering requires a separate end-to-end review.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "<script>window.__xss=1</script>",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-04",
+    "technique": "Security",
+    "title": "HTML script literal in description"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-40",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Bad",
+          "price": 0,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Good 1",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Good 2",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "State",
+    "title": "Invalid first row rolls back all rows"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-41",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Good 1",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Good 2",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "State",
+    "title": "Invalid middle row rolls back all rows"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-42",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Good 1",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Good 2",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Bad",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": -1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "State",
+    "title": "Invalid last row rolls back all rows"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-43",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Black-box literal handling is evidence but source review is needed to prove parameterization.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "' OR 1=1; --",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "SEC-05",
+    "technique": "Security",
+    "title": "SQL-looking literal product name"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-44",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Extra-property handling is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1,
+          "hack": true
+        }
+      ]
+    },
+    "requirements": "Schema",
+    "technique": "Robustness",
+    "title": "Extra product property"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-45",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "REJECT_AT_VALIDATION",
+    "rawBody": "{\"products\":[",
+    "requirements": "Schema",
+    "technique": "Negative",
+    "title": "Malformed top-level JSON"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-46",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Duplicate-key behavior is parser-dependent.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "rawBody": "{\"products\":[{\"name\":\"A\",\"name\":\"B\",\"price\":1,\"category_id\":1}]}",
+    "requirements": "Schema",
+    "technique": "Robustness",
+    "title": "Duplicate JSON name keys"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-47",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Name uniqueness is unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Duplicate",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Duplicate",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "Robustness",
+    "title": "Duplicate names inside one batch"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-48",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INVALID",
+    "auditReason": "Ordinary black-box input cannot establish this precondition; controlled fault injection is required.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "Security",
+    "technique": "Fault injection",
+    "manualReview": "Run only with an isolated database fault fixture.",
+    "title": "Controlled database error does not leak stack"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-AI-49",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "Sản Phẩm Có Dấu __CASE__",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "EP",
+    "title": "Vietnamese Unicode name"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-50",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Optional-field null semantics are unspecified.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": null,
+          "imageUrl": null,
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "BVA",
+    "title": "Null description and imageUrl"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-51",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Bad Price",
+          "price": -1,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Bad Category",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 999999
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "State",
+    "title": "Several invalid rows report reasons and roll back"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 3,
+    "id": "I-AI-52",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ One",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Two",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        {
+          "name": "__CASE__ Three",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "State",
+    "title": "All-valid three-row atomic commit"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-53",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Safe ignore or rejection are both acceptable; no prototype mutation is allowed.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "rawBody": "{\"products\":[{\"name\":\"__CASE__ Proto\",\"price\":1,\"category_id\":1,\"__proto__\":{\"admin\":true},\"constructor\":{\"prototype\":{\"polluted\":true}}}]}",
+    "requirements": "Schema,Security",
+    "technique": "Security",
+    "title": "Prototype-style extra properties"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-54",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "INCOMPLETE",
+    "auditReason": "Idempotency and name uniqueness are unspecified; parallel execution is a companion run.",
+    "priority": "Medium",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Concurrent",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "Concurrency",
+    "manualReview": "Use the video-script parallel command.",
+    "title": "Concurrent identical imports"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-AI-55",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "Medium",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": true
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "Negative",
+    "title": "Boolean category_id"
+  },
+  {
+    "authMode": "user",
+    "expectedDelta": 0,
+    "id": "I-AI-56",
+    "origin": "Gemini Pro candidate",
+    "auditLabel": "VALID",
+    "auditReason": "Traceable to the supplied requirement and has a usable oracle.",
+    "priority": "High",
+    "outcome": "REJECT_BEFORE_PROCESSING",
+    "payload": {
+      "products": [
+        {
+          "name": "' OR 1=1; --",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-12,SEC-02",
+    "technique": "State",
+    "title": "User token is rejected before SQL-looking payload processing"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-H-01",
+    "origin": "Student extension",
+    "auditLabel": "STUDENT_ADDED",
+    "auditReason": "Added during human review because the AI candidate pool missed this risk.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Good",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        },
+        null
+      ]
+    },
+    "requirements": "FR-16",
+    "technique": "Schema/state",
+    "title": "Null row inside products array"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-H-02",
+    "origin": "Student extension",
+    "auditLabel": "STUDENT_ADDED",
+    "auditReason": "Added during human review because the AI candidate pool missed this risk.",
+    "priority": "High",
+    "outcome": "OBSERVE",
+    "payload": {
+      "products": [
+        {
+          "name": " AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "Metamorphic",
+    "title": "Name boundary after surrounding whitespace"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 1,
+    "id": "I-H-03",
+    "origin": "Student extension",
+    "auditLabel": "STUDENT_ADDED",
+    "auditReason": "Added during human review because the AI candidate pool missed this risk.",
+    "priority": "High",
+    "outcome": "COMMIT",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 0.000001,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 1
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Very small positive fractional price"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-H-04",
+    "origin": "Student extension",
+    "auditLabel": "STUDENT_ADDED",
+    "auditReason": "Added during human review because the AI candidate pool missed this risk.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "__CASE__ Product",
+          "price": 10000,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 0
+        }
+      ]
+    },
+    "requirements": "FR-15",
+    "technique": "BVA",
+    "title": "Category ID zero"
+  },
+  {
+    "authMode": "admin",
+    "expectedDelta": 0,
+    "id": "I-H-05",
+    "origin": "Student extension",
+    "auditLabel": "STUDENT_ADDED",
+    "auditReason": "Added during human review because the AI candidate pool missed this risk.",
+    "priority": "High",
+    "outcome": "ROLLBACK",
+    "payload": {
+      "products": [
+        {
+          "name": "",
+          "price": 0,
+          "description": "Valid product description",
+          "imageUrl": "https://example.com/product.png",
+          "category_id": 999999
+        }
+      ]
+    },
+    "requirements": "FR-15,FR-16",
+    "technique": "Error guessing",
+    "title": "One row has multiple simultaneous validation failures"
+  }
+]

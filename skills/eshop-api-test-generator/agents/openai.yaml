@@ -1,0 +1,8 @@
+interface:
+  display_name: "EShop API Test Generator"
+  short_description: "Generate and audit traceable EShop API cases"
+  brand_color: "#0F766E"
+  default_prompt: "Use $eshop-api-test-generator to generate and audit at least 35 data-driven cases for one EShop API."
+
+policy:
+  allow_implicit_invocation: true

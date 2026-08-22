@@ -27,8 +27,10 @@ OUTPUT.mkdir(parents=True, exist_ok=True)
 
 font_regular = Path("C:/Windows/Fonts/arial.ttf")
 font_bold = Path("C:/Windows/Fonts/arialbd.ttf")
+font_mono = Path("C:/Windows/Fonts/consola.ttf")
 pdfmetrics.registerFont(TTFont("HWArial", str(font_regular)))
 pdfmetrics.registerFont(TTFont("HWArial-Bold", str(font_bold)))
+pdfmetrics.registerFont(TTFont("HWMono", str(font_mono)))
 
 NAVY = colors.HexColor("#12324A")
 TEAL = colors.HexColor("#0F766E")
@@ -70,7 +72,7 @@ styles = {
     "h3": ParagraphStyle("H3", parent=base["Heading3"], fontName="HWArial-Bold", fontSize=10.5, leading=13, textColor=NAVY, spaceBefore=7, spaceAfter=4),
     "body": ParagraphStyle("Body", parent=base["BodyText"], fontName="HWArial", fontSize=8.5, leading=12, textColor=colors.HexColor("#1D2939"), spaceAfter=5, splitLongWords=True),
     "bullet": ParagraphStyle("Bullet", parent=base["BodyText"], fontName="HWArial", fontSize=8.3, leading=11.5, leftIndent=10, firstLineIndent=-7, bulletIndent=2, spaceAfter=3, splitLongWords=True),
-    "code": ParagraphStyle("Code", parent=base["Code"], fontName="Courier", fontSize=6.2, leading=8.2, leftIndent=5, rightIndent=5, backColor=colors.HexColor("#F2F4F7"), borderColor=LINE, borderWidth=0.4, borderPadding=4, spaceAfter=2, splitLongWords=True),
+    "code": ParagraphStyle("Code", parent=base["Code"], fontName="HWMono", fontSize=6.1, leading=7.7, leftIndent=5, rightIndent=5, backColor=colors.HexColor("#F2F4F7"), borderColor=LINE, borderWidth=0.4, borderPadding=4, spaceAfter=1.5, splitLongWords=True),
     "note": ParagraphStyle("Note", parent=base["BodyText"], fontName="HWArial", fontSize=8, leading=11, textColor=GRAY, backColor=colors.HexColor("#F8FAFC"), borderColor=LINE, borderWidth=0.5, borderPadding=6),
 }
 
@@ -80,7 +82,7 @@ def inline(text):
     text = re.sub(r"\[([^]]+)\]\([^)]*\)", r"\1", text)
     escaped = html.escape(text, quote=False)
     escaped = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", escaped)
-    escaped = re.sub(r"`([^`]+)`", r"<font name='Courier'>\1</font>", escaped)
+    escaped = re.sub(r"`([^`]+)`", r"<font name='HWMono'>\1</font>", escaped)
     return escaped
 
 

@@ -4,7 +4,7 @@ Target length: 7–9 minutes. Record your own screen and voice. Use **PowerShell
 
 ## 0:00–0:40 — Identity and scope
 
-Say: “I am Hưng Nguyễn, student ID [state it]. This is HW06. I selected reset-password, apply-coupon, and admin import-products because they do not duplicate my group members.” Show README and the selection table.
+Say: “I am Nguyễn Đình Thái Hưng, student ID 23127373. This is HW06. I selected reset-password, apply-coupon, and admin import-products because they do not duplicate my group members.” Show README and the selection table.
 
 ## 0:40–1:40 — AI-first evidence
 
@@ -21,7 +21,7 @@ Open **PowerShell** in the repository root and type exactly:
 ```powershell
 npm.cmd install
 npm.cmd run generate:postman
-npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID
+npm.cmd run test:api -- --student-id 23127373
 ```
 
 Before Enter on the final command, explain that the collection pre-request script injects `X-Student-Id` into every request. After execution, zoom in on a real console line containing the student ID and capture the required screenshot manually. Show the three suite summaries and explain that failed assertions are genuine findings, not a broken runner.

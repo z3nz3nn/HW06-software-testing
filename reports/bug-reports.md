@@ -1,6 +1,6 @@
 # Genuine Bug Reports
 
-These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. GitHub Issue creation is deferred until the student approves the representational action and public-repository change.
+These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. GitHub Issues are created while the repository remains private; repository visibility is a separate final approval gate.
 
 
 ## BUG-01 — Passwords are stored in plaintext and login returns the full user record including password/reset_token/locked_until.
@@ -12,7 +12,7 @@ These reports separate test-oracle failures from test-harness failures. Each def
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -23,13 +23,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-01-login-secret-leak.jpg](../evidence/screenshots/bug-01-login-secret-leak.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-02 — Reset accepts weak, missing, null, empty, and numeric passwords, contrary to FR-01.
@@ -41,7 +41,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -52,13 +52,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-02-reset-password-complexity.jpg](../evidence/screenshots/bug-02-reset-password-complexity.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-03 — Forgot-password generates only four digits and stores no expiry timestamp; SEC-07 cannot be met.
@@ -70,7 +70,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -81,13 +81,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-03-weak-reset-token.jpg](../evidence/screenshots/bug-03-weak-reset-token.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-04 — Apply-coupon has no JWT gate and trusts body user_id, enabling identity substitution and usage-limit bypass.
@@ -99,7 +99,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -110,13 +110,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-04-coupon-missing-auth.jpg](../evidence/screenshots/bug-04-coupon-missing-auth.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-05 — Percent discount uses total × (1 − discount_value), yielding negative discounts and inflated final totals.
@@ -128,7 +128,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -139,13 +139,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-05-coupon-percentage-formula.jpg](../evidence/screenshots/bug-05-coupon-percentage-formula.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-06 — Minimum-order check uses > instead of >=, rejecting exact threshold values.
@@ -157,7 +157,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -168,13 +168,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-06-coupon-threshold-boundary.jpg](../evidence/screenshots/bug-06-coupon-threshold-boundary.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-07 — Import-products authenticates a JWT but never enforces role=admin.
@@ -186,7 +186,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -197,13 +197,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-07-import-missing-role-check.jpg](../evidence/screenshots/bug-07-import-missing-role-check.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-08 — Rows validate only truthy name; invalid price/category/name-length values are inserted.
@@ -215,7 +215,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -226,13 +226,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-08-import-incomplete-validation.jpg](../evidence/screenshots/bug-08-import-incomplete-validation.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-09 — Mixed-invalid batches partially commit instead of rolling back the whole batch.
@@ -244,7 +244,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -255,13 +255,13 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-09-import-non-atomic.jpg](../evidence/screenshots/bug-09-import-non-atomic.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
 
 ## BUG-10 — Malformed JSON and null rows expose Express/Node stack details.
@@ -273,7 +273,7 @@ The recorded assertion fails consistently in the isolated local run. See `eviden
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID`.
+1. From PowerShell in the repository root, run `npm.cmd run test:api -- --student-id 23127373`.
 2. Open the matching latest HTML report under `evidence/newman/`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -284,10 +284,10 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See `evidence/newman/dry-run-summary.json` and the endpoint HTML report. The current files are labeled dry-run until the real `X-Student-Id` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See `evidence/newman/execution-summary.json` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: **PENDING_BROWSER_PUBLICATION**
 - Screenshot: [evidence/screenshots/bug-10-stack-leak.jpg](../evidence/screenshots/bug-10-stack-leak.jpg)
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.

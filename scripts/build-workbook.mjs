@@ -11,19 +11,25 @@ const outputDir = path.resolve("outputs/hw06");
 const previewDir = path.join(outputDir, "previews");
 await fs.mkdir(previewDir, { recursive: true });
 
-const summary = JSON.parse(await fs.readFile("evidence/newman/dry-run-summary.json", "utf8"));
+const summary = JSON.parse(await fs.readFile("evidence/newman/execution-summary.json", "utf8"));
+let issueIndex = {};
+try {
+  issueIndex = JSON.parse(await fs.readFile("reports/github-issues.json", "utf8"));
+} catch {
+  issueIndex = {};
+}
 const bugs = [
-  ["BUG-01", "Critical", "Authentication", "Plaintext password storage and sensitive login response", "R-H-05; source review", "OPEN"],
-  ["BUG-02", "High", "Password reset", "Password complexity is not validated", "R-AI-05..10,35..38", "OPEN"],
-  ["BUG-03", "High", "OTP", "OTP has four digits and no expiry", "R-AI-15; source review", "OPEN"],
-  ["BUG-04", "Critical", "Coupon", "No JWT gate; body identity is trusted", "C-AI-02..09", "OPEN"],
-  ["BUG-05", "High", "Coupon", "Percent calculation is incorrect", "C-AI-01,19,34", "OPEN"],
-  ["BUG-06", "Medium", "Coupon", "Exact minimum is rejected", "C-AI-18,21,22", "OPEN"],
-  ["BUG-07", "Critical", "Import", "Normal user can call admin import", "I-AI-02,56", "OPEN"],
-  ["BUG-08", "High", "Import", "Price/category/name validation is incomplete", "I-AI-21..33", "OPEN"],
-  ["BUG-09", "High", "Import", "Invalid mixed batch partially commits", "I-AI-40..42,51", "OPEN"],
-  ["BUG-10", "Medium", "Error handling", "Malformed input exposes stack details", "R/C/I malformed rows", "OPEN"],
-];
+  ["BUG-01", "Critical", "Authentication", "Plaintext password storage and sensitive login response", "R-H-05; source review"],
+  ["BUG-02", "High", "Password reset", "Password complexity is not validated", "R-AI-05..10,35..38"],
+  ["BUG-03", "High", "OTP", "OTP has four digits and no expiry", "R-AI-15; source review"],
+  ["BUG-04", "Critical", "Coupon", "No JWT gate; body identity is trusted", "C-AI-02..09"],
+  ["BUG-05", "High", "Coupon", "Percent calculation is incorrect", "C-AI-01,19,34"],
+  ["BUG-06", "Medium", "Coupon", "Exact minimum is rejected", "C-AI-18,21,22"],
+  ["BUG-07", "Critical", "Import", "Normal user can call admin import", "I-AI-02,56"],
+  ["BUG-08", "High", "Import", "Price/category/name validation is incomplete", "I-AI-21..33"],
+  ["BUG-09", "High", "Import", "Invalid mixed batch partially commits", "I-AI-40..42,51"],
+  ["BUG-10", "Medium", "Error handling", "Malformed input exposes stack details", "R/C/I malformed rows"],
+].map((row) => [...row, issueIndex[row[0]] ? `#${issueIndex[row[0]].number}` : "PENDING", issueIndex[row[0]]?.url || ""]);
 
 const suiteSpecs = [
   { sheet: "Reset_Password", key: "reset-password", endpoint: "POST /api/reset-password", cases: resetCases },
@@ -90,8 +96,8 @@ function inputSummary(item) {
 for (const spec of suiteSpecs) {
   const sheet = workbook.worksheets.getItem(spec.sheet);
   const runCases = new Map(summary.suites[spec.key].cases.map((row) => [row.id, row]));
-  titleBand(sheet, "A1:O2", spec.endpoint, `${spec.cases.length} canonical cases • dry-run results until official student ID is supplied`);
-  const headers = ["Case_ID", "Title", "Origin", "Audit_Label", "Audit_Reason", "Requirement", "Technique", "Priority", "Oracle", "Input / mode", "Manual_Review", "Dry_Result", "Dry_Failures", "Human_Verified", "Reviewer_Notes"];
+  titleBand(sheet, "A1:O2", spec.endpoint, `${spec.cases.length} canonical cases • official Newman result • X-Student-Id 23127373`);
+  const headers = ["Case_ID", "Title", "Origin", "Audit_Label", "Audit_Reason", "Requirement", "Technique", "Priority", "Oracle", "Input / mode", "Manual_Review", "Official_Result", "Official_Failures", "Human_Verified", "Reviewer_Notes"];
   sheet.getRange(`A4:O${4 + spec.cases.length}`).values = [
     headers,
     ...spec.cases.map((item) => {
@@ -136,7 +142,7 @@ for (const spec of suiteSpecs) {
   sheet.getRange(`N5:N${4 + spec.cases.length}`).conditionalFormats.add("containsText", { text: "NO", format: { fill: colors.amberPale, font: { color: colors.amber, bold: true } } });
 }
 
-titleBand(summarySheet, "A1:I2", "HW06 API Testing Dashboard", "Formula-backed summary • Hưng Nguyễn • Student ID HUMAN_REVIEW_REQUIRED");
+titleBand(summarySheet, "A1:I2", "HW06 API Testing Dashboard", "Formula-backed summary • Nguyễn Đình Thái Hưng • Student ID 23127373");
 summarySheet.getRange("A4:I4").values = [["API", "AI candidates", "Student-added", "VALID", "INVALID", "INCOMPLETE", "Executed", "Passed", "Failed"]];
 styleHeader(summarySheet.getRange("A4:I4"));
 summarySheet.getRange("A5:A7").values = suiteSpecs.map((spec) => [spec.endpoint]);
@@ -157,32 +163,34 @@ suiteSpecs.forEach((spec, index) => {
 summarySheet.getRange("A8:I8").values = [["TOTAL", null, null, null, null, null, null, null, null]];
 summarySheet.getRange("B8:I8").formulas = [["=SUM(B5:B7)", "=SUM(C5:C7)", "=SUM(D5:D7)", "=SUM(E5:E7)", "=SUM(F5:F7)", "=SUM(G5:G7)", "=SUM(H5:H7)", "=SUM(I5:I7)"]];
 summarySheet.getRange("A8:I8").format = { fill: colors.pale, font: { bold: true, color: colors.navy }, borders: { preset: "doubleBottom", style: "medium", color: colors.teal } };
-summarySheet.getRange("A11:B17").values = [
+summarySheet.getRange("A11:B18").values = [
   ["Submission gate", "Status"],
-  ["Student ID supplied", "NO"],
-  ["Official Newman rerun", "NO"],
+  ["Student ID supplied", "YES"],
+  ["Official Newman rerun", "YES"],
   ["Rows personally reviewed", "NO"],
   ["Self-drawn diagram", "NO"],
-  ["Public GitHub + issues", "NO"],
+  ["Ten GitHub Issues", Object.keys(issueIndex).length === 10 ? "YES" : "NO"],
+  ["Public GitHub", "NO"],
   ["Video + final ZIP", "NO"],
 ];
 styleHeader(summarySheet.getRange("A11:B11"));
-summarySheet.getRange("B12:B17").format = { fill: colors.amberPale, font: { bold: true, color: colors.amber } };
+summarySheet.getRange("B12:B18").format = { fill: colors.amberPale, font: { bold: true, color: colors.amber } };
+summarySheet.getRange("B12:B18").conditionalFormats.add("containsText", { text: "YES", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
 summarySheet.getRange("D11:F16").values = [
   ["Evidence", "Value", "Interpretation"],
-  ["Dry-run total", summary.totals.cases, "158 expected"],
-  ["Dry-run passed", summary.totals.passed, "Product behavior met oracle"],
-  ["Dry-run failed", summary.totals.failed, "Candidate defect evidence"],
-  ["Bug candidates", bugs.length, "Needs GitHub publication"],
+  ["Official total", summary.totals.cases, "158 expected"],
+  ["Official passed", summary.totals.passed, "Product behavior met oracle"],
+  ["Official failed", summary.totals.failed, "Candidate defect evidence"],
+  ["GitHub Issues", Object.keys(issueIndex).length, "10 expected"],
   ["AI sessions", 11, "3 reset + 4 coupon + 4 import"],
 ];
 styleHeader(summarySheet.getRange("D11:F11"));
 summarySheet.getRange("A4:I8").format.borders = { preset: "outside", style: "thin", color: colors.line };
-summarySheet.getRange("A4:I17").format.verticalAlignment = "center";
-summarySheet.getRange("A4:I17").format.wrapText = true;
-summarySheet.getRange("A4:I17").format.columnWidth = 19;
-summarySheet.getRange("A4:A17").format.columnWidth = 33;
-summarySheet.getRange("F4:F17").format.columnWidth = 30;
+summarySheet.getRange("A4:I18").format.verticalAlignment = "center";
+summarySheet.getRange("A4:I18").format.wrapText = true;
+summarySheet.getRange("A4:I18").format.columnWidth = 19;
+summarySheet.getRange("A4:A18").format.columnWidth = 33;
+summarySheet.getRange("F4:F18").format.columnWidth = 30;
 summarySheet.showGridLines = false;
 summarySheet.freezePanes.freezeRows(4);
 summarySheet.getRange("K20:M23").values = [
@@ -197,7 +205,7 @@ summarySheet.getRange("L21:M23").formulas = [
   ["=H7", "=I7"],
 ];
 const chart = summarySheet.charts.add("bar", summarySheet.getRange("K20:M23"));
-chart.title = "Dry-run pass/fail by API";
+chart.title = "Official pass/fail by API";
 chart.hasLegend = true;
 chart.setPosition("K4", "R18");
 
@@ -225,26 +233,27 @@ auditSheet.getRange("A5:F15").format.wrapText = true;
 auditSheet.showGridLines = false;
 auditSheet.freezePanes.freezeRows(4);
 
-titleBand(bugSheet, "A1:F2", "Genuine Defect Summary", "URLs/screenshots remain human-review gates until publication is approved");
-bugSheet.getRange("A4:F14").values = [["Bug_ID", "Severity", "Area", "Finding", "Evidence", "GitHub_Status"], ...bugs];
-styleHeader(bugSheet.getRange("A4:F4"));
-bugSheet.tables.add("A4:F14", true, "BugSummaryTable").style = "TableStyleMedium2";
-bugSheet.getRange("A4:F14").format.columnWidth = 20;
+titleBand(bugSheet, "A1:G2", "Genuine Defect Summary", "Ten issue records with traceable screenshot and official Newman evidence");
+bugSheet.getRange("A4:G14").values = [["Bug_ID", "Severity", "Area", "Finding", "Evidence", "GitHub_Status", "Issue_URL"], ...bugs];
+styleHeader(bugSheet.getRange("A4:G4"));
+bugSheet.tables.add("A4:G14", true, "BugSummaryTable").style = "TableStyleMedium2";
+bugSheet.getRange("A4:G14").format.columnWidth = 20;
 bugSheet.getRange("D4:D14").format.columnWidth = 58;
 bugSheet.getRange("E4:E14").format.columnWidth = 30;
-bugSheet.getRange("A5:F14").format.wrapText = true;
+bugSheet.getRange("G4:G14").format.columnWidth = 52;
+bugSheet.getRange("A5:G14").format.wrapText = true;
 bugSheet.getRange("B5:B14").conditionalFormats.add("containsText", { text: "Critical", format: { fill: colors.redPale, font: { color: colors.red, bold: true } } });
 bugSheet.getRange("B5:B14").conditionalFormats.add("containsText", { text: "High", format: { fill: colors.amberPale, font: { color: colors.amber, bold: true } } });
 bugSheet.showGridLines = false;
 bugSheet.freezePanes.freezeRows(4);
 
 const checklist = [
-  ["MR-01", "Confirm name and provide official student ID", "BLOCKING", "NO", "Student"],
+  ["MR-01", "Confirm name and provide official student ID", "BLOCKING", "YES", "Student"],
   ["MR-02", "Personally review every test row", "BLOCKING", "NO", "Student"],
-  ["MR-03", "Run official Newman command and capture real console header", "BLOCKING", "NO", "Student"],
+  ["MR-03", "Capture/recreate the real official Newman console header screenshot", "BLOCKING", "NO", "Student"],
   ["MR-04", "Approve/publicize GitHub repository", "BLOCKING", "NO", "Student"],
-  ["MR-05", "Publish issues with real screenshots", "BLOCKING", "NO", "Student"],
-  ["MR-06", "Verify both GitHub Actions demonstration runs", "BLOCKING", "NO", "Student"],
+  ["MR-05", "Publish issues with real screenshot links", "BLOCKING", Object.keys(issueIndex).length === 10 ? "YES" : "NO", "Student"],
+  ["MR-06", "Verify both GitHub Actions demonstration runs", "BLOCKING", "YES", "Student"],
   ["MR-07", "Draw and export the Agent Skill diagram personally", "BLOCKING", "NO", "Student"],
   ["MR-08", "Record/upload video and add URL", "BLOCKING", "NO", "Student"],
   ["MR-09", "Select self-assessed grade and filename", "BLOCKING", "NO", "Student"],
@@ -265,6 +274,8 @@ manualSheet.freezePanes.freezeRows(4);
 
 const inspect = await workbook.inspect({ kind: "workbook,sheet,table,formula", maxChars: 12000, tableMaxRows: 5, tableMaxCols: 10, options: { maxResults: 80 } });
 await fs.writeFile(path.join(outputDir, "workbook-inspection.ndjson"), inspect.ndjson || String(inspect));
+const formulaErrorScan = await workbook.inspect({ kind: "match", searchTerm: "#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A", maxChars: 5000, options: { useRegex: true, maxResults: 100 } });
+await fs.writeFile(path.join(outputDir, "workbook-formula-error-scan.ndjson"), formulaErrorScan.ndjson || String(formulaErrorScan));
 
 for (const sheetName of ["Summary", ...suiteSpecs.map((spec) => spec.sheet), "AI_Audit_Index", "Bug_Summary", "Manual_Review"]) {
   const preview = await workbook.render({ sheetName, autoCrop: "all", scale: sheetName === "Summary" ? 1.2 : 0.8, format: "png" });

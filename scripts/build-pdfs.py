@@ -47,7 +47,7 @@ class NumberedDocTemplate(BaseDocTemplate):
             topMargin=18 * mm,
             bottomMargin=17 * mm,
             title=title,
-            author="Hưng Nguyễn — HUMAN_REVIEW_REQUIRED",
+            author="Nguyễn Đình Thái Hưng — 23127373",
         )
         frame = Frame(self.leftMargin, self.bottomMargin, self.width, self.height, id="body")
         self.addPageTemplates(PageTemplate(id="all", frames=[frame], onPage=self._page))
@@ -56,7 +56,7 @@ class NumberedDocTemplate(BaseDocTemplate):
         canvas.saveState()
         canvas.setFont("HWArial", 8)
         canvas.setFillColor(GRAY)
-        canvas.drawString(16 * mm, 9 * mm, "HW06 AI-First API Testing • HUMAN_REVIEW_REQUIRED")
+        canvas.drawString(16 * mm, 9 * mm, "HW06 AI-First API Testing • 23127373")
         canvas.drawRightString(A4[0] - 16 * mm, 9 * mm, f"Page {doc.page}")
         canvas.setStrokeColor(LINE)
         canvas.line(16 * mm, 12 * mm, A4[0] - 16 * mm, 12 * mm)

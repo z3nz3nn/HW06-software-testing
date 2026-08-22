@@ -2,10 +2,10 @@
 
 ## Submission identity
 
-- Student: **Hưng Nguyễn** *(human review required)*
-- Student ID: **HUMAN_REVIEW_REQUIRED**
+- Student: **Nguyễn Đình Thái Hưng**
+- Student ID: **23127373**
 - SUT: EShop at `http://127.0.0.1:3000`
-- Evidence status: **DRYRUN-NOT-SUBMISSION — rerun with the official student ID**
+- Evidence status: **official local Newman run with `X-Student-Id: 23127373`**
 
 ## 1. API selection and collision check
 
@@ -23,7 +23,7 @@ For each endpoint I used a phased AI-first workflow: requirements decomposition 
 
 The executable oracle distinguishes normative rules from unspecified behavior. `ACCEPT/APPLY/COMMIT` and `REJECT/ROLLBACK` cases assert requirements. `OBSERVE` cases assert only safety/stability and remain marked INCOMPLETE when the specification does not permit a binary verdict.
 
-## 3. Test inventory and dry-run result
+## 3. Test inventory and official execution result
 
 | API | AI candidates | VALID | INVALID | INCOMPLETE | Student-added | Executed | Passed | Failed |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ The executable oracle distinguishes normative rules from unspecified behavior. `
 | POST /api/apply-coupon | 44 | 33 | 2 | 9 | 5 | 49 | 36 | 13 |
 | POST /api/admin/import-products | 56 | 32 | 7 | 17 | 5 | 61 | 42 | 19 |
 
-The current 158-case result is a controlled dry run using `X-Student-Id: DRYRUN-NOT-SUBMISSION`. Its 113 passing and 45 failing cases are not fabricated “green” evidence: failures are preserved because they reveal requirement violations. An official rerun must replace this evidence after the real student ID is supplied.
+The official 158-case run used `X-Student-Id: 23127373`. Its 113 passing and 45 failing cases are not fabricated “green” evidence: failures are preserved because they reveal requirement violations.
 
 ## 4. Coverage
 
@@ -63,7 +63,7 @@ Reproduce from **PowerShell** in the repository root:
 ```powershell
 npm.cmd install
 npm.cmd run generate:postman
-npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID
+npm.cmd run test:api -- --student-id 23127373
 npm.cmd run verify:artifacts
 ```
 
@@ -94,7 +94,7 @@ The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-t
 
 ## 10. Limitations and mandatory human review
 
-OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. The student must supply identity, personally review/sign off rows, take the non-fabricated console screenshot, draw the diagram, record/upload the video, approve repository visibility and GitHub Issues, select the self-assessed grade, create the final ZIP, and submit it on Moodle. See [manual-checklist.md](./manual-checklist.md).
+OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity and the official Newman rerun are complete. The student must still personally review/sign off rows, take the non-fabricated console screenshot, draw the diagram, record/upload the video, approve the final repository-visibility change, select the self-assessed grade, create the final ZIP, and submit it on Moodle. See [manual-checklist.md](./manual-checklist.md).
 
 ## 11. AI declaration
 

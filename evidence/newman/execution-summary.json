@@ -1,0 +1,2063 @@
+{
+  "label": "OFFICIAL",
+  "studentId": "23127373",
+  "warning": null,
+  "suites": {
+    "reset-password": {
+      "source": "evidence/newman/reset-password-2026-08-22T03-52-14-527Z.json",
+      "dryRun": false,
+      "generatedAt": 1787370783481,
+      "stats": {
+        "iterations": {
+          "total": 48,
+          "pending": 0,
+          "failed": 0
+        },
+        "items": {
+          "total": 336,
+          "pending": 0,
+          "failed": 0
+        },
+        "scripts": {
+          "total": 853,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequests": {
+          "total": 336,
+          "pending": 0,
+          "failed": 0
+        },
+        "requests": {
+          "total": 229,
+          "pending": 0,
+          "failed": 0
+        },
+        "tests": {
+          "total": 229,
+          "pending": 0,
+          "failed": 0
+        },
+        "assertions": {
+          "total": 494,
+          "pending": 0,
+          "failed": 23
+        },
+        "testScripts": {
+          "total": 229,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequestScripts": {
+          "total": 624,
+          "pending": 0,
+          "failed": 0
+        }
+      },
+      "caseSummary": {
+        "total": 48,
+        "passed": 35,
+        "failed": 13
+      },
+      "cases": [
+        {
+          "id": "R-AI-01",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-02",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-03",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-04",
+          "requestCount": 6,
+          "assertionCount": 13,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-05",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-05] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-05] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-06",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-06] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-06] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-07",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-07] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-07] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-08",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-08] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-08] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-09",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-09] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-09] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-10",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-10] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-10] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-11",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-12",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-13",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-14",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-15",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-16",
+          "requestCount": 6,
+          "assertionCount": 13,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-17",
+          "requestCount": 6,
+          "assertionCount": 13,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-18",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-19",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-20",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-21",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-22",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-23",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-24",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-25",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-26",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-27",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-28",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-29",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-30",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-31",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-32",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-33",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-34",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-35",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-35] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-35] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-36",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-36] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-36] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-37",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-37] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-37] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-38",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[R-AI-38] no success response for invalid reset",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "[R-AI-38] password state matches the normative oracle",
+              "message": "expected 401 to deeply equal 200"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-39",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-40",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[R-AI-40] response has no stack/database leak",
+              "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-AI-41",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-AI-42",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-H-01",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[R-H-01] response has no stack/database leak",
+              "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-H-02",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-H-03",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-H-04",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "R-H-05",
+          "requestCount": 5,
+          "assertionCount": 13,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "Login response does not disclose stored secrets",
+              "message": "expected { id: 49, …(9) } to not have keys 'password', 'reset_token', or 'locked_until'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "R-H-06",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        }
+      ],
+      "bugSignals": [
+        {
+          "id": "R-AI-05",
+          "assertion": "[R-AI-05] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-06",
+          "assertion": "[R-AI-06] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-07",
+          "assertion": "[R-AI-07] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-08",
+          "assertion": "[R-AI-08] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-09",
+          "assertion": "[R-AI-09] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-10",
+          "assertion": "[R-AI-10] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-35",
+          "assertion": "[R-AI-35] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-36",
+          "assertion": "[R-AI-36] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-37",
+          "assertion": "[R-AI-37] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-38",
+          "assertion": "[R-AI-38] password state matches the normative oracle",
+          "message": "expected 401 to deeply equal 200"
+        },
+        {
+          "id": "R-AI-40",
+          "assertion": "[R-AI-40] response has no stack/database leak",
+          "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+        },
+        {
+          "id": "R-H-01",
+          "assertion": "[R-H-01] response has no stack/database leak",
+          "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+        },
+        {
+          "id": "R-H-05",
+          "assertion": "Login response does not disclose stored secrets",
+          "message": "expected { id: 49, …(9) } to not have keys 'password', 'reset_token', or 'locked_until'"
+        }
+      ]
+    },
+    "apply-coupon": {
+      "source": "evidence/newman/apply-coupon-2026-08-22T03-52-14-527Z.json",
+      "dryRun": false,
+      "generatedAt": 1787370797956,
+      "stats": {
+        "iterations": {
+          "total": 49,
+          "pending": 0,
+          "failed": 0
+        },
+        "items": {
+          "total": 245,
+          "pending": 0,
+          "failed": 0
+        },
+        "scripts": {
+          "total": 595,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequests": {
+          "total": 245,
+          "pending": 0,
+          "failed": 0
+        },
+        "requests": {
+          "total": 203,
+          "pending": 0,
+          "failed": 0
+        },
+        "tests": {
+          "total": 154,
+          "pending": 0,
+          "failed": 0
+        },
+        "assertions": {
+          "total": 387,
+          "pending": 0,
+          "failed": 28
+        },
+        "testScripts": {
+          "total": 154,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequestScripts": {
+          "total": 441,
+          "pending": 0,
+          "failed": 0
+        }
+      },
+      "caseSummary": {
+        "total": 49,
+        "passed": 36,
+        "failed": 13
+      },
+      "cases": [
+        {
+          "id": "C-AI-01",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 4,
+          "failures": [
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected -4500000 to be close to 50000 +/- 0.0001"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected 5000000 to be close to 450000 +/- 0.0001"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected -4500000 to be close to 50000 +/- 0.0001"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected 5000000 to be close to 450000 +/- 0.0001"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-02",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-02] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            },
+            {
+              "assertion": "[C-AI-02] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-03",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-03] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            },
+            {
+              "assertion": "[C-AI-03] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-04",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-04] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            },
+            {
+              "assertion": "[C-AI-04] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-05",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-05] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            },
+            {
+              "assertion": "[C-AI-05] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-06",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-06] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            },
+            {
+              "assertion": "[C-AI-06] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-07",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-08",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-09",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-09] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            },
+            {
+              "assertion": "[C-AI-09] coupon is not applied",
+              "message": "expected true to deeply equal false"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-10",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-11",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-12",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-13",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-14",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-15",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-16",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-17",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-18",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 10,
+          "failures": [
+            {
+              "assertion": "[C-AI-18] coupon applies",
+              "message": "expected 400 to be within 200..299"
+            },
+            {
+              "assertion": "Required numeric success fields exist",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "Core formula invariant",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "[C-AI-18] coupon applies",
+              "message": "expected 400 to be within 200..299"
+            },
+            {
+              "assertion": "Required numeric success fields exist",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "Core formula invariant",
+              "message": "expected undefined to be a number"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-19",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 4,
+          "failures": [
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected -2700009 to be close to 30000.1 +/- 0.0001"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected 3000010 to be close to 270000.9 +/- 0.0001"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected -2700009 to be close to 30000.1 +/- 0.0001"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected 3000010 to be close to 270000.9 +/- 0.0001"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-20",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-21",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 10,
+          "failures": [
+            {
+              "assertion": "[C-AI-21] coupon applies",
+              "message": "expected 400 to be within 200..299"
+            },
+            {
+              "assertion": "Required numeric success fields exist",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "Core formula invariant",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "[C-AI-21] coupon applies",
+              "message": "expected 400 to be within 200..299"
+            },
+            {
+              "assertion": "Required numeric success fields exist",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "Core formula invariant",
+              "message": "expected undefined to be a number"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-22",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 10,
+          "failures": [
+            {
+              "assertion": "[C-AI-22] coupon applies",
+              "message": "expected 400 to be within 200..299"
+            },
+            {
+              "assertion": "Required numeric success fields exist",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "Core formula invariant",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "[C-AI-22] coupon applies",
+              "message": "expected 400 to be within 200..299"
+            },
+            {
+              "assertion": "Required numeric success fields exist",
+              "message": "expected false to deeply equal true"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected undefined to be a number"
+            },
+            {
+              "assertion": "Core formula invariant",
+              "message": "expected undefined to be a number"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-23",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-24",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-25",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-26",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-27",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-28",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-29",
+          "requestCount": 4,
+          "assertionCount": 20,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-30",
+          "requestCount": 5,
+          "assertionCount": 22,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-31",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-32",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-34",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 4,
+          "failures": [
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected -7200000 to be close to 80000 +/- 0.0001"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected 8000000 to be close to 720000 +/- 0.0001"
+            },
+            {
+              "assertion": "discount_amount follows formula",
+              "message": "expected -7200000 to be close to 80000 +/- 0.0001"
+            },
+            {
+              "assertion": "final_amount follows formula",
+              "message": "expected 8000000 to be close to 720000 +/- 0.0001"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-35",
+          "requestCount": 4,
+          "assertionCount": 18,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-36",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-37",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-38",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-39",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-40",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[C-AI-40] response has no stack/database leak",
+              "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+            },
+            {
+              "assertion": "[C-AI-40] response has no stack/database leak",
+              "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "C-AI-41",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-42",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-43",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-44",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-AI-45",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-H-01",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-H-02",
+          "requestCount": 4,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-H-03",
+          "requestCount": 5,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-H-04",
+          "requestCount": 4,
+          "assertionCount": 8,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "C-H-05",
+          "requestCount": 5,
+          "assertionCount": 10,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        }
+      ],
+      "bugSignals": [
+        {
+          "id": "C-AI-01",
+          "assertion": "discount_amount follows formula",
+          "message": "expected -4500000 to be close to 50000 +/- 0.0001"
+        },
+        {
+          "id": "C-AI-01",
+          "assertion": "discount_amount follows formula",
+          "message": "expected -4500000 to be close to 50000 +/- 0.0001"
+        },
+        {
+          "id": "C-AI-18",
+          "assertion": "discount_amount follows formula",
+          "message": "expected undefined to be a number"
+        },
+        {
+          "id": "C-AI-18",
+          "assertion": "discount_amount follows formula",
+          "message": "expected undefined to be a number"
+        },
+        {
+          "id": "C-AI-19",
+          "assertion": "discount_amount follows formula",
+          "message": "expected -2700009 to be close to 30000.1 +/- 0.0001"
+        },
+        {
+          "id": "C-AI-19",
+          "assertion": "discount_amount follows formula",
+          "message": "expected -2700009 to be close to 30000.1 +/- 0.0001"
+        },
+        {
+          "id": "C-AI-21",
+          "assertion": "discount_amount follows formula",
+          "message": "expected undefined to be a number"
+        },
+        {
+          "id": "C-AI-21",
+          "assertion": "discount_amount follows formula",
+          "message": "expected undefined to be a number"
+        },
+        {
+          "id": "C-AI-22",
+          "assertion": "discount_amount follows formula",
+          "message": "expected undefined to be a number"
+        },
+        {
+          "id": "C-AI-22",
+          "assertion": "discount_amount follows formula",
+          "message": "expected undefined to be a number"
+        },
+        {
+          "id": "C-AI-34",
+          "assertion": "discount_amount follows formula",
+          "message": "expected -7200000 to be close to 80000 +/- 0.0001"
+        },
+        {
+          "id": "C-AI-34",
+          "assertion": "discount_amount follows formula",
+          "message": "expected -7200000 to be close to 80000 +/- 0.0001"
+        },
+        {
+          "id": "C-AI-40",
+          "assertion": "[C-AI-40] response has no stack/database leak",
+          "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+        },
+        {
+          "id": "C-AI-40",
+          "assertion": "[C-AI-40] response has no stack/database leak",
+          "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+        }
+      ]
+    },
+    "import-products": {
+      "source": "evidence/newman/import-products-2026-08-22T03-52-14-527Z.json",
+      "dryRun": false,
+      "generatedAt": 1787370818347,
+      "stats": {
+        "iterations": {
+          "total": 61,
+          "pending": 0,
+          "failed": 0
+        },
+        "items": {
+          "total": 305,
+          "pending": 0,
+          "failed": 0
+        },
+        "scripts": {
+          "total": 671,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequests": {
+          "total": 305,
+          "pending": 0,
+          "failed": 0
+        },
+        "requests": {
+          "total": 305,
+          "pending": 0,
+          "failed": 0
+        },
+        "tests": {
+          "total": 305,
+          "pending": 0,
+          "failed": 0
+        },
+        "assertions": {
+          "total": 648,
+          "pending": 0,
+          "failed": 22
+        },
+        "testScripts": {
+          "total": 305,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequestScripts": {
+          "total": 366,
+          "pending": 0,
+          "failed": 0
+        }
+      },
+      "caseSummary": {
+        "total": 61,
+        "passed": 42,
+        "failed": 19
+      },
+      "cases": [
+        {
+          "id": "I-AI-01",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-02",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "Authorization gate rejects request",
+              "message": "expected 200 to be within 400..499"
+            },
+            {
+              "assertion": "[I-AI-02] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-03",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-04",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-05",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-06",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-07",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-08",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-09",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-10",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-11",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-12",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-13",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-14",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-15",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-16",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-17",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-18",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-19",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-20",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-21",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-21] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-22",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-22] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-23",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-23] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-24",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-24] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-25",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-25] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-26",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-27",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-28",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-29",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-30",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-30] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-31",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-31] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-32",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-32] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-33",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-33] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-34",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-35",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-36",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-37",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-38",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-39",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-40",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-40] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-41",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-41] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-42",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-42] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-43",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-44",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-45",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-45] response has no stack/database leak",
+              "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-46",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-47",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-48",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-49",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-50",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-51",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-51] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-52",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-53",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-54",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-AI-55",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-AI-55] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-AI-56",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "Authorization gate rejects request",
+              "message": "expected 200 to be within 400..499"
+            },
+            {
+              "assertion": "[I-AI-56] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-H-01",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 2,
+          "failures": [
+            {
+              "assertion": "[I-H-01] response has no stack/database leak",
+              "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+            },
+            {
+              "assertion": "[I-H-01] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-H-02",
+          "requestCount": 5,
+          "assertionCount": 9,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-H-03",
+          "requestCount": 5,
+          "assertionCount": 12,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        },
+        {
+          "id": "I-H-04",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 1,
+          "failures": [
+            {
+              "assertion": "[I-H-04] database snapshot is unchanged",
+              "message": "expected '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…' to deeply equal '[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"…'"
+            }
+          ],
+          "result": "FAIL"
+        },
+        {
+          "id": "I-H-05",
+          "requestCount": 5,
+          "assertionCount": 11,
+          "failureCount": 0,
+          "failures": [],
+          "result": "PASS"
+        }
+      ],
+      "bugSignals": [
+        {
+          "id": "I-AI-02",
+          "assertion": "Authorization gate rejects request",
+          "message": "expected 200 to be within 400..499"
+        },
+        {
+          "id": "I-AI-45",
+          "assertion": "[I-AI-45] response has no stack/database leak",
+          "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+        },
+        {
+          "id": "I-AI-56",
+          "assertion": "Authorization gate rejects request",
+          "message": "expected 200 to be within 400..499"
+        },
+        {
+          "id": "I-H-01",
+          "assertion": "[I-H-01] response has no stack/database leak",
+          "message": "expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<h…' not to match /SQLITE_|node_modules[\\\\/]|TypeError:|ReferenceError:|at .*\\.js:\\d+/i"
+        }
+      ]
+    }
+  },
+  "totals": {
+    "cases": 158,
+    "passed": 113,
+    "failed": 45
+  }
+}

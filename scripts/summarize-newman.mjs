@@ -3,6 +3,12 @@ import path from "node:path";
 
 const reportDir = path.resolve("evidence/newman");
 const suites = ["reset-password", "apply-coupon", "import-products"];
+const idFlagIndex = process.argv.indexOf("--student-id");
+const studentId = idFlagIndex >= 0 ? process.argv[idFlagIndex + 1] : process.env.STUDENT_ID;
+
+if (!studentId) {
+  throw new Error("Missing student ID. Use --student-id YOUR_ID or set STUDENT_ID.");
+}
 
 function latestReport(suite) {
   const candidates = fs
@@ -70,7 +76,7 @@ function summarize(file) {
 
   return {
     source: path.relative(process.cwd(), file).replaceAll("\\", "/"),
-    dryRun: true,
+    dryRun: false,
     generatedAt: parsed.run?.timings?.completed || null,
     stats: parsed.run?.stats || null,
     caseSummary: {
@@ -85,8 +91,9 @@ function summarize(file) {
 
 const summaries = Object.fromEntries(suites.map((suite) => [suite, summarize(latestReport(suite))]));
 const output = {
-  label: "DRYRUN-NOT-SUBMISSION",
-  warning: "Replace this evidence by rerunning Newman with the student's real ID.",
+  label: "OFFICIAL",
+  studentId,
+  warning: null,
   suites: summaries,
   totals: {
     cases: Object.values(summaries).reduce((sum, item) => sum + item.caseSummary.total, 0),
@@ -95,6 +102,6 @@ const output = {
   },
 };
 
-const outputPath = path.join(reportDir, "dry-run-summary.json");
+const outputPath = path.join(reportDir, "execution-summary.json");
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(JSON.stringify({ outputPath, totals: output.totals, suites: Object.fromEntries(Object.entries(summaries).map(([key, value]) => [key, value.caseSummary])) }, null, 2));

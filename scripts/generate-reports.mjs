@@ -3,10 +3,12 @@ import path from "node:path";
 import { resetCases, couponCases, importCases } from "./case-definitions.mjs";
 
 const root = process.cwd();
-const summaryPath = path.join(root, "evidence/newman/dry-run-summary.json");
+const summaryPath = path.join(root, "evidence/newman/execution-summary.json");
 const resultSummary = fs.existsSync(summaryPath) ? JSON.parse(fs.readFileSync(summaryPath, "utf8")) : null;
-const studentName = "Hưng Nguyễn";
-const studentId = process.env.STUDENT_ID || "HUMAN_REVIEW_REQUIRED";
+const studentName = "Nguyễn Đình Thái Hưng";
+const studentId = "23127373";
+const issueIndexPath = path.join(root, "reports/github-issues.json");
+const githubIssues = fs.existsSync(issueIndexPath) ? JSON.parse(fs.readFileSync(issueIndexPath, "utf8")) : {};
 const suites = [
   { key: "reset-password", label: "Pool A — FR-03 Password reset", endpoint: "POST /api/reset-password", cases: resetCases, prefix: "R" },
   { key: "apply-coupon", label: "Pool B — FR-09 Discount coupon", endpoint: "POST /api/apply-coupon", cases: couponCases, prefix: "C" },
@@ -94,10 +96,10 @@ const mainReport = `
 
 ## Submission identity
 
-- Student: **${studentName}** *(human review required)*
+- Student: **${studentName}**
 - Student ID: **${studentId}**
 - SUT: EShop at \`http://127.0.0.1:3000\`
-- Evidence status: **${studentId === "HUMAN_REVIEW_REQUIRED" ? "DRYRUN-NOT-SUBMISSION — rerun with the official student ID" : "official local run"}**
+- Evidence status: **official local Newman run with \`X-Student-Id: ${studentId}\`**
 
 ## 1. API selection and collision check
 
@@ -111,11 +113,11 @@ For each endpoint I used a phased AI-first workflow: requirements decomposition 
 
 The executable oracle distinguishes normative rules from unspecified behavior. \`ACCEPT/APPLY/COMMIT\` and \`REJECT/ROLLBACK\` cases assert requirements. \`OBSERVE\` cases assert only safety/stability and remain marked INCOMPLETE when the specification does not permit a binary verdict.
 
-## 3. Test inventory and dry-run result
+## 3. Test inventory and official execution result
 
 ${mdTable(["API", "AI candidates", "VALID", "INVALID", "INCOMPLETE", "Student-added", "Executed", "Passed", "Failed"], countRows)}
 
-The current 158-case result is a controlled dry run using \`X-Student-Id: DRYRUN-NOT-SUBMISSION\`. Its 113 passing and 45 failing cases are not fabricated “green” evidence: failures are preserved because they reveal requirement violations. An official rerun must replace this evidence after the real student ID is supplied.
+The official 158-case run used \`X-Student-Id: ${studentId}\`. Its 113 passing and 45 failing cases are not fabricated “green” evidence: failures are preserved because they reveal requirement violations.
 
 ## 4. Coverage
 
@@ -143,7 +145,7 @@ Reproduce from **PowerShell** in the repository root:
 \`\`\`powershell
 npm.cmd install
 npm.cmd run generate:postman
-npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID
+npm.cmd run test:api -- --student-id ${studentId}
 npm.cmd run verify:artifacts
 \`\`\`
 
@@ -163,7 +165,7 @@ The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-t
 
 ## 10. Limitations and mandatory human review
 
-OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. The student must supply identity, personally review/sign off rows, take the non-fabricated console screenshot, draw the diagram, record/upload the video, approve repository visibility and GitHub Issues, select the self-assessed grade, create the final ZIP, and submit it on Moodle. See [manual-checklist.md](./manual-checklist.md).
+OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity and the official Newman rerun are complete. The student must still personally review/sign off rows, take the non-fabricated console screenshot, draw the diagram, record/upload the video, approve the final repository-visibility change, select the self-assessed grade, create the final ZIP, and submit it on Moodle. See [manual-checklist.md](./manual-checklist.md).
 
 ## 11. AI declaration
 
@@ -180,7 +182,7 @@ const bugSections = findings.map(([id, severity, area, title, evidence]) => `
 
 ### Steps to reproduce
 
-1. From PowerShell in the repository root, run \`npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID\`.
+1. From PowerShell in the repository root, run \`npm.cmd run test:api -- --student-id ${studentId}\`.
 2. Open the matching latest HTML report under \`evidence/newman/\`.
 3. Filter or search for the evidence case IDs above.
 4. Compare the response and database-state assertion with the authoritative FR/SEC rule.
@@ -191,19 +193,19 @@ The endpoint enforces the cited business/security rule, returns a non-leaking re
 
 ### Actual
 
-The recorded assertion fails consistently in the isolated local run. See \`evidence/newman/dry-run-summary.json\` and the endpoint HTML report. The current files are labeled dry-run until the real \`X-Student-Id\` rerun is made.
+The recorded assertion fails consistently in the isolated official local run. See \`evidence/newman/execution-summary.json\` and the endpoint HTML report.
 
 ### GitHub evidence
 
-- Issue URL: **HUMAN_REVIEW_REQUIRED_AFTER_PUBLIC_PUSH**
+- Issue URL: ${githubIssues[id]?.url ? `[${githubIssues[id].url}](${githubIssues[id].url})` : "**PENDING_BROWSER_PUBLICATION**"}
 - Screenshot: [${findingScreenshots[id]}](../${findingScreenshots[id]})
-- Attachment status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence; publishing it to the issue still requires the student's action-time approval.
+- Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 `).join("\n");
 
 const bugReport = `
 # Genuine Bug Reports
 
-These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. GitHub Issue creation is deferred until the student approves the representational action and public-repository change.
+These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. GitHub Issues are created while the repository remains private; repository visibility is a separate final approval gate.
 
 ${bugSections}
 `;
@@ -245,7 +247,7 @@ const auditReport = `
 
 ## Declaration
 
-I use AI tools for requirements analysis, candidate test generation, correction, and automation/report scaffolding. The browser session used **Google Gemini Pro**, signed in as ${studentName}; the email address is deliberately redacted. Local automation assistance used OpenAI Codex and is disclosed in the main report. All Gemini interactions below include tool, time, prompt, and complete output.
+I use AI tools for requirements analysis, candidate test generation, correction, and automation/report scaffolding. The browser session used **Google Gemini Pro**; its account display name was “Hưng Nguyễn”, while the submission identity is ${studentName} (${studentId}). The email address is deliberately redacted. Local automation assistance used OpenAI Codex and is disclosed in the main report. All Gemini interactions below include tool, time, prompt, and complete output.
 
 ## Session index
 
@@ -290,13 +292,13 @@ const manualChecklist = `
 
 Do not submit until every unchecked item is completed personally.
 
-- [ ] Confirm the student name (**${studentName}**) and provide the exact student ID.
-- [ ] Rerun in **PowerShell** from \`${root}\`: \`npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID\`.
+- [x] Confirm the student name (**${studentName}**) and exact student ID (**${studentId}**).
+- [x] Rerun in **PowerShell** from \`${root}\`: \`npm.cmd run test:api -- --student-id ${studentId}\`.
 - [ ] Personally inspect every Excel row; update the \`Human_Verified\` column from \`NO\` to \`YES\` only after review.
-- [ ] Take the required real console screenshot showing the pre-request log/header \`X-Student-Id: YOUR_REAL_STUDENT_ID\`. This anti-cheat evidence must not be fabricated or AI-generated.
+- [ ] Take the required real console screenshot showing the pre-request log/header \`X-Student-Id: ${studentId}\`. The official run is complete, but this anti-cheat screenshot must be captured/recreated manually and must not be AI-generated.
 - [ ] Open each latest Newman HTML report and spot-check hostname \`127.0.0.1:3000\`, case IDs, failures, and timestamps.
 - [ ] Approve making the GitHub repository public, then verify no secrets/personal email are committed.
-- [ ] Approve/create the ten GitHub Issues; attach the real, matching screenshot to each and paste URLs into \`reports/bug-reports.md\`.
+- [${Object.keys(githubIssues).length === 10 ? "x" : " "}] Create the ten GitHub Issues; link the real, matching screenshot in each and preserve URLs in \`reports/github-issues.json\` and \`reports/bug-reports.md\`.
 - [ ] Trigger/verify both CI demonstration commits; paste Actions links and screenshots into \`reports/ci-cd-report.md\`.
 - [ ] Draw the Agent Skill diagram yourself from the design checklist. Export it as PNG and keep the editable source. Do not use an AI-generated diagram.
 - [ ] Read the prompts/outputs in \`reports/ai-audit.md\`; confirm they match the Gemini chat and that no private email remains.
@@ -312,7 +314,7 @@ Target length: 7–9 minutes. Record your own screen and voice. Use **PowerShell
 
 ## 0:00–0:40 — Identity and scope
 
-Say: “I am ${studentName}, student ID [state it]. This is HW06. I selected reset-password, apply-coupon, and admin import-products because they do not duplicate my group members.” Show README and the selection table.
+Say: “I am ${studentName}, student ID ${studentId}. This is HW06. I selected reset-password, apply-coupon, and admin import-products because they do not duplicate my group members.” Show README and the selection table.
 
 ## 0:40–1:40 — AI-first evidence
 
@@ -329,7 +331,7 @@ Open **PowerShell** in the repository root and type exactly:
 \`\`\`powershell
 npm.cmd install
 npm.cmd run generate:postman
-npm.cmd run test:api -- --student-id YOUR_REAL_STUDENT_ID
+npm.cmd run test:api -- --student-id ${studentId}
 \`\`\`
 
 Before Enter on the final command, explain that the collection pre-request script injects \`X-Student-Id\` into every request. After execution, zoom in on a real console line containing the student ID and capture the required screenshot manually. Show the three suite summaries and explain that failed assertions are genuine findings, not a broken runner.
@@ -431,11 +433,11 @@ Gemini underweighted protocol edge cases, information leakage, identity trust, a
 - Data rows executed: ${run.total ?? "pending"}
 - Passed: ${run.passed ?? "pending"}
 - Failed: ${run.failed ?? "pending"}
-- Current label: \`DRYRUN-NOT-SUBMISSION\`
+- Current label: \`OFFICIAL-${studentId}\`
 - Host: \`127.0.0.1:3000\`
-- Evidence: latest matching HTML/JUnit report under \`evidence/newman/\`; compact ledger in \`evidence/newman/dry-run-summary.json\`.
+- Evidence: latest matching HTML/JUnit report under \`evidence/newman/\`; compact ledger in \`evidence/newman/execution-summary.json\`.
 
-Failures are retained when they violate normative requirements; they are not converted to passes. Rerun with the official student ID before submission.
+Failures are retained when they violate normative requirements; they are not converted to passes.
   `);
 }
 

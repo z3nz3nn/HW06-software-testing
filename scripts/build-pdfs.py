@@ -116,9 +116,29 @@ def markdown_table(lines, width):
     return table
 
 
+def normalize_code_spacing(lines):
+    normalized = []
+    blank_run = 0
+
+    for raw in lines:
+        if not raw.strip():
+            blank_run += 1
+            continue
+
+        # The browser transcript export inserts one empty row between almost
+        # every visible line. Remove that artifact, while preserving a single
+        # paragraph break where the source contains a larger blank run.
+        if normalized and blank_run >= 2:
+            normalized.append("")
+        normalized.append(raw.rstrip())
+        blank_run = 0
+
+    return normalized
+
+
 def code_block(lines, width):
     rows = []
-    for raw in lines:
+    for raw in normalize_code_spacing(lines):
         # Preserve indentation without turning every internal space into a
         # non-breaking space, so long transcript lines can still wrap.
         leading_spaces = len(raw) - len(raw.lstrip(" "))

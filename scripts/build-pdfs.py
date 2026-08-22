@@ -12,6 +12,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     BaseDocTemplate,
     Frame,
+    LongTable,
     PageTemplate,
     Paragraph,
     PageBreak,
@@ -72,7 +73,7 @@ styles = {
     "h3": ParagraphStyle("H3", parent=base["Heading3"], fontName="HWArial-Bold", fontSize=10.5, leading=13, textColor=NAVY, spaceBefore=7, spaceAfter=4),
     "body": ParagraphStyle("Body", parent=base["BodyText"], fontName="HWArial", fontSize=8.5, leading=12, textColor=colors.HexColor("#1D2939"), spaceAfter=5, splitLongWords=True),
     "bullet": ParagraphStyle("Bullet", parent=base["BodyText"], fontName="HWArial", fontSize=8.3, leading=11.5, leftIndent=10, firstLineIndent=-7, bulletIndent=2, spaceAfter=3, splitLongWords=True),
-    "code": ParagraphStyle("Code", parent=base["Code"], fontName="HWMono", fontSize=6.1, leading=7.7, leftIndent=5, rightIndent=5, backColor=colors.HexColor("#F2F4F7"), borderColor=LINE, borderWidth=0.4, borderPadding=4, spaceAfter=1.5, splitLongWords=True),
+    "code_line": ParagraphStyle("CodeLine", parent=base["Code"], fontName="HWMono", fontSize=6.1, leading=8.3, textColor=colors.HexColor("#344054"), spaceBefore=0, spaceAfter=0, splitLongWords=True),
     "note": ParagraphStyle("Note", parent=base["BodyText"], fontName="HWArial", fontSize=8, leading=11, textColor=GRAY, backColor=colors.HexColor("#F8FAFC"), borderColor=LINE, borderWidth=0.5, borderPadding=6),
 }
 
@@ -115,24 +116,52 @@ def markdown_table(lines, width):
     return table
 
 
+def code_block(lines, width):
+    rows = []
+    for raw in lines:
+        # Preserve indentation without turning every internal space into a
+        # non-breaking space, so long transcript lines can still wrap.
+        leading_spaces = len(raw) - len(raw.lstrip(" "))
+        content = ("&#160;" * leading_spaces) + html.escape(raw[leading_spaces:], quote=False)
+        rows.append([Paragraph(content or "&#160;", styles["code_line"])])
+
+    if not rows:
+        rows = [[Paragraph("&#160;", styles["code_line"])]]
+
+    table = LongTable(
+        rows,
+        colWidths=[width],
+        hAlign="LEFT",
+        splitByRow=1,
+    )
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#F6F8FA")),
+        ("BOX", (0, 0), (-1, -1), 0.5, LINE),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 5),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+        ("TOPPADDING", (0, 0), (-1, -1), 0.8),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0.8),
+    ]))
+    return table
+
+
 def markdown_story(markdown, doc_width):
     lines = markdown.splitlines()
     story = []
     i = 0
-    in_code = False
     while i < len(lines):
         raw = lines[i]
         stripped = raw.strip()
         if stripped.startswith("```"):
-            in_code = not in_code
             i += 1
-            continue
-        if in_code:
-            if stripped:
-                story.append(Paragraph(html.escape(raw).replace(" ", "&nbsp;"), styles["code"]))
-            else:
-                story.append(Spacer(1, 2))
-            i += 1
+            code_lines = []
+            while i < len(lines) and not lines[i].strip().startswith("```"):
+                code_lines.append(lines[i])
+                i += 1
+            if i < len(lines):
+                i += 1
+            story.extend([code_block(code_lines, doc_width), Spacer(1, 6)])
             continue
         if not stripped:
             story.append(Spacer(1, 3))

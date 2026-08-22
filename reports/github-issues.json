@@ -1,0 +1,12 @@
+{
+  "BUG-01": { "number": 1, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/1" },
+  "BUG-02": { "number": 2, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/2" },
+  "BUG-03": { "number": 3, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/3" },
+  "BUG-04": { "number": 4, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/4" },
+  "BUG-05": { "number": 5, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/5" },
+  "BUG-06": { "number": 6, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/6" },
+  "BUG-07": { "number": 7, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/7" },
+  "BUG-08": { "number": 8, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/8" },
+  "BUG-09": { "number": 9, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/9" },
+  "BUG-10": { "number": 10, "url": "https://github.com/z3nz3nn/HW06-software-testing/issues/10" }
+}

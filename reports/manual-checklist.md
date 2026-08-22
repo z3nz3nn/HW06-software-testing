@@ -8,7 +8,7 @@ Do not submit until every unchecked item is completed personally.
 - [ ] Take the required real console screenshot showing the pre-request log/header `X-Student-Id: 23127373`. The official run is complete, but this anti-cheat screenshot must be captured/recreated manually and must not be AI-generated.
 - [ ] Open each latest Newman HTML report and spot-check hostname `127.0.0.1:3000`, case IDs, failures, and timestamps.
 - [ ] Approve making the GitHub repository public, then verify no secrets/personal email are committed.
-- [ ] Create the ten GitHub Issues; link the real, matching screenshot in each and preserve URLs in `reports/github-issues.json` and `reports/bug-reports.md`.
+- [x] Create the ten GitHub Issues; link the real, matching screenshot in each and preserve URLs in `reports/github-issues.json` and `reports/bug-reports.md`.
 - [ ] Trigger/verify both CI demonstration commits; paste Actions links and screenshots into `reports/ci-cd-report.md`.
 - [ ] Draw the Agent Skill diagram yourself from the design checklist. Export it as PNG and keep the editable source. Do not use an AI-generated diagram.
 - [ ] Read the prompts/outputs in `reports/ai-audit.md`; confirm they match the Gemini chat and that no private email remains.

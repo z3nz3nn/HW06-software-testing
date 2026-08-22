@@ -8,7 +8,7 @@ This repository contains the complete, auditable testing pipeline for three ESho
 | B | FR-09 Apply coupon | `POST /api/apply-coupon` |
 | C | FR-16 Import products | `POST /api/admin/import-products` |
 
-Key artifacts: [main report](reports/main-report.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [CI/CD report](reports/ci-cd-report.md), and [video script](reports/video-script.md).
+Key artifacts: [main report](reports/main-report.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [10 GitHub Issues](reports/github-issues.json), [CI/CD report](reports/ci-cd-report.md), and [video script](reports/video-script.md).
 
 CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) and [one-failing-case mutation](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145).
 
@@ -20,7 +20,7 @@ CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-t
 
 ## Current status
 
-The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`. The repository remains private because changing it to Public is the final, separately confirmed action. Personal row review, the real console screenshot, self-drawn diagram, video, self-assessed score, ZIP inspection, and Moodle submission remain student-only gates.
+The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373` and publication of ten GitHub Issues. The repository remains private because changing it to Public is the final, separately confirmed action. Personal row review, the real console screenshot, self-drawn diagram, video, self-assessed score, ZIP inspection, and Moodle submission remain student-only gates.
 
 ## Test summary (official local run)
 

@@ -27,7 +27,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/1](https://github.com/z3nz3nn/HW06-software-testing/issues/1)
 - Screenshot: [evidence/screenshots/bug-01-login-secret-leak.jpg](../evidence/screenshots/bug-01-login-secret-leak.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -56,7 +56,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/2](https://github.com/z3nz3nn/HW06-software-testing/issues/2)
 - Screenshot: [evidence/screenshots/bug-02-reset-password-complexity.jpg](../evidence/screenshots/bug-02-reset-password-complexity.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -85,7 +85,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/3](https://github.com/z3nz3nn/HW06-software-testing/issues/3)
 - Screenshot: [evidence/screenshots/bug-03-weak-reset-token.jpg](../evidence/screenshots/bug-03-weak-reset-token.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -114,7 +114,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/4](https://github.com/z3nz3nn/HW06-software-testing/issues/4)
 - Screenshot: [evidence/screenshots/bug-04-coupon-missing-auth.jpg](../evidence/screenshots/bug-04-coupon-missing-auth.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -143,7 +143,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/5](https://github.com/z3nz3nn/HW06-software-testing/issues/5)
 - Screenshot: [evidence/screenshots/bug-05-coupon-percentage-formula.jpg](../evidence/screenshots/bug-05-coupon-percentage-formula.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -172,7 +172,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/6](https://github.com/z3nz3nn/HW06-software-testing/issues/6)
 - Screenshot: [evidence/screenshots/bug-06-coupon-threshold-boundary.jpg](../evidence/screenshots/bug-06-coupon-threshold-boundary.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -201,7 +201,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/7](https://github.com/z3nz3nn/HW06-software-testing/issues/7)
 - Screenshot: [evidence/screenshots/bug-07-import-missing-role-check.jpg](../evidence/screenshots/bug-07-import-missing-role-check.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -230,7 +230,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/8](https://github.com/z3nz3nn/HW06-software-testing/issues/8)
 - Screenshot: [evidence/screenshots/bug-08-import-incomplete-validation.jpg](../evidence/screenshots/bug-08-import-incomplete-validation.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -259,7 +259,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/9](https://github.com/z3nz3nn/HW06-software-testing/issues/9)
 - Screenshot: [evidence/screenshots/bug-09-import-non-atomic.jpg](../evidence/screenshots/bug-09-import-non-atomic.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.
 
@@ -288,6 +288,6 @@ The recorded assertion fails consistently in the isolated official local run. Se
 
 ### GitHub evidence
 
-- Issue URL: **PENDING_BROWSER_PUBLICATION**
+- Issue URL: [https://github.com/z3nz3nn/HW06-software-testing/issues/10](https://github.com/z3nz3nn/HW06-software-testing/issues/10)
 - Screenshot: [evidence/screenshots/bug-10-stack-leak.jpg](../evidence/screenshots/bug-10-stack-leak.jpg)
 - Evidence status: the screenshot is genuine Chrome-captured Newman or GitHub source evidence and is linked from the issue body.

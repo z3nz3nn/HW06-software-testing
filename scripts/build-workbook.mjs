@@ -14,6 +14,9 @@ await fs.mkdir(previewDir, { recursive: true });
 const summary = JSON.parse(await fs.readFile("evidence/newman/execution-summary.json", "utf8"));
 const submissionStatus = JSON.parse(await fs.readFile("reports/submission-status.json", "utf8"));
 const gates = submissionStatus.studentOnlyGates;
+const rowReviewNote = gates.allExcelRowsPersonallyReviewed
+  ? "Student personally reviewed all test-case rows on 2026-08-30."
+  : "";
 let issueIndex = {};
 try {
   issueIndex = JSON.parse(await fs.readFile("reports/github-issues.json", "utf8"));
@@ -118,8 +121,8 @@ for (const spec of suiteSpecs) {
         item.manualReview || "",
         result?.result || "NOT_RUN",
         result ? safe([...new Set(result.failures.map((failure) => failure.assertion))].join(" | "), 500) : "",
-        "NO",
-        "",
+        gates.allExcelRowsPersonallyReviewed ? "YES" : "NO",
+        rowReviewNote,
       ];
     }),
   ];
@@ -142,6 +145,7 @@ for (const spec of suiteSpecs) {
   sheet.getRange(`L5:L${4 + spec.cases.length}`).conditionalFormats.add("containsText", { text: "PASS", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
   sheet.getRange(`L5:L${4 + spec.cases.length}`).conditionalFormats.add("containsText", { text: "FAIL", format: { fill: colors.redPale, font: { color: colors.red, bold: true } } });
   sheet.getRange(`N5:N${4 + spec.cases.length}`).conditionalFormats.add("containsText", { text: "NO", format: { fill: colors.amberPale, font: { color: colors.amber, bold: true } } });
+  sheet.getRange(`N5:N${4 + spec.cases.length}`).conditionalFormats.add("containsText", { text: "YES", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
 }
 
 titleBand(summarySheet, "A1:I2", "HW06 API Testing Dashboard", "Formula-backed summary • Nguyễn Đình Thái Hưng • Student ID 23127373");

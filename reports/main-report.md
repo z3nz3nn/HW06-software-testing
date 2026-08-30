@@ -51,7 +51,7 @@ The reset suite covers 42 AI candidates plus 6 extensions. Coupon uses 45 genera
 - INCOMPLETE: useful exploratory input, but the specification leaves the expected result ambiguous; assertions are conservative.
 - STUDENT_ADDED: a security, protocol, metamorphic, state, or white-box risk missed by Gemini.
 
-Every row contains its label and reason in the Excel workbook and canonical [case-definitions.mjs](../scripts/case-definitions.mjs). Manual student sign-off remains required before submission; automated generation is not represented as personal review.
+Every row contains its label and reason in the Excel workbook and canonical [case-definitions.mjs](../scripts/case-definitions.mjs). The student explicitly confirmed personal review/sign-off of all 158 rows on 2026-08-30; automated generation itself is not represented as personal review.
 
 ## 6. Postman/Newman implementation
 
@@ -91,11 +91,11 @@ The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dep
 
 ## 9. Agent Skill
 
-The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-test-generator/) decomposes specifications, classifies normative versus observational oracles, generates ≥35 candidates, audits them, adds human-risk prompts, and emits canonical rows/Postman data. Pseudocode is provided. An editable Mermaid scaffold is available in [agent-skill-diagram.mmd](../docs/agent-skill-diagram.mmd); the student must review or revise it and export the final `agent-skill-diagram.png` before submission.
+The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-test-generator/) decomposes specifications, classifies normative versus observational oracles, generates ≥35 candidates, audits them, adds human-risk prompts, and emits canonical rows/Postman data. Pseudocode, editable Mermaid source, and the student-reviewed final PNG are provided in [docs](../docs/).
 
 ## 10. Limitations and mandatory human review
 
-OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, CI run-pair evidence, the decision to omit the optional video, and the 100/100 self-assessment are recorded. The student must still personally review/sign off rows, take the non-fabricated console screenshot, spot-check the Newman HTML, confirm the AI audit, draw the diagram, approve the final repository-visibility change, inspect the final ZIP, and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the human actions.
+OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, CI run-pair evidence, personal review/sign-off of all 158 Excel rows, the real console screenshot, the reviewed diagram export, the decision to omit the optional video, and the 100/100 self-assessment are recorded. The student must still spot-check the Newman HTML, confirm the AI audit, approve the final repository-visibility change, inspect the final ZIP, and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the human actions.
 
 ## 11. AI Critique (267 words)
 

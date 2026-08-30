@@ -80,7 +80,27 @@ for (const relative of missingHumanEvidence) {
   if (fs.existsSync(path.join(root, relative))) copyFile(relative);
 }
 
-const manifest = `# Submission package\n\n- Student: ${status.student.name}\n- Student ID: ${status.student.id}\n- Self-assessed grade: ${grade}/100\n- Required ZIP filename: \`${status.student.id}_HW06_AI_API_${grade}.zip\`\n- Repository: ${status.repository.url} (${status.repository.visibility}; make public only as the final step)\n- Optional video: declined by the student\n\n## Human evidence still required before ZIP\n\n1. Run \`npm.cmd run test:api:reset -- --student-id ${status.student.id}\` in PowerShell and save a real screenshot containing \`[HW06 pre-request] X-Student-Id: ${status.student.id}\` as \`evidence/screenshots/09-console-x-student-id-${status.student.id}.png\`.\n2. Open \`docs/agent-skill-diagram.mmd\` in Mermaid Live Editor, review or revise it, then export \`docs/agent-skill-diagram.png\`.\n3. Personally review the Excel rows, Newman HTML, and AI Audit; then update the source-of-truth gates truthfully and rebuild this folder.\n4. Make the GitHub repository public as the final online step.\n5. Inspect the folder, ZIP its contents as \`${status.student.id}_HW06_AI_API_${grade}.zip\`, and submit on Moodle.\n\nDo not submit while either required human-evidence file above is absent.\n`;
+const manifest = `# Submission package
+
+- Student: ${status.student.name}
+- Student ID: ${status.student.id}
+- Self-assessed grade: ${grade}/100
+- Required ZIP filename: \`${status.student.id}_HW06_AI_API_${grade}.zip\`
+- Repository: ${status.repository.url} (${status.repository.visibility}; make public only as the final step)
+- Optional video: declined by the student
+
+## Human evidence already confirmed
+
+- All 158 Excel rows were personally reviewed.
+- The real PowerShell screenshot contains \`X-Student-Id: ${status.student.id}\`.
+- The Agent Skill diagram is a valid PNG and its editable Mermaid source is retained.
+
+## Human actions still required before submission
+
+1. Personally spot-check the Newman HTML and AI Audit; then update the remaining source-of-truth gates truthfully and rebuild this folder.
+2. Make the GitHub repository public as the final online step.
+3. Inspect the folder, ZIP its contents as \`${status.student.id}_HW06_AI_API_${grade}.zip\`, and submit on Moodle.
+`;
 fs.writeFileSync(path.join(destination, "SUBMISSION_MANIFEST.md"), manifest, "utf8");
 fs.writeFileSync(path.join(destination, "ZIP_FILENAME.txt"), `${status.student.id}_HW06_AI_API_${grade}.zip\n`, "utf8");
 

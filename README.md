@@ -22,7 +22,7 @@ CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-t
 
 ## Current status
 
-The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository remains private because changing it to Public is the final, separately confirmed action. The optional video is declined and the self-assessed score is 100/100. Personal row review, the real console screenshot, visual Newman/Audit confirmation, self-drawn diagram, ZIP inspection, and Moodle submission remain student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
+The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository remains private because changing it to Public is the final, separately confirmed action. The optional video is declined, the self-assessed score is 100/100, all 158 Excel rows are personally reviewed, and both the real console screenshot and reviewed diagram export are present. Visual Newman/Audit confirmation, ZIP inspection, and Moodle submission remain student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
 
 ## Test summary (official local run)
 
@@ -46,8 +46,8 @@ The counts above come from the official run using `X-Student-Id: 23127373`. Fail
 | Public repository link | Repository URL above | Private by instruction; public is the final student step |
 | Postman + Newman HTML | `postman/`, three latest `2026-08-22` HTML reports under `evidence/newman/` | Complete and automatically reconciled |
 | CI/CD report and two runs | `.github/workflows/api-tests.yml`, `reports/ci-cd-report.md`, screenshots 04–07 | Complete and live-checked in GitHub |
-| Excel test cases + summary | `outputs/hw06/HW06_Test_Cases.xlsx` | Complete; personal row sign-off pending |
-| Agent Skill diagram + pseudocode | `docs/agent-skill-diagram.mmd`, `docs/agent-skill-diagram-HUMAN-REVIEW.md`, `docs/agent-skill-pseudocode.md` | Mermaid source and pseudocode complete; student-reviewed PNG export pending |
+| Excel test cases + summary | `outputs/hw06/HW06_Test_Cases.xlsx` | Complete; all 158 rows personally reviewed and signed off |
+| Agent Skill diagram + pseudocode | `docs/agent-skill-diagram.mmd`, `docs/agent-skill-diagram.png`, `docs/agent-skill-pseudocode.md` | Complete; valid PNG export visually checked and editable source retained |
 | Bug report + issue screenshots | `reports/bug-reports.md`, issue index/drafts, screenshots `bug-01`–`bug-10` | Complete; 10 open issues live-checked |
 | AI Critique + Audit, Markdown + PDF | `reports/ai-critique.md`, `reports/ai-audit.md`, `outputs/hw06/HW06_AI_Audit_Report.pdf` | Complete; personal transcript confirmation pending |
 | Git commit log | `reports/git-commit-log.txt` | Exported; at most the final synchronization commit may follow it |
@@ -58,10 +58,10 @@ The counts above come from the official run using `X-Student-Id: 23127373`. Fail
 
 | No. | Criteria | Maximum | Self-assessed | Evidence status |
 | --- | --- | ---: | ---: | --- |
-| 1 | API 1 full pipeline | 30 | 30 | Official pipeline/evidence complete; final personal review/public visibility pending |
-| 2 | API 2 full pipeline | 30 | 30 | Official pipeline/evidence complete; final personal review/public visibility pending |
-| 3 | API 3 full pipeline | 30 | 30 | Official pipeline/evidence complete; final personal review/public visibility pending |
-| 4 | Agent Skill | 10 | 10 | Reusable skill and pseudocode complete; self-drawn diagram pending; video is optional and declined |
+| 1 | API 1 full pipeline | 30 | 30 | Official pipeline/evidence and personal row review complete; final public visibility pending |
+| 2 | API 2 full pipeline | 30 | 30 | Official pipeline/evidence and personal row review complete; final public visibility pending |
+| 3 | API 3 full pipeline | 30 | 30 | Official pipeline/evidence and personal row review complete; final public visibility pending |
+| 4 | Agent Skill | 10 | 10 | Reusable skill, pseudocode, and reviewed diagram export complete; video is optional and declined |
 |  | **Total** | **100** | **100** | Selected by the student; ZIP name: `23127373_HW06_AI_API_100.zip` |
 
 ## Commands

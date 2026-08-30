@@ -19,10 +19,10 @@
     "pdfLayoutChecked": true
   },
   "studentOnlyGates": {
-    "allExcelRowsPersonallyReviewed": false,
-    "realStudentIdConsoleScreenshotCaptured": false,
+    "allExcelRowsPersonallyReviewed": true,
+    "realStudentIdConsoleScreenshotCaptured": true,
     "newmanHtmlPersonallySpotChecked": false,
-    "selfDrawnDiagramCompleted": false,
+    "selfDrawnDiagramCompleted": true,
     "aiAuditPersonallyConfirmed": false,
     "videoRecordedAndLinked": false,
     "videoDecision": "declined",
@@ -32,6 +32,9 @@
   },
   "notes": [
     "The repository must remain private until the student performs the final public-visibility step.",
+    "The student explicitly confirmed personal review of all 158 Excel test-case rows on 2026-08-30.",
+    "The real PowerShell console screenshot containing X-Student-Id 23127373 was visually verified on 2026-08-30.",
+    "The student-provided Agent Skill diagram was visually verified, converted from a mislabeled SVG export to a valid PNG, and retained with editable Mermaid source on 2026-08-30.",
     "The student explicitly declined the optional demonstration video on 2026-08-30.",
     "The student selected the maximum self-assessed grade: 100/100.",
     "Automated verification must never change a student-only gate to true."

@@ -4,7 +4,7 @@
 
 - Student: **Nguyễn Đình Thái Hưng**
 - Student ID: **23127373**
-- Repository: [https://github.com/z3nz3nn/HW06-software-testing](https://github.com/z3nz3nn/HW06-software-testing) — **PRIVATE until the student approves the final public step**
+- Repository: [https://github.com/z3nz3nn/HW06-software-testing](https://github.com/z3nz3nn/HW06-software-testing) — **PUBLIC (student-approved and GitHub API verified)**
 - SUT: EShop at `http://127.0.0.1:3000`
 - Evidence status: **official local Newman run with `X-Student-Id: 23127373`**
 
@@ -87,7 +87,7 @@ Detailed reproduction steps, expected/actual results, and evidence references ar
 
 ## 8. CI/CD
 
-The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dependencies, regenerates artifacts, starts the local SUT, runs Newman, and uploads reports. The required all-pass versus one-fail pair is implemented as an explicit mutation-demonstration lane, separate from the diagnostic lane that preserves real SUT failures. The run links, commit IDs, and screenshots are recorded in [ci-cd-report.md](./ci-cd-report.md); public repository visibility remains a separate final submission gate.
+The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dependencies, regenerates artifacts, starts the local SUT, runs Newman, and uploads reports. The required all-pass versus one-fail pair is implemented as an explicit mutation-demonstration lane, separate from the diagnostic lane that preserves real SUT failures. The run links, commit IDs, and screenshots are recorded in [ci-cd-report.md](./ci-cd-report.md); public repository visibility is student-approved and was verified through the GitHub API.
 
 ## 9. Agent Skill
 
@@ -95,7 +95,7 @@ The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-t
 
 ## 10. Limitations and mandatory human review
 
-OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, CI run-pair evidence, personal review/sign-off of all 158 Excel rows, the real console screenshot, the reviewed diagram export, the decision to omit the optional video, and the 100/100 self-assessment are recorded. The student must still spot-check the Newman HTML, confirm the AI audit, approve the final repository-visibility change, inspect the final ZIP, and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the human actions.
+OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, CI run-pair evidence, personal review/sign-off of all 158 Excel rows, the real console screenshot, Newman HTML spot-check, AI Audit confirmation, reviewed diagram export, public repository verification, the decision to omit the optional video, and the 100/100 self-assessment are recorded. The student must still inspect the final ZIP and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the final human actions.
 
 ## 11. AI Critique (267 words)
 

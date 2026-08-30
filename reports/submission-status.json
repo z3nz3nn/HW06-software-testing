@@ -8,22 +8,23 @@
   },
   "repository": {
     "url": "https://github.com/z3nz3nn/HW06-software-testing",
-    "visibility": "private",
-    "publicApprovedByStudent": false
+    "visibility": "public",
+    "publicApprovedByStudent": true
   },
   "automatedEvidence": {
     "officialNewmanRun": true,
     "newmanHtmlConsistencyChecked": true,
     "tenGithubIssuesRecorded": true,
     "ciRunPairRecorded": true,
+    "publicRepositoryApiVerified": true,
     "pdfLayoutChecked": true
   },
   "studentOnlyGates": {
     "allExcelRowsPersonallyReviewed": true,
     "realStudentIdConsoleScreenshotCaptured": true,
-    "newmanHtmlPersonallySpotChecked": false,
+    "newmanHtmlPersonallySpotChecked": true,
     "selfDrawnDiagramCompleted": true,
-    "aiAuditPersonallyConfirmed": false,
+    "aiAuditPersonallyConfirmed": true,
     "videoRecordedAndLinked": false,
     "videoDecision": "declined",
     "selfAssessedGrade": 100,
@@ -31,7 +32,8 @@
     "moodleSubmitted": false
   },
   "notes": [
-    "The repository must remain private until the student performs the final public-visibility step.",
+    "The student confirmed the Newman HTML spot-check and Gemini-to-AI-Audit comparison on 2026-08-30.",
+    "GitHub API verification confirmed the repository is public (private=false, visibility=public) on 2026-08-30.",
     "The student explicitly confirmed personal review of all 158 Excel test-case rows on 2026-08-30.",
     "The real PowerShell console screenshot containing X-Student-Id 23127373 was visually verified on 2026-08-30.",
     "The student-provided Agent Skill diagram was visually verified, converted from a mislabeled SVG export to a valid PNG, and retained with editable Mermaid source on 2026-08-30.",

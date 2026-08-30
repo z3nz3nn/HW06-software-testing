@@ -1,6 +1,6 @@
 # Genuine Bug Reports
 
-These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. GitHub Issues are created while the repository remains private; repository visibility is a separate final approval gate.
+These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. The ten GitHub Issues and their linked evidence are publicly accessible in the student-approved repository.
 
 
 ## BUG-01 — Passwords are stored in plaintext and login returns the full user record including password/reset_token/locked_until.

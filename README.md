@@ -8,7 +8,7 @@ This repository contains the complete, auditable testing pipeline for three ESho
 | B | FR-09 Apply coupon | `POST /api/apply-coupon` |
 | C | FR-16 Import products | `POST /api/admin/import-products` |
 
-Repository: [https://github.com/z3nz3nn/HW06-software-testing](https://github.com/z3nz3nn/HW06-software-testing) (kept private until the student's final public step).
+Repository: [https://github.com/z3nz3nn/HW06-software-testing](https://github.com/z3nz3nn/HW06-software-testing) (**Public**, student-approved and verified through the GitHub API).
 
 Key artifacts: [main report](reports/main-report.md), [AI critique](reports/ai-critique.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [10 GitHub Issues](reports/github-issues.json), [CI/CD report](reports/ci-cd-report.md), and [submission status](reports/submission-status.json). The optional video was explicitly declined.
 
@@ -22,7 +22,7 @@ CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-t
 
 ## Current status
 
-The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository remains private because changing it to Public is the final, separately confirmed action. The optional video is declined, the self-assessed score is 100/100, all 158 Excel rows are personally reviewed, and both the real console screenshot and reviewed diagram export are present. Visual Newman/Audit confirmation, ZIP inspection, and Moodle submission remain student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
+The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository is Public, the optional video is declined, the self-assessed score is 100/100, all 158 Excel rows are personally reviewed, and the console screenshot, diagram export, Newman HTML spot-check, and AI Audit confirmation are complete. ZIP inspection and Moodle submission are the only remaining student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
 
 ## Test summary (official local run)
 
@@ -43,13 +43,13 @@ The counts above come from the official run using `X-Student-Id: 23127373`. Fail
 | Requirement | Artifact | Current state |
 | --- | --- | --- |
 | Main report, Markdown + PDF | `reports/main-report.md`, `outputs/hw06/HW06_Main_Report.pdf` | Complete; PDF includes the full 267-word AI Critique |
-| Public repository link | Repository URL above | Private by instruction; public is the final student step |
-| Postman + Newman HTML | `postman/`, three latest `2026-08-22` HTML reports under `evidence/newman/` | Complete and automatically reconciled |
+| Public repository link | Repository URL above | Complete; Public status verified through the GitHub API |
+| Postman + Newman HTML | `postman/`, three latest `2026-08-22` HTML reports under `evidence/newman/` | Complete; automatically reconciled and personally spot-checked |
 | CI/CD report and two runs | `.github/workflows/api-tests.yml`, `reports/ci-cd-report.md`, screenshots 04–07 | Complete and live-checked in GitHub |
 | Excel test cases + summary | `outputs/hw06/HW06_Test_Cases.xlsx` | Complete; all 158 rows personally reviewed and signed off |
 | Agent Skill diagram + pseudocode | `docs/agent-skill-diagram.mmd`, `docs/agent-skill-diagram.png`, `docs/agent-skill-pseudocode.md` | Complete; valid PNG export visually checked and editable source retained |
 | Bug report + issue screenshots | `reports/bug-reports.md`, issue index/drafts, screenshots `bug-01`–`bug-10` | Complete; 10 open issues live-checked |
-| AI Critique + Audit, Markdown + PDF | `reports/ai-critique.md`, `reports/ai-audit.md`, `outputs/hw06/HW06_AI_Audit_Report.pdf` | Complete; personal transcript confirmation pending |
+| AI Critique + Audit, Markdown + PDF | `reports/ai-critique.md`, `reports/ai-audit.md`, `outputs/hw06/HW06_AI_Audit_Report.pdf` | Complete; student confirmed it matches Gemini |
 | Git commit log | `reports/git-commit-log.txt` | Exported; at most the final synchronization commit may follow it |
 | README self-assessment + summary | This file | Summary complete; self-assessed grade 100/100 |
 | Supporting material | Gemini screenshots/transcripts and reusable skill | Complete; optional video declined |
@@ -58,9 +58,9 @@ The counts above come from the official run using `X-Student-Id: 23127373`. Fail
 
 | No. | Criteria | Maximum | Self-assessed | Evidence status |
 | --- | --- | ---: | ---: | --- |
-| 1 | API 1 full pipeline | 30 | 30 | Official pipeline/evidence and personal row review complete; final public visibility pending |
-| 2 | API 2 full pipeline | 30 | 30 | Official pipeline/evidence and personal row review complete; final public visibility pending |
-| 3 | API 3 full pipeline | 30 | 30 | Official pipeline/evidence and personal row review complete; final public visibility pending |
+| 1 | API 1 full pipeline | 30 | 30 | Official pipeline, personal review, and Public evidence complete |
+| 2 | API 2 full pipeline | 30 | 30 | Official pipeline, personal review, and Public evidence complete |
+| 3 | API 3 full pipeline | 30 | 30 | Official pipeline, personal review, and Public evidence complete |
 | 4 | Agent Skill | 10 | 10 | Reusable skill, pseudocode, and reviewed diagram export complete; video is optional and declined |
 |  | **Total** | **100** | **100** | Selected by the student; ZIP name: `23127373_HW06_AI_API_100.zip` |
 

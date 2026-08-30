@@ -111,7 +111,7 @@ const mainReport = `
 
 - Student: **${studentName}**
 - Student ID: **${studentId}**
-- Repository: [${repoUrl}](${repoUrl}) — **${submissionStatus.repository.visibility.toUpperCase()} until the student approves the final public step**
+- Repository: [${repoUrl}](${repoUrl}) — **${submissionStatus.repository.visibility.toUpperCase()} (student-approved and GitHub API verified)**
 - SUT: EShop at \`http://127.0.0.1:3000\`
 - Evidence status: **official local Newman run with \`X-Student-Id: ${studentId}\`**
 
@@ -171,7 +171,7 @@ Detailed reproduction steps, expected/actual results, and evidence references ar
 
 ## 8. CI/CD
 
-The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dependencies, regenerates artifacts, starts the local SUT, runs Newman, and uploads reports. The required all-pass versus one-fail pair is implemented as an explicit mutation-demonstration lane, separate from the diagnostic lane that preserves real SUT failures. The run links, commit IDs, and screenshots are recorded in [ci-cd-report.md](./ci-cd-report.md); public repository visibility remains a separate final submission gate.
+The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dependencies, regenerates artifacts, starts the local SUT, runs Newman, and uploads reports. The required all-pass versus one-fail pair is implemented as an explicit mutation-demonstration lane, separate from the diagnostic lane that preserves real SUT failures. The run links, commit IDs, and screenshots are recorded in [ci-cd-report.md](./ci-cd-report.md); public repository visibility is student-approved and was verified through the GitHub API.
 
 ## 9. Agent Skill
 
@@ -179,7 +179,7 @@ The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-t
 
 ## 10. Limitations and mandatory human review
 
-OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, CI run-pair evidence, personal review/sign-off of all 158 Excel rows, the real console screenshot, the reviewed diagram export, the decision to omit the optional video, and the 100/100 self-assessment are recorded. The student must still spot-check the Newman HTML, confirm the AI audit, approve the final repository-visibility change, inspect the final ZIP, and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the human actions.
+OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, CI run-pair evidence, personal review/sign-off of all 158 Excel rows, the real console screenshot, Newman HTML spot-check, AI Audit confirmation, reviewed diagram export, public repository verification, the decision to omit the optional video, and the 100/100 self-assessment are recorded. The student must still inspect the final ZIP and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the final human actions.
 
 ## 11. AI Critique (267 words)
 
@@ -225,7 +225,7 @@ The recorded assertion fails consistently in the isolated official local run. Se
 const bugReport = `
 # Genuine Bug Reports
 
-These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. GitHub Issues are created while the repository remains private; repository visibility is a separate final approval gate.
+These reports separate test-oracle failures from test-harness failures. Each defect is supported by repeatable black-box evidence; source inspection is used only to explain the likely cause. The ten GitHub Issues and their linked evidence are publicly accessible in the student-approved repository.
 
 ${bugSections}
 `;
@@ -300,7 +300,7 @@ ${mdTable(["Run", "Commit/link", "Expected result", "Screenshot"], [
 
 ## Human review
 
-Both runs were produced by GitHub Actions after separate pushes and include downloadable HTML/JUnit artifacts. The repository remains private pending explicit approval to change visibility. Do not claim the mutation lane proves the unmodified SUT passes; the diagnostic Newman reports are the authoritative product-quality result.
+Both runs were produced by GitHub Actions after separate pushes and include downloadable HTML/JUnit artifacts. The repository is public with explicit student approval and GitHub API verification. Do not claim the mutation lane proves the unmodified SUT passes; the diagnostic Newman reports are the authoritative product-quality result.
 `;
 
 const manualChecklist = `

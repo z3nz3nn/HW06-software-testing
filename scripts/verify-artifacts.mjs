@@ -54,6 +54,7 @@ record("required artifact inventory", missing.length === 0, missing.join(", "));
 const submission = json("reports/submission-status.json");
 record("student identity synchronized", submission.student.id === "23127373" && submission.student.name === "Nguyễn Đình Thái Hưng", JSON.stringify(submission.student));
 record("repository URL synchronized", submission.repository.url === "https://github.com/z3nz3nn/HW06-software-testing", submission.repository.url);
+record("public repository verification recorded", submission.repository.visibility === "public" && submission.repository.publicApprovedByStudent && submission.automatedEvidence.publicRepositoryApiVerified, `${submission.repository.visibility}; approved=${submission.repository.publicApprovedByStudent}`);
 
 const suites = [
   ["reset-password", resetCases, "postman/data/reset-password.json", "R-"],
@@ -163,10 +164,10 @@ if (suspiciousEmails.length) warnings.push(`review non-test email-like strings: 
 const g = submission.studentOnlyGates;
 gate("all 158 Excel rows personally reviewed", g.allExcelRowsPersonallyReviewed, "Human_Verified must be YES only after personal inspection");
 gate("real console screenshot with X-Student-Id", g.realStudentIdConsoleScreenshotCaptured && validPng("evidence/screenshots/09-console-x-student-id-23127373.png"), "evidence/screenshots/09-console-x-student-id-23127373.png");
-gate("Newman HTML personally spot-checked", g.newmanHtmlPersonallySpotChecked, "automated consistency passed; student visual check remains");
-gate("repository public as final step", submission.repository.visibility === "public" && submission.repository.publicApprovedByStudent, submission.repository.url);
+gate("Newman HTML personally spot-checked", g.newmanHtmlPersonallySpotChecked, "automated consistency passed; student confirmed visual spot-check");
+gate("repository public as final step", submission.repository.visibility === "public" && submission.repository.publicApprovedByStudent && submission.automatedEvidence.publicRepositoryApiVerified, submission.repository.url);
 gate("self-drawn Agent Skill diagram", g.selfDrawnDiagramCompleted && validPng("docs/agent-skill-diagram.png"), "docs/agent-skill-diagram.png");
-gate("AI audit personally confirmed", g.aiAuditPersonallyConfirmed, "compare the 11 recorded interactions with Gemini");
+gate("AI audit personally confirmed", g.aiAuditPersonallyConfirmed, "student confirmed all 11 recorded interactions match Gemini");
 gate("optional video decision recorded", g.videoRecordedAndLinked || g.videoDecision === "declined", g.videoDecision === "declined" ? "optional video declined by student" : "video recorded and linked");
 gate("self-assessed grade selected", Number.isInteger(g.selfAssessedGrade) && g.selfAssessedGrade >= 0 && g.selfAssessedGrade <= 100, String(g.selfAssessedGrade));
 gate("final ZIP inspected", g.finalZipInspected, "23127373_HW06_AI_API_<grade>.zip");

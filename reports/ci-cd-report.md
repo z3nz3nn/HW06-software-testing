@@ -16,4 +16,4 @@ The **diagnostic** lane preserves genuine SUT assertion failures and always uplo
 
 ## Human review
 
-Both runs were produced by GitHub Actions after separate pushes and include downloadable HTML/JUnit artifacts. The repository remains private pending explicit approval to change visibility. Do not claim the mutation lane proves the unmodified SUT passes; the diagnostic Newman reports are the authoritative product-quality result.
+Both runs were produced by GitHub Actions after separate pushes and include downloadable HTML/JUnit artifacts. The repository is public with explicit student approval and GitHub API verification. Do not claim the mutation lane proves the unmodified SUT passes; the diagnostic Newman reports are the authoritative product-quality result.

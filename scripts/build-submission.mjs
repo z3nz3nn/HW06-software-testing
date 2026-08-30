@@ -86,7 +86,7 @@ const manifest = `# Submission package
 - Student ID: ${status.student.id}
 - Self-assessed grade: ${grade}/100
 - Required ZIP filename: \`${status.student.id}_HW06_AI_API_${grade}.zip\`
-- Repository: ${status.repository.url} (${status.repository.visibility}; make public only as the final step)
+- Repository: ${status.repository.url} (${status.repository.visibility}; student-approved and GitHub API verified)
 - Optional video: declined by the student
 
 ## Human evidence already confirmed
@@ -94,12 +94,13 @@ const manifest = `# Submission package
 - All 158 Excel rows were personally reviewed.
 - The real PowerShell screenshot contains \`X-Student-Id: ${status.student.id}\`.
 - The Agent Skill diagram is a valid PNG and its editable Mermaid source is retained.
+- The Newman HTML reports were personally spot-checked and the AI Audit was confirmed against Gemini.
+- The repository is Public.
 
 ## Human actions still required before submission
 
-1. Personally spot-check the Newman HTML and AI Audit; then update the remaining source-of-truth gates truthfully and rebuild this folder.
-2. Make the GitHub repository public as the final online step.
-3. Inspect the folder, ZIP its contents as \`${status.student.id}_HW06_AI_API_${grade}.zip\`, and submit on Moodle.
+1. Inspect this folder, then update \`finalZipInspected\` truthfully and rebuild it.
+2. ZIP its contents as \`${status.student.id}_HW06_AI_API_${grade}.zip\` and submit on Moodle.
 `;
 fs.writeFileSync(path.join(destination, "SUBMISSION_MANIFEST.md"), manifest, "utf8");
 fs.writeFileSync(path.join(destination, "ZIP_FILENAME.txt"), `${status.student.id}_HW06_AI_API_${grade}.zip\n`, "utf8");

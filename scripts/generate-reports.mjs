@@ -7,6 +7,9 @@ const summaryPath = path.join(root, "evidence/newman/execution-summary.json");
 const resultSummary = fs.existsSync(summaryPath) ? JSON.parse(fs.readFileSync(summaryPath, "utf8")) : null;
 const studentName = "Nguyễn Đình Thái Hưng";
 const studentId = "23127373";
+const submissionStatus = JSON.parse(fs.readFileSync(path.join(root, "reports/submission-status.json"), "utf8"));
+const repoUrl = submissionStatus.repository.url;
+const gates = submissionStatus.studentOnlyGates;
 const issueIndexPath = path.join(root, "reports/github-issues.json");
 const githubIssues = fs.existsSync(issueIndexPath) ? JSON.parse(fs.readFileSync(issueIndexPath, "utf8")) : {};
 const suites = [
@@ -35,6 +38,10 @@ function mdTable(headers, rows) {
     `| ${headers.map(() => "---").join(" | ")} |`,
     ...rows.map((row) => `| ${row.map(esc).join(" | ")} |`),
   ].join("\n");
+}
+
+function checked(done) {
+  return done ? "x" : " ";
 }
 
 const selectionRows = [
@@ -91,6 +98,12 @@ const findingScreenshots = {
   "BUG-10": "evidence/screenshots/bug-10-stack-leak.jpg",
 };
 
+const critiqueBody = `Gemini was productive at decomposing parameters and proposing broad candidate pools, but its first answers showed why AI output cannot be used as an oracle without review. For password reset, it introduced RFC 5322 as if the specification required it, implied unlisted special characters were forbidden, and invented exact status-code expectations. For coupons, it assumed applying a coupon increments usage even though the endpoint only calculates a discount; it also under-specified the trust boundary between the JWT identity and the body user_id. For product import, it mixed frontend CSV-parser concerns with the JSON API, treated SQL-looking literals as invalid input, and proposed fault-injection and concurrency cases without executable preconditions. These failures came from three causes: the model filled specification gaps with common conventions, optimized for an impressive list rather than testability, and did not initially distinguish a normative requirement from an observational question.
+
+Follow-up prompts improved the result because they named each faulty assumption and demanded a correction ledger. I retained incomplete cases only when their assertions could be limited to stability, security, or state observation; invalid cases were removed or replaced. The student-added cases then targeted null rows, authorization before processing, identity substitution, information disclosure, protocol behavior, and atomic rollback—risks the generic generation phase missed.
+
+The main lesson is that collaboration with AI needs an evidence hierarchy: authoritative requirements first, explicit ambiguity second, executable preconditions third, and implementation observations last. A large case count is not quality by itself. Each case needs traceability, a defensible oracle, isolation, and a recorded audit decision. AI is best used as a fast hypothesis generator; responsibility for correctness remains human.`;
+
 const mainReport = `
 # HW06 — AI-First API Testing Report
 
@@ -98,6 +111,7 @@ const mainReport = `
 
 - Student: **${studentName}**
 - Student ID: **${studentId}**
+- Repository: [${repoUrl}](${repoUrl}) — **${submissionStatus.repository.visibility.toUpperCase()} until the student approves the final public step**
 - SUT: EShop at \`http://127.0.0.1:3000\`
 - Evidence status: **official local Newman run with \`X-Student-Id: ${studentId}\`**
 
@@ -157,7 +171,7 @@ Detailed reproduction steps, expected/actual results, and evidence references ar
 
 ## 8. CI/CD
 
-The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dependencies, regenerates artifacts, starts the local SUT, runs Newman, and uploads reports. The required all-pass versus one-fail pair is implemented as an explicit mutation-demonstration lane, separate from the diagnostic lane that preserves real SUT failures. Links and screenshots require the public GitHub push and are marked in [ci-cd-report.md](./ci-cd-report.md).
+The workflow in [api-tests.yml](../.github/workflows/api-tests.yml) installs dependencies, regenerates artifacts, starts the local SUT, runs Newman, and uploads reports. The required all-pass versus one-fail pair is implemented as an explicit mutation-demonstration lane, separate from the diagnostic lane that preserves real SUT failures. The run links, commit IDs, and screenshots are recorded in [ci-cd-report.md](./ci-cd-report.md); public repository visibility remains a separate final submission gate.
 
 ## 9. Agent Skill
 
@@ -165,9 +179,15 @@ The reusable skill under [skills/eshop-api-test-generator](../skills/eshop-api-t
 
 ## 10. Limitations and mandatory human review
 
-OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity and the official Newman rerun are complete. The student must still personally review/sign off rows, take the non-fabricated console screenshot, draw the diagram, record/upload the video, approve the final repository-visibility change, select the self-assessed grade, create the final ZIP, and submit it on Moodle. See [manual-checklist.md](./manual-checklist.md).
+OTP expiry and true concurrency need controlled time/parallel facilities not exposed by the published API. Identity, the official Newman rerun, ten issue records, and CI run-pair evidence are complete. The student must still personally review/sign off rows, take the non-fabricated console screenshot, spot-check the Newman HTML, confirm the AI audit, draw the diagram, record/upload the video, approve the final repository-visibility change, select the self-assessed grade, create/inspect the final ZIP, and submit it on Moodle. The synchronized machine-readable state is [submission-status.json](./submission-status.json); see [manual-checklist.md](./manual-checklist.md) for the human actions.
 
-## 11. AI declaration
+## 11. AI Critique (267 words)
+
+${critiqueBody}
+
+The standalone Markdown source is [ai-critique.md](./ai-critique.md); this full copy is included so the mandatory critique is also present in the Main Report PDF.
+
+## 12. AI declaration
 
 I use AI tools for requirements analysis, test-candidate generation, critique, automation assistance, and report scaffolding. Full prompts, outputs, timestamps, corrections, and evidence paths are disclosed. Final correctness and submission responsibility remain with the student.
 `;
@@ -213,11 +233,7 @@ ${bugSections}
 const critique = `
 # AI Critique (200–300 words)
 
-Gemini was productive at decomposing parameters and proposing broad candidate pools, but its first answers showed why AI output cannot be used as an oracle without review. For password reset, it introduced RFC 5322 as if the specification required it, implied unlisted special characters were forbidden, and invented exact status-code expectations. For coupons, it assumed applying a coupon increments usage even though the endpoint only calculates a discount; it also under-specified the trust boundary between the JWT identity and the body user_id. For product import, it mixed frontend CSV-parser concerns with the JSON API, treated SQL-looking literals as invalid input, and proposed fault-injection and concurrency cases without executable preconditions. These failures came from three causes: the model filled specification gaps with common conventions, optimized for an impressive list rather than testability, and did not initially distinguish a normative requirement from an observational question.
-
-Follow-up prompts improved the result because they named each faulty assumption and demanded a correction ledger. I retained incomplete cases only when their assertions could be limited to stability, security, or state observation; invalid cases were removed or replaced. The student-added cases then targeted null rows, authorization before processing, identity substitution, information disclosure, protocol behavior, and atomic rollback—risks the generic generation phase missed.
-
-The main lesson is that collaboration with AI needs an evidence hierarchy: authoritative requirements first, explicit ambiguity second, executable preconditions third, and implementation observations last. A large case count is not quality by itself. Each case needs traceability, a defensible oracle, isolation, and a recorded audit decision. AI is best used as a fast hypothesis generator; responsibility for correctness remains human.
+${critiqueBody}
 `;
 
 const transcriptSpecs = [
@@ -247,7 +263,7 @@ const auditReport = `
 
 ## Declaration
 
-I use AI tools for requirements analysis, candidate test generation, correction, and automation/report scaffolding. The browser session used **Google Gemini Pro**; its account display name was “Hưng Nguyễn”, while the submission identity is ${studentName} (${studentId}). The email address is deliberately redacted. Local automation assistance used OpenAI Codex and is disclosed in the main report. All Gemini interactions below include tool, time, prompt, and complete output.
+I use AI tools for requirements analysis, candidate test generation, correction, and automation/report scaffolding. The assessed AI-first candidate-generation strategy used **Google Gemini Pro**; its account display name was “Hưng Nguyễn”, while the submission identity is ${studentName} (${studentId}). The email address is deliberately redacted. OpenAI Codex was used locally for deterministic automation and document scaffolding; that assistance is declared here and in the main report, while the complete prompt/output/timestamp ledger below covers all 11 Gemini generation and correction interactions used as assignment evidence.
 
 ## Session index
 
@@ -292,19 +308,21 @@ const manualChecklist = `
 
 Do not submit until every unchecked item is completed personally.
 
-- [x] Confirm the student name (**${studentName}**) and exact student ID (**${studentId}**).
-- [x] Rerun in **PowerShell** from \`${root}\`: \`npm.cmd run test:api -- --student-id ${studentId}\`.
-- [ ] Personally inspect every Excel row; update the \`Human_Verified\` column from \`NO\` to \`YES\` only after review.
-- [ ] Take the required real console screenshot showing the pre-request log/header \`X-Student-Id: ${studentId}\`. The official run is complete, but this anti-cheat screenshot must be captured/recreated manually and must not be AI-generated.
-- [ ] Open each latest Newman HTML report and spot-check hostname \`127.0.0.1:3000\`, case IDs, failures, and timestamps.
-- [ ] Approve making the GitHub repository public, then verify no secrets/personal email are committed.
-- [${Object.keys(githubIssues).length === 10 ? "x" : " "}] Create the ten GitHub Issues; link the real, matching screenshot in each and preserve URLs in \`reports/github-issues.json\` and \`reports/bug-reports.md\`.
-- [ ] Trigger/verify both CI demonstration commits; paste Actions links and screenshots into \`reports/ci-cd-report.md\`.
-- [ ] Draw the Agent Skill diagram yourself from the design checklist. Export it as PNG and keep the editable source. Do not use an AI-generated diagram.
-- [ ] Read the prompts/outputs in \`reports/ai-audit.md\`; confirm they match the Gemini chat and that no private email remains.
-- [ ] Record the video yourself using \`reports/video-script.md\`, upload to YouTube, and add the link to README/report.
-- [ ] Choose the honest self-assessed grade (000–100), complete the README table, and name the ZIP \`<StudentID>_HW06_AI_API_<Grade>.zip\`.
-- [ ] Open the generated PDFs and Excel file, then verify the ZIP contains every mandatory artifact before Moodle submission.
+- [${checked(submissionStatus.student.identityConfirmed)}] Confirm the student name (**${studentName}**) and exact student ID (**${studentId}**).
+- [${checked(submissionStatus.automatedEvidence.officialNewmanRun)}] Rerun in **PowerShell** from \`${root}\`: \`npm.cmd run test:api -- --student-id ${studentId}\`.
+- [${checked(gates.allExcelRowsPersonallyReviewed)}] Personally inspect every Excel row; update the \`Human_Verified\` column from \`NO\` to \`YES\` only after review.
+- [${checked(gates.realStudentIdConsoleScreenshotCaptured)}] Take the required real console screenshot showing the pre-request log/header \`X-Student-Id: ${studentId}\`. The official run is complete, but this anti-cheat screenshot must be captured/recreated manually and must not be AI-generated.
+- [${checked(gates.newmanHtmlPersonallySpotChecked)}] Open each latest Newman HTML report and spot-check hostname \`127.0.0.1:3000\`, case IDs, failures, and timestamps. Automated consistency is already verified; this checkbox is the student's visual confirmation.
+- [${checked(submissionStatus.repository.publicApprovedByStudent && submissionStatus.repository.visibility === "public")}] Approve making the GitHub repository public, then verify no secrets/personal email are committed.
+- [${checked(submissionStatus.automatedEvidence.tenGithubIssuesRecorded)}] Create the ten GitHub Issues; link the real, matching screenshot in each and preserve URLs in \`reports/github-issues.json\` and \`reports/bug-reports.md\`.
+- [${checked(submissionStatus.automatedEvidence.ciRunPairRecorded)}] Verify both CI demonstration commits; preserve Actions links and screenshots in \`reports/ci-cd-report.md\`.
+- [${checked(gates.selfDrawnDiagramCompleted)}] Draw the Agent Skill diagram yourself from the design checklist. Export it as PNG and keep the editable source. Do not use an AI-generated diagram.
+- [${checked(gates.aiAuditPersonallyConfirmed)}] Read the prompts/outputs in \`reports/ai-audit.md\`; confirm they match the Gemini chat and that no private email remains.
+- [${checked(gates.videoRecordedAndLinked)}] Record the video yourself using \`reports/video-script.md\`, upload to YouTube, and add the link to README/report.
+- [${checked(Number.isInteger(gates.selfAssessedGrade))}] Choose the honest self-assessed grade (000–100), complete the README table, and name the ZIP \`<StudentID>_HW06_AI_API_<Grade>.zip\`.
+- [${checked(gates.finalZipInspected && gates.moodleSubmitted)}] Open the generated PDFs and Excel file, verify the ZIP contains every mandatory artifact, then submit it on Moodle.
+
+Source of truth: [submission-status.json](./submission-status.json). Only the student may change fields under \`studentOnlyGates\` to completed.
 `;
 
 const videoScript = `

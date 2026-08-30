@@ -12,6 +12,8 @@ const previewDir = path.join(outputDir, "previews");
 await fs.mkdir(previewDir, { recursive: true });
 
 const summary = JSON.parse(await fs.readFile("evidence/newman/execution-summary.json", "utf8"));
+const submissionStatus = JSON.parse(await fs.readFile("reports/submission-status.json", "utf8"));
+const gates = submissionStatus.studentOnlyGates;
 let issueIndex = {};
 try {
   issueIndex = JSON.parse(await fs.readFile("reports/github-issues.json", "utf8"));
@@ -167,11 +169,11 @@ summarySheet.getRange("A11:B18").values = [
   ["Submission gate", "Status"],
   ["Student ID supplied", "YES"],
   ["Official Newman rerun", "YES"],
-  ["Rows personally reviewed", "NO"],
-  ["Self-drawn diagram", "NO"],
+  ["Rows personally reviewed", gates.allExcelRowsPersonallyReviewed ? "YES" : "NO"],
+  ["Self-drawn diagram", gates.selfDrawnDiagramCompleted ? "YES" : "NO"],
   ["Ten GitHub Issues", Object.keys(issueIndex).length === 10 ? "YES" : "NO"],
-  ["Public GitHub", "NO"],
-  ["Video + final ZIP", "NO"],
+  ["Public GitHub", submissionStatus.repository.visibility === "public" && submissionStatus.repository.publicApprovedByStudent ? "YES" : "NO"],
+  ["Video + final ZIP", gates.videoRecordedAndLinked && gates.finalZipInspected ? "YES" : "NO"],
 ];
 styleHeader(summarySheet.getRange("A11:B11"));
 summarySheet.getRange("B12:B18").format = { fill: colors.amberPale, font: { bold: true, color: colors.amber } };
@@ -248,27 +250,29 @@ bugSheet.showGridLines = false;
 bugSheet.freezePanes.freezeRows(4);
 
 const checklist = [
-  ["MR-01", "Confirm name and provide official student ID", "BLOCKING", "YES", "Student"],
-  ["MR-02", "Personally review every test row", "BLOCKING", "NO", "Student"],
-  ["MR-03", "Capture/recreate the real official Newman console header screenshot", "BLOCKING", "NO", "Student"],
-  ["MR-04", "Approve/publicize GitHub repository", "BLOCKING", "NO", "Student"],
-  ["MR-05", "Publish issues with real screenshot links", "BLOCKING", Object.keys(issueIndex).length === 10 ? "YES" : "NO", "Student"],
-  ["MR-06", "Verify both GitHub Actions demonstration runs", "BLOCKING", "YES", "Student"],
-  ["MR-07", "Draw and export the Agent Skill diagram personally", "BLOCKING", "NO", "Student"],
-  ["MR-08", "Record/upload video and add URL", "BLOCKING", "NO", "Student"],
-  ["MR-09", "Select self-assessed grade and filename", "BLOCKING", "NO", "Student"],
-  ["MR-10", "Inspect ZIP and submit on Moodle", "BLOCKING", "NO", "Student"],
+  ["MR-01", "Confirm name and provide official student ID", "BLOCKING", submissionStatus.student.identityConfirmed ? "YES" : "NO", "Student"],
+  ["MR-02", "Personally review every test row", "BLOCKING", gates.allExcelRowsPersonallyReviewed ? "YES" : "NO", "Student"],
+  ["MR-03", "Capture/recreate the real official Newman console header screenshot", "BLOCKING", gates.realStudentIdConsoleScreenshotCaptured ? "YES" : "NO", "Student"],
+  ["MR-04", "Personally spot-check the three latest Newman HTML reports", "BLOCKING", gates.newmanHtmlPersonallySpotChecked ? "YES" : "NO", "Student"],
+  ["MR-05", "Approve/publicize GitHub repository", "BLOCKING", submissionStatus.repository.visibility === "public" && submissionStatus.repository.publicApprovedByStudent ? "YES" : "NO", "Student"],
+  ["MR-06", "Publish issues with real screenshot links", "BLOCKING", Object.keys(issueIndex).length === 10 ? "YES" : "NO", "Student"],
+  ["MR-07", "Verify both GitHub Actions demonstration runs", "BLOCKING", submissionStatus.automatedEvidence.ciRunPairRecorded ? "YES" : "NO", "Student"],
+  ["MR-08", "Draw and export the Agent Skill diagram personally", "BLOCKING", gates.selfDrawnDiagramCompleted ? "YES" : "NO", "Student"],
+  ["MR-09", "Personally confirm the AI Audit against Gemini", "BLOCKING", gates.aiAuditPersonallyConfirmed ? "YES" : "NO", "Student"],
+  ["MR-10", "Record/upload video and add URL", "BLOCKING", gates.videoRecordedAndLinked ? "YES" : "NO", "Student"],
+  ["MR-11", "Select self-assessed grade and filename", "BLOCKING", Number.isInteger(gates.selfAssessedGrade) ? "YES" : "NO", "Student"],
+  ["MR-12", "Inspect ZIP and submit on Moodle", "BLOCKING", gates.finalZipInspected && gates.moodleSubmitted ? "YES" : "NO", "Student"],
 ];
 titleBand(manualSheet, "A1:E2", "Mandatory Human Review", "Only the student may change a row to YES after completing it");
-manualSheet.getRange("A4:E14").values = [["Gate_ID", "Required action", "Impact", "Completed", "Owner"], ...checklist];
+manualSheet.getRange("A4:E16").values = [["Gate_ID", "Required action", "Impact", "Completed", "Owner"], ...checklist];
 styleHeader(manualSheet.getRange("A4:E4"));
-manualSheet.tables.add("A4:E14", true, "ManualReviewTable").style = "TableStyleMedium2";
-manualSheet.getRange("D5:D14").dataValidation = { rule: { type: "list", values: ["NO", "YES"] } };
-manualSheet.getRange("D5:D14").conditionalFormats.add("containsText", { text: "NO", format: { fill: colors.redPale, font: { color: colors.red, bold: true } } });
-manualSheet.getRange("D5:D14").conditionalFormats.add("containsText", { text: "YES", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
-manualSheet.getRange("A4:E14").format.columnWidth = 20;
-manualSheet.getRange("B4:B14").format.columnWidth = 64;
-manualSheet.getRange("A5:E14").format.wrapText = true;
+manualSheet.tables.add("A4:E16", true, "ManualReviewTable").style = "TableStyleMedium2";
+manualSheet.getRange("D5:D16").dataValidation = { rule: { type: "list", values: ["NO", "YES"] } };
+manualSheet.getRange("D5:D16").conditionalFormats.add("containsText", { text: "NO", format: { fill: colors.redPale, font: { color: colors.red, bold: true } } });
+manualSheet.getRange("D5:D16").conditionalFormats.add("containsText", { text: "YES", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
+manualSheet.getRange("A4:E16").format.columnWidth = 20;
+manualSheet.getRange("B4:B16").format.columnWidth = 64;
+manualSheet.getRange("A5:E16").format.wrapText = true;
 manualSheet.showGridLines = false;
 manualSheet.freezePanes.freezeRows(4);
 
@@ -277,8 +281,17 @@ await fs.writeFile(path.join(outputDir, "workbook-inspection.ndjson"), inspect.n
 const formulaErrorScan = await workbook.inspect({ kind: "match", searchTerm: "#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A", maxChars: 5000, options: { useRegex: true, maxResults: 100 } });
 await fs.writeFile(path.join(outputDir, "workbook-formula-error-scan.ndjson"), formulaErrorScan.ndjson || String(formulaErrorScan));
 
+const previewRanges = {
+  Summary: "A1:R24",
+  Reset_Password: "A1:O53",
+  Apply_Coupon: "A1:O54",
+  Import_Products: "A1:O66",
+  AI_Audit_Index: "A1:F16",
+  Bug_Summary: "A1:G15",
+  Manual_Review: "A1:E17",
+};
 for (const sheetName of ["Summary", ...suiteSpecs.map((spec) => spec.sheet), "AI_Audit_Index", "Bug_Summary", "Manual_Review"]) {
-  const preview = await workbook.render({ sheetName, autoCrop: "all", scale: sheetName === "Summary" ? 1.2 : 0.8, format: "png" });
+  const preview = await workbook.render({ sheetName, range: previewRanges[sheetName], scale: sheetName === "Summary" ? 1.2 : 0.8, format: "png" });
   await fs.writeFile(path.join(previewDir, `${sheetName}.png`), new Uint8Array(await preview.arrayBuffer()));
 }
 

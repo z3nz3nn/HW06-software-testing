@@ -2,7 +2,7 @@
 
 ## Declaration
 
-I use AI tools for requirements analysis, candidate test generation, correction, and automation/report scaffolding. The browser session used **Google Gemini Pro**; its account display name was “Hưng Nguyễn”, while the submission identity is Nguyễn Đình Thái Hưng (23127373). The email address is deliberately redacted. Local automation assistance used OpenAI Codex and is disclosed in the main report. All Gemini interactions below include tool, time, prompt, and complete output.
+I use AI tools for requirements analysis, candidate test generation, correction, and automation/report scaffolding. The assessed AI-first candidate-generation strategy used **Google Gemini Pro**; its account display name was “Hưng Nguyễn”, while the submission identity is Nguyễn Đình Thái Hưng (23127373). The email address is deliberately redacted. OpenAI Codex was used locally for deterministic automation and document scaffolding; that assistance is declared here and in the main report, while the complete prompt/output/timestamp ledger below covers all 11 Gemini generation and correction interactions used as assignment evidence.
 
 ## Session index
 

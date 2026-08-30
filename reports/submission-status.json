@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "lastAutomatedSync": "2026-08-30",
+  "student": {
+    "name": "Nguyễn Đình Thái Hưng",
+    "id": "23127373",
+    "identityConfirmed": true
+  },
+  "repository": {
+    "url": "https://github.com/z3nz3nn/HW06-software-testing",
+    "visibility": "private",
+    "publicApprovedByStudent": false
+  },
+  "automatedEvidence": {
+    "officialNewmanRun": true,
+    "newmanHtmlConsistencyChecked": true,
+    "tenGithubIssuesRecorded": true,
+    "ciRunPairRecorded": true,
+    "pdfLayoutChecked": true
+  },
+  "studentOnlyGates": {
+    "allExcelRowsPersonallyReviewed": false,
+    "realStudentIdConsoleScreenshotCaptured": false,
+    "newmanHtmlPersonallySpotChecked": false,
+    "selfDrawnDiagramCompleted": false,
+    "aiAuditPersonallyConfirmed": false,
+    "videoRecordedAndLinked": false,
+    "selfAssessedGrade": null,
+    "finalZipInspected": false,
+    "moodleSubmitted": false
+  },
+  "notes": [
+    "The repository must remain private until the student performs the final public-visibility step.",
+    "Automated verification must never change a student-only gate to true."
+  ]
+}

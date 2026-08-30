@@ -15,7 +15,8 @@
     "summarize:newman": "node scripts/summarize-newman.mjs",
     "generate:reports": "node scripts/generate-reports.mjs",
     "export:git-log": "node scripts/export-git-log.mjs",
-    "verify:artifacts": "node scripts/verify-artifacts.mjs"
+    "verify:artifacts": "node scripts/verify-artifacts.mjs",
+    "verify:submission": "node scripts/verify-artifacts.mjs --strict"
   },
   "devDependencies": {
     "jsonwebtoken": "^9.0.3",

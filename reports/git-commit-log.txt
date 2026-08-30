@@ -1,3 +1,9 @@
+4c2375519e3e608bac05e0b541c6f773976591f0 | 2026-08-22T11:48:34+07:00 | Z3n | fix: normalize AI audit transcript spacing
+3e6f7503f6373a1401c8faa69921143e117c7a1e | 2026-08-22T11:39:40+07:00 | Z3n | fix: prevent PDF transcript block overlap
+c40e4f65c46c10600b2d1c59079822e7100a7502 | 2026-08-22T11:32:39+07:00 | Z3n | docs: publish ten verified defect issues
+8b2c85ac5a1e95f6ac2edfdfabd9be3e066cd13e | 2026-08-22T11:06:37+07:00 | Z3n | docs: refresh official submission artifacts
+6d3c8469e97fbfcc73b19996c843541289724c0e | 2026-08-22T10:59:18+07:00 | Z3n | docs: record official student execution
+0a2bbbda277d6085dccd43339032389bfbc0a4b6 | 2026-08-21T02:13:00+07:00 | Z3n | docs: attach verified defect and CI evidence
 5d71f4e45d59b0f8b7987362eac755a92ad2b827 | 2026-08-21T01:54:08+07:00 | Z3n | ci: restore passing baseline and document both runs
 a40164bfcf0d249ad3913da8654bd8e2ac041320 | 2026-08-21T01:49:35+07:00 | Z3n | ci: mutate sentinel to demonstrate one failing case
 beecfaafc1381ce072422aa912add7c6762627e3 | 2026-08-21T01:46:47+07:00 | Z3n | chore: ignore spreadsheet QA traces

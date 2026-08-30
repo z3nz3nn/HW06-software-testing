@@ -8,7 +8,9 @@ This repository contains the complete, auditable testing pipeline for three ESho
 | B | FR-09 Apply coupon | `POST /api/apply-coupon` |
 | C | FR-16 Import products | `POST /api/admin/import-products` |
 
-Key artifacts: [main report](reports/main-report.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [10 GitHub Issues](reports/github-issues.json), [CI/CD report](reports/ci-cd-report.md), and [video script](reports/video-script.md).
+Repository: [https://github.com/z3nz3nn/HW06-software-testing](https://github.com/z3nz3nn/HW06-software-testing) (kept private until the student's final public step).
+
+Key artifacts: [main report](reports/main-report.md), [AI critique](reports/ai-critique.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [10 GitHub Issues](reports/github-issues.json), [CI/CD report](reports/ci-cd-report.md), [submission status](reports/submission-status.json), and [video script](reports/video-script.md).
 
 CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) and [one-failing-case mutation](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145).
 
@@ -20,7 +22,7 @@ CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-t
 
 ## Current status
 
-The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373` and publication of ten GitHub Issues. The repository remains private because changing it to Public is the final, separately confirmed action. Personal row review, the real console screenshot, self-drawn diagram, video, self-assessed score, ZIP inspection, and Moodle submission remain student-only gates.
+The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository remains private because changing it to Public is the final, separately confirmed action. Personal row review, the real console screenshot, visual Newman/Audit confirmation, self-drawn diagram, video, self-assessed score, ZIP inspection, and Moodle submission remain student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
 
 ## Test summary (official local run)
 
@@ -35,6 +37,22 @@ The evidence-backed pipeline is complete through the official local Newman execu
 | Genuine bug candidates | 3 | 3 | 4 | 10 |
 
 The counts above come from the official run using `X-Student-Id: 23127373`. Failures are preserved as genuine defect evidence.
+
+## Submission contents map
+
+| Requirement | Artifact | Current state |
+| --- | --- | --- |
+| Main report, Markdown + PDF | `reports/main-report.md`, `outputs/hw06/HW06_Main_Report.pdf` | Complete; PDF includes the full 267-word AI Critique |
+| Public repository link | Repository URL above | Private by instruction; public is the final student step |
+| Postman + Newman HTML | `postman/`, three latest `2026-08-22` HTML reports under `evidence/newman/` | Complete and automatically reconciled |
+| CI/CD report and two runs | `.github/workflows/api-tests.yml`, `reports/ci-cd-report.md`, screenshots 04–07 | Complete and live-checked in GitHub |
+| Excel test cases + summary | `outputs/hw06/HW06_Test_Cases.xlsx` | Complete; personal row sign-off pending |
+| Agent Skill diagram + pseudocode | `docs/agent-skill-diagram-HUMAN-REVIEW.md`, `docs/agent-skill-pseudocode.md` | Pseudocode complete; self-drawn PNG pending |
+| Bug report + issue screenshots | `reports/bug-reports.md`, issue index/drafts, screenshots `bug-01`–`bug-10` | Complete; 10 open issues live-checked |
+| AI Critique + Audit, Markdown + PDF | `reports/ai-critique.md`, `reports/ai-audit.md`, `outputs/hw06/HW06_AI_Audit_Report.pdf` | Complete; personal transcript confirmation pending |
+| Git commit log | `reports/git-commit-log.txt` | Exported; at most the final synchronization commit may follow it |
+| README self-assessment + summary | This file | Summary complete; grade decision pending |
+| Supporting material | Gemini screenshots/transcripts, `reports/video-script.md`, reusable skill | Complete except student-recorded video |
 
 ## Self-assessment
 
@@ -53,6 +71,7 @@ npm.cmd install
 npm.cmd run generate:postman
 npm.cmd run test:api -- --student-id 23127373
 npm.cmd run verify:artifacts
+npm.cmd run verify:submission
 ```
 
-The test runner starts a fresh local EShop backend, executes all three data-driven Newman runs, and writes CLI, JSON, JUnit, and HTML evidence under `evidence/newman/`.
+The test runner starts a fresh local EShop backend, executes all three data-driven Newman runs, and writes CLI, JSON, JUnit, and HTML evidence under `evidence/newman/`. `verify:artifacts` validates all automatable evidence while allowing explicit student-only gates; `verify:submission` fails until every final gate is truthfully complete.

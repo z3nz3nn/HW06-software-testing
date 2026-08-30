@@ -25,12 +25,15 @@
     "selfDrawnDiagramCompleted": false,
     "aiAuditPersonallyConfirmed": false,
     "videoRecordedAndLinked": false,
-    "selfAssessedGrade": null,
+    "videoDecision": "declined",
+    "selfAssessedGrade": 100,
     "finalZipInspected": false,
     "moodleSubmitted": false
   },
   "notes": [
     "The repository must remain private until the student performs the final public-visibility step.",
+    "The student explicitly declined the optional demonstration video on 2026-08-30.",
+    "The student selected the maximum self-assessed grade: 100/100.",
     "Automated verification must never change a student-only gate to true."
   ]
 }

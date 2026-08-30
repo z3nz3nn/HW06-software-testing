@@ -33,6 +33,7 @@ const commonAssertions = [
 const collectionPreRequest = [
   "const studentId = pm.environment.get('studentId');",
   "pm.request.headers.upsert({ key: 'X-Student-Id', value: studentId });",
+  "console.log(`[HW06 pre-request] X-Student-Id: ${studentId}`);",
   "pm.variables.set('caseId', pm.iterationData.get('id') || 'setup');",
   "pm.variables.set('caseTitle', pm.iterationData.get('title') || 'setup');",
 ];

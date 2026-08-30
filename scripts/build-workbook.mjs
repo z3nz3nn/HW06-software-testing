@@ -165,7 +165,7 @@ suiteSpecs.forEach((spec, index) => {
 summarySheet.getRange("A8:I8").values = [["TOTAL", null, null, null, null, null, null, null, null]];
 summarySheet.getRange("B8:I8").formulas = [["=SUM(B5:B7)", "=SUM(C5:C7)", "=SUM(D5:D7)", "=SUM(E5:E7)", "=SUM(F5:F7)", "=SUM(G5:G7)", "=SUM(H5:H7)", "=SUM(I5:I7)"]];
 summarySheet.getRange("A8:I8").format = { fill: colors.pale, font: { bold: true, color: colors.navy }, borders: { preset: "doubleBottom", style: "medium", color: colors.teal } };
-summarySheet.getRange("A11:B18").values = [
+summarySheet.getRange("A11:B20").values = [
   ["Submission gate", "Status"],
   ["Student ID supplied", "YES"],
   ["Official Newman rerun", "YES"],
@@ -173,11 +173,15 @@ summarySheet.getRange("A11:B18").values = [
   ["Self-drawn diagram", gates.selfDrawnDiagramCompleted ? "YES" : "NO"],
   ["Ten GitHub Issues", Object.keys(issueIndex).length === 10 ? "YES" : "NO"],
   ["Public GitHub", submissionStatus.repository.visibility === "public" && submissionStatus.repository.publicApprovedByStudent ? "YES" : "NO"],
-  ["Video + final ZIP", gates.videoRecordedAndLinked && gates.finalZipInspected ? "YES" : "NO"],
+  ["Video decision", gates.videoRecordedAndLinked ? "RECORDED" : gates.videoDecision === "declined" ? "DECLINED (OPTIONAL)" : "NO DECISION"],
+  ["Self-assessed grade", Number.isInteger(gates.selfAssessedGrade) ? `${gates.selfAssessedGrade}/100` : "NOT SELECTED"],
+  ["Final ZIP inspected", gates.finalZipInspected ? "YES" : "NO"],
 ];
 styleHeader(summarySheet.getRange("A11:B11"));
-summarySheet.getRange("B12:B18").format = { fill: colors.amberPale, font: { bold: true, color: colors.amber } };
-summarySheet.getRange("B12:B18").conditionalFormats.add("containsText", { text: "YES", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
+summarySheet.getRange("B12:B20").format = { fill: colors.amberPale, font: { bold: true, color: colors.amber } };
+summarySheet.getRange("B12:B20").conditionalFormats.add("containsText", { text: "YES", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
+summarySheet.getRange("B12:B20").conditionalFormats.add("containsText", { text: "OPTIONAL", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
+summarySheet.getRange("B12:B20").conditionalFormats.add("containsText", { text: "/100", format: { fill: colors.greenPale, font: { color: colors.green, bold: true } } });
 summarySheet.getRange("D11:F16").values = [
   ["Evidence", "Value", "Interpretation"],
   ["Official total", summary.totals.cases, "158 expected"],
@@ -188,11 +192,11 @@ summarySheet.getRange("D11:F16").values = [
 ];
 styleHeader(summarySheet.getRange("D11:F11"));
 summarySheet.getRange("A4:I8").format.borders = { preset: "outside", style: "thin", color: colors.line };
-summarySheet.getRange("A4:I18").format.verticalAlignment = "center";
-summarySheet.getRange("A4:I18").format.wrapText = true;
-summarySheet.getRange("A4:I18").format.columnWidth = 19;
-summarySheet.getRange("A4:A18").format.columnWidth = 33;
-summarySheet.getRange("F4:F18").format.columnWidth = 30;
+summarySheet.getRange("A4:I20").format.verticalAlignment = "center";
+summarySheet.getRange("A4:I20").format.wrapText = true;
+summarySheet.getRange("A4:I20").format.columnWidth = 19;
+summarySheet.getRange("A4:A20").format.columnWidth = 33;
+summarySheet.getRange("F4:F20").format.columnWidth = 30;
 summarySheet.showGridLines = false;
 summarySheet.freezePanes.freezeRows(4);
 summarySheet.getRange("K20:M23").values = [
@@ -206,6 +210,8 @@ summarySheet.getRange("L21:M23").formulas = [
   ["=H6", "=I6"],
   ["=H7", "=I7"],
 ];
+summarySheet.getRange("K20:K23").format.columnWidth = 20;
+summarySheet.getRange("L20:M23").format.columnWidth = 12;
 const chart = summarySheet.charts.add("bar", summarySheet.getRange("K20:M23"));
 chart.title = "Official pass/fail by API";
 chart.hasLegend = true;
@@ -259,7 +265,7 @@ const checklist = [
   ["MR-07", "Verify both GitHub Actions demonstration runs", "BLOCKING", submissionStatus.automatedEvidence.ciRunPairRecorded ? "YES" : "NO", "Student"],
   ["MR-08", "Draw and export the Agent Skill diagram personally", "BLOCKING", gates.selfDrawnDiagramCompleted ? "YES" : "NO", "Student"],
   ["MR-09", "Personally confirm the AI Audit against Gemini", "BLOCKING", gates.aiAuditPersonallyConfirmed ? "YES" : "NO", "Student"],
-  ["MR-10", "Record/upload video and add URL", "BLOCKING", gates.videoRecordedAndLinked ? "YES" : "NO", "Student"],
+  ["MR-10", gates.videoDecision === "declined" ? "Optional video explicitly declined" : "Record/upload video and add URL", "OPTIONAL", gates.videoRecordedAndLinked || gates.videoDecision === "declined" ? "YES" : "NO", "Student"],
   ["MR-11", "Select self-assessed grade and filename", "BLOCKING", Number.isInteger(gates.selfAssessedGrade) ? "YES" : "NO", "Student"],
   ["MR-12", "Inspect ZIP and submit on Moodle", "BLOCKING", gates.finalZipInspected && gates.moodleSubmitted ? "YES" : "NO", "Student"],
 ];
@@ -282,7 +288,7 @@ const formulaErrorScan = await workbook.inspect({ kind: "match", searchTerm: "#R
 await fs.writeFile(path.join(outputDir, "workbook-formula-error-scan.ndjson"), formulaErrorScan.ndjson || String(formulaErrorScan));
 
 const previewRanges = {
-  Summary: "A1:R24",
+  Summary: "A1:R25",
   Reset_Password: "A1:O53",
   Apply_Coupon: "A1:O54",
   Import_Products: "A1:O66",
@@ -296,6 +302,8 @@ for (const sheetName of ["Summary", ...suiteSpecs.map((spec) => spec.sheet), "AI
 }
 
 const exported = await SpreadsheetFile.exportXlsx(workbook);
-const outputPath = path.join(outputDir, "HW06_Test_Cases.xlsx");
+const outputPath = process.env.HW06_WORKBOOK_OUTPUT
+  ? path.resolve(process.env.HW06_WORKBOOK_OUTPUT)
+  : path.join(outputDir, "HW06_Test_Cases.xlsx");
 await exported.save(outputPath);
 console.log(JSON.stringify({ outputPath, sheets: 7, previews: 7 }, null, 2));

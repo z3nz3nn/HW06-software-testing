@@ -14,6 +14,7 @@
     "test:ci-diagnostic": "node scripts/run-newman.mjs all --report-mode compact --suppress-exit-code",
     "summarize:newman": "node scripts/summarize-newman.mjs",
     "generate:reports": "node scripts/generate-reports.mjs",
+    "build:submission": "node scripts/build-submission.mjs",
     "export:git-log": "node scripts/export-git-log.mjs",
     "verify:artifacts": "node scripts/verify-artifacts.mjs",
     "verify:submission": "node scripts/verify-artifacts.mjs --strict"

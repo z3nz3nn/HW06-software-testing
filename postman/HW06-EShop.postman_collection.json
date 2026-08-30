@@ -13,6 +13,7 @@
         "exec": [
           "const studentId = pm.environment.get('studentId');",
           "pm.request.headers.upsert({ key: 'X-Student-Id', value: studentId });",
+          "console.log(`[HW06 pre-request] X-Student-Id: ${studentId}`);",
           "pm.variables.set('caseId', pm.iterationData.get('id') || 'setup');",
           "pm.variables.set('caseTitle', pm.iterationData.get('title') || 'setup');"
         ]
@@ -22,15 +23,15 @@
   "variable": [
     {
       "key": "expiredUserToken",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJleHAiOjEsImlhdCI6MTc4NzI1MDA4OH0.P9LGckcseIuGQIeOykvg9Fbrh8LIqoIicuJNULaOblA"
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJleHAiOjEsImlhdCI6MTc4ODA2MjU3M30.YOZcPyawEzcMuuIOr77DWhHFRiyxZa6cqYYvrHGfOHg"
     },
     {
       "key": "expiredAdminToken",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZXhwIjoxLCJpYXQiOjE3ODcyNTAwODh9.33Q9EBJauJcD5LvBW9PkUY7fN2j8ykZ40NvKaP5e4qU"
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZXhwIjoxLCJpYXQiOjE3ODgwNjI1NzN9.joK3pofJPQG3U3RWQs71yU5TxSlNqCbEMhvOcL1j19U"
     },
     {
       "key": "invalidSignatureToken",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3ODcyNTAwODh9.G9dSBIbA3MCt0Wr_yuq_u6dqjLOtKnfIf8pgd4G-gpw"
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3ODgwNjI1NzN9.qiOiQbjejc4MqzRk8oVl6uRJaUHyUs49Jy6A6jdbwBc"
     }
   ],
   "item": [

@@ -1,3 +1,4 @@
+074d6f63ab432af7eb2174c191b3a82e44cfbed1 | 2026-08-30T10:47:18+07:00 | Z3n | docs: synchronize submission evidence and readiness
 4c2375519e3e608bac05e0b541c6f773976591f0 | 2026-08-22T11:48:34+07:00 | Z3n | fix: normalize AI audit transcript spacing
 3e6f7503f6373a1401c8faa69921143e117c7a1e | 2026-08-22T11:39:40+07:00 | Z3n | fix: prevent PDF transcript block overlap
 c40e4f65c46c10600b2d1c59079822e7100a7502 | 2026-08-22T11:32:39+07:00 | Z3n | docs: publish ten verified defect issues

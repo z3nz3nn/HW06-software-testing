@@ -10,7 +10,7 @@ This repository contains the complete, auditable testing pipeline for three ESho
 
 Repository: [https://github.com/z3nz3nn/HW06-software-testing](https://github.com/z3nz3nn/HW06-software-testing) (kept private until the student's final public step).
 
-Key artifacts: [main report](reports/main-report.md), [AI critique](reports/ai-critique.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [10 GitHub Issues](reports/github-issues.json), [CI/CD report](reports/ci-cd-report.md), [submission status](reports/submission-status.json), and [video script](reports/video-script.md).
+Key artifacts: [main report](reports/main-report.md), [AI critique](reports/ai-critique.md), [AI audit](reports/ai-audit.md), [Excel test cases](outputs/hw06/HW06_Test_Cases.xlsx), [bug reports](reports/bug-reports.md), [10 GitHub Issues](reports/github-issues.json), [CI/CD report](reports/ci-cd-report.md), and [submission status](reports/submission-status.json). The optional video was explicitly declined.
 
 CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405131238) and [one-failing-case mutation](https://github.com/z3nz3nn/HW06-software-testing/actions/runs/32405318145).
 
@@ -22,7 +22,7 @@ CI evidence: [all-pass demonstration](https://github.com/z3nz3nn/HW06-software-t
 
 ## Current status
 
-The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository remains private because changing it to Public is the final, separately confirmed action. Personal row review, the real console screenshot, visual Newman/Audit confirmation, self-drawn diagram, video, self-assessed score, ZIP inspection, and Moodle submission remain student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
+The evidence-backed pipeline is complete through the official local Newman execution with `X-Student-Id: 23127373`, ten GitHub Issues, and the required CI all-pass/one-fail demonstration pair. The repository remains private because changing it to Public is the final, separately confirmed action. The optional video is declined and the self-assessed score is 100/100. Personal row review, the real console screenshot, visual Newman/Audit confirmation, self-drawn diagram, ZIP inspection, and Moodle submission remain student-only gates. The synchronized source of truth is [submission-status.json](reports/submission-status.json).
 
 ## Test summary (official local run)
 
@@ -47,22 +47,22 @@ The counts above come from the official run using `X-Student-Id: 23127373`. Fail
 | Postman + Newman HTML | `postman/`, three latest `2026-08-22` HTML reports under `evidence/newman/` | Complete and automatically reconciled |
 | CI/CD report and two runs | `.github/workflows/api-tests.yml`, `reports/ci-cd-report.md`, screenshots 04–07 | Complete and live-checked in GitHub |
 | Excel test cases + summary | `outputs/hw06/HW06_Test_Cases.xlsx` | Complete; personal row sign-off pending |
-| Agent Skill diagram + pseudocode | `docs/agent-skill-diagram-HUMAN-REVIEW.md`, `docs/agent-skill-pseudocode.md` | Pseudocode complete; self-drawn PNG pending |
+| Agent Skill diagram + pseudocode | `docs/agent-skill-diagram.mmd`, `docs/agent-skill-diagram-HUMAN-REVIEW.md`, `docs/agent-skill-pseudocode.md` | Mermaid source and pseudocode complete; student-reviewed PNG export pending |
 | Bug report + issue screenshots | `reports/bug-reports.md`, issue index/drafts, screenshots `bug-01`–`bug-10` | Complete; 10 open issues live-checked |
 | AI Critique + Audit, Markdown + PDF | `reports/ai-critique.md`, `reports/ai-audit.md`, `outputs/hw06/HW06_AI_Audit_Report.pdf` | Complete; personal transcript confirmation pending |
 | Git commit log | `reports/git-commit-log.txt` | Exported; at most the final synchronization commit may follow it |
-| README self-assessment + summary | This file | Summary complete; grade decision pending |
-| Supporting material | Gemini screenshots/transcripts, `reports/video-script.md`, reusable skill | Complete except student-recorded video |
+| README self-assessment + summary | This file | Summary complete; self-assessed grade 100/100 |
+| Supporting material | Gemini screenshots/transcripts and reusable skill | Complete; optional video declined |
 
 ## Self-assessment
 
 | No. | Criteria | Maximum | Self-assessed | Evidence status |
 | --- | --- | ---: | ---: | --- |
-| 1 | API 1 full pipeline | 30 | STUDENT_DECISION_REQUIRED | Official pipeline/evidence complete; personal review/public visibility pending |
-| 2 | API 2 full pipeline | 30 | STUDENT_DECISION_REQUIRED | Official pipeline/evidence complete; personal review/public visibility pending |
-| 3 | API 3 full pipeline | 30 | STUDENT_DECISION_REQUIRED | Official pipeline/evidence complete; personal review/public visibility pending |
-| 4 | Agent Skill | 10 | STUDENT_DECISION_REQUIRED | Skill validated; self-drawn diagram/video pending |
-|  | **Total** | **100** | **STUDENT_DECISION_REQUIRED** | Student must choose an honest grade |
+| 1 | API 1 full pipeline | 30 | 30 | Official pipeline/evidence complete; final personal review/public visibility pending |
+| 2 | API 2 full pipeline | 30 | 30 | Official pipeline/evidence complete; final personal review/public visibility pending |
+| 3 | API 3 full pipeline | 30 | 30 | Official pipeline/evidence complete; final personal review/public visibility pending |
+| 4 | Agent Skill | 10 | 10 | Reusable skill and pseudocode complete; self-drawn diagram pending; video is optional and declined |
+|  | **Total** | **100** | **100** | Selected by the student; ZIP name: `23127373_HW06_AI_API_100.zip` |
 
 ## Commands
 

@@ -13,3 +13,4 @@ evidence/newman/*.xml
 outputs/hw06/*.inspect.ndjson
 outputs/hw06/workbook-inspection.ndjson
 outputs/hw06/pdf-previews/
+submission/

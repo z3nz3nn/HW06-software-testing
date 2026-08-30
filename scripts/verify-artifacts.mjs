@@ -33,7 +33,7 @@ const required = [
   "reports/main-report.md", "reports/ai-audit.md", "reports/ai-critique.md", "reports/bug-reports.md",
   "reports/ci-cd-report.md", "reports/manual-checklist.md", "reports/video-script.md",
   "reports/git-commit-log.txt", "reports/github-issues.json", "reports/github-issue-drafts.json",
-  "docs/agent-skill-pseudocode.md", "docs/agent-skill-diagram-HUMAN-REVIEW.md",
+  "docs/agent-skill-pseudocode.md", "docs/agent-skill-diagram-HUMAN-REVIEW.md", "docs/agent-skill-diagram.mmd",
   "skills/eshop-api-test-generator/SKILL.md", "skills/eshop-api-test-generator/agents/openai.yaml",
   "skills/eshop-api-test-generator/references/test-case-schema.md", "skills/eshop-api-test-generator/scripts/validate_cases.mjs",
   "outputs/hw06/HW06_Test_Cases.xlsx", "outputs/hw06/HW06_Main_Report.pdf", "outputs/hw06/HW06_AI_Audit_Report.pdf",
@@ -163,7 +163,7 @@ gate("Newman HTML personally spot-checked", g.newmanHtmlPersonallySpotChecked, "
 gate("repository public as final step", submission.repository.visibility === "public" && submission.repository.publicApprovedByStudent, submission.repository.url);
 gate("self-drawn Agent Skill diagram", g.selfDrawnDiagramCompleted && exists("docs/agent-skill-diagram.png"), "docs/agent-skill-diagram.png");
 gate("AI audit personally confirmed", g.aiAuditPersonallyConfirmed, "compare the 11 recorded interactions with Gemini");
-gate("video recorded and linked", g.videoRecordedAndLinked, "video is encouraged for the Agent Skill demonstration");
+gate("optional video decision recorded", g.videoRecordedAndLinked || g.videoDecision === "declined", g.videoDecision === "declined" ? "optional video declined by student" : "video recorded and linked");
 gate("self-assessed grade selected", Number.isInteger(g.selfAssessedGrade) && g.selfAssessedGrade >= 0 && g.selfAssessedGrade <= 100, String(g.selfAssessedGrade));
 gate("final ZIP inspected", g.finalZipInspected, "23127373_HW06_AI_API_<grade>.zip");
 gate("Moodle submission", g.moodleSubmitted, "final external action");

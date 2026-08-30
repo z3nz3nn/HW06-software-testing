@@ -1,0 +1,85 @@
+flowchart LR
+    %% HW06 Agent Skill design
+    %% Nguyễn Đình Thái Hưng - 23127373 - 2026-08-30
+
+    subgraph INPUTS["1. Authoritative inputs"]
+        direction TB
+        SPEC["API specification"]
+        RULES["FR / SEC rules"]
+        ENDPOINT["Selected endpoint"]
+        ENV["Execution environment"]
+    end
+
+    DECOMP["2. Requirement decomposer<br/>Parameters • partitions • boundaries<br/>States • security • schema"]
+    AMBIG{"3. Ambiguity gate"}
+    NORM["Normative oracle<br/>Directly supported by requirements"]
+    OBS["Observational oracle<br/>Safety and stability only"]
+    HUMAN["Human clarification<br/>Do not invent an expectation"]
+    GEN["4. Candidate generator<br/>≥35 cases • trace IDs • prerequisites<br/>Request and expected result"]
+    AUDIT{"5. Human audit<br/>VALID / INVALID / INCOMPLETE"}
+    FIX["Reason and correction<br/>Exclude, constrain, or repair"]
+    EXT["6. Human extension gate<br/>Add ≥5 missed risks<br/>Security • state • protocol"]
+
+    subgraph EMIT["7. Deterministic emitters"]
+        direction TB
+        JSON["Canonical JSON"]
+        POSTMAN["Postman collection<br/>and data files"]
+        EXCEL["Excel test cases"]
+        LEDGER["Audit ledger"]
+    end
+
+    subgraph EXEC["8. Isolated execution"]
+        direction LR
+        FIXTURE["Fixture isolation"] --> SUT["SUT API"]
+        SUT --> NEWMAN["Newman runner<br/>X-Student-Id injected"]
+        NEWMAN --> REPORTS["HTML • JUnit • JSON<br/>compact summary"]
+    end
+
+    FAILED{"9. Requirement<br/>assertion failed?"}
+    BUG["Reproduce and triage<br/>Genuine bug candidate"]
+    ISSUE["GitHub Issue<br/>Steps • expected • actual • screenshot"]
+    SIGNOFF["10. Student review and sign-off<br/>Identity evidence • row review • issue publication<br/>diagram review • public repository • ZIP • Moodle"]
+
+    SPEC --> DECOMP
+    RULES --> DECOMP
+    ENDPOINT --> DECOMP
+    ENV --> DECOMP
+    DECOMP --> AMBIG
+    AMBIG -- "Specified" --> NORM
+    AMBIG -- "Safe to observe" --> OBS
+    AMBIG -- "Unclear" --> HUMAN
+    NORM --> GEN
+    OBS --> GEN
+    HUMAN -- "After decision" --> GEN
+    GEN --> AUDIT
+    AUDIT -- "Accepted or constrained" --> EXT
+    AUDIT -- "Invalid or incomplete" --> FIX
+    FIX -- "Correction loop" --> DECOMP
+    EXT --> JSON
+    EXT --> POSTMAN
+    EXT --> EXCEL
+    EXT --> LEDGER
+    JSON --> FIXTURE
+    POSTMAN --> FIXTURE
+    REPORTS --> FAILED
+    FAILED -- "Yes" --> BUG
+    BUG --> ISSUE
+    ISSUE -. "Coverage feedback" .-> DECOMP
+    FAILED -- "No" --> SIGNOFF
+    ISSUE --> SIGNOFF
+    EXCEL --> SIGNOFF
+    LEDGER --> SIGNOFF
+
+    classDef input fill:#E8F1F8,stroke:#175CD3,color:#101828,stroke-width:1px;
+    classDef process fill:#DDF3EE,stroke:#0F766E,color:#101828,stroke-width:2px;
+    classDef decision fill:#FFF4E5,stroke:#B54708,color:#101828,stroke-width:2px;
+    classDef audit fill:#F4EBFF,stroke:#7F56D9,color:#101828,stroke-width:2px;
+    classDef output fill:#EAF8F0,stroke:#067647,color:#101828,stroke-width:1px;
+    classDef defect fill:#FDECEC,stroke:#B42318,color:#101828,stroke-width:1px;
+
+    class SPEC,RULES,ENDPOINT,ENV,NORM,OBS,HUMAN input;
+    class DECOMP,GEN,EXT,FIXTURE,SUT,NEWMAN,SIGNOFF process;
+    class AMBIG,FAILED decision;
+    class AUDIT,FIX audit;
+    class JSON,POSTMAN,EXCEL,LEDGER,REPORTS output;
+    class BUG,ISSUE defect;

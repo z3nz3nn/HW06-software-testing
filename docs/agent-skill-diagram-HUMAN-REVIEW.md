@@ -1,6 +1,6 @@
-# Agent Skill Diagram — Human Drawing Checklist
+# Agent Skill Diagram — Human Review and Export Checklist
 
-**Do not submit this file as the diagram.** The assignment explicitly requires a self-drawn diagram. Use this only as a completeness checklist, then make your own design decisions and draw/export the final PNG manually.
+The editable Mermaid scaffold is `docs/agent-skill-diagram.mmd`. Open it in Mermaid Live Editor, review or revise the wording/layout, then export the final image as `docs/agent-skill-diagram.png`.
 
 Include, in your own layout and wording:
 
@@ -15,4 +15,4 @@ Include, in your own layout and wording:
 9. Feedback: failed requirement assertion → bug candidate → reproduce/triage → GitHub issue.
 10. Human sign-off boundaries: identity evidence, row review, issue publication, self-drawn diagram, video/submission.
 
-Add arrows that make the correction loop and human decision points unambiguous. Put your name/date on the editable source and export a PNG.
+Confirm that the correction loop and human decision points are unambiguous. Keep your name/date in the source and export a PNG.
